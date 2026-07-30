@@ -1,0 +1,280 @@
+/* ============================================================
+   Jordan Parker — Cultural Architect
+   Foundations: color, type, spacing, motion
+   ============================================================ */
+
+/* ---- Webfonts (Google Fonts — see README for substitution notes) ---- */
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@300;400;500;600&display=swap');
+
+:root {
+  /* ---------------------------------------------------------
+     COLOR — Warm earth, ink, paper.
+     The palette is anchored in printer's ink on uncoated stock.
+     --------------------------------------------------------- */
+
+  /* Paper / ground */
+  --paper:        #f5efe2;   /* primary background — uncoated cream */
+  --paper-warm:   #ebe2cf;   /* secondary background — aged */
+  --paper-deep:   #e0d4ba;   /* card / well */
+  --bone:         #d6c9ad;   /* divider / rule */
+
+  /* Ink */
+  --ink:          #1a1410;   /* primary text — near-black with warmth */
+  --ink-2:        #3a2e25;   /* secondary text */
+  --ink-3:        #6b5a4c;   /* tertiary / caption */
+  --ink-4:        #9a8a78;   /* quaternary / placeholder */
+
+  /* Pigments — used sparingly, as marginalia */
+  --ochre:        #c08a3e;   /* primary accent, "highlighter" */
+  --ochre-deep:   #8a5e22;   /* hover / pressed ochre */
+  --terracotta:   #b5532e;   /* warm alarm, energetic */
+  --oxblood:      #5a1f1a;   /* deep marker, scholarly */
+  --moss:         #5d6a4a;   /* cool counterweight, ecological */
+  --moss-deep:    #3e4a30;
+  --lapis:        #2a3f6b;   /* rare — for diagrams, links in dark mode */
+
+  /* Semantic */
+  --fg-1:         var(--ink);
+  --fg-2:         var(--ink-2);
+  --fg-3:         var(--ink-3);
+  --fg-4:         var(--ink-4);
+  --bg-1:         var(--paper);
+  --bg-2:         var(--paper-warm);
+  --bg-3:         var(--paper-deep);
+  --rule:         var(--bone);
+  --rule-strong:  var(--ink-3);
+  --accent:       var(--ochre);
+  --accent-deep:  var(--ochre-deep);
+  --link:         var(--oxblood);
+  --link-hover:   var(--terracotta);
+  --marker:       var(--ochre);            /* highlighter background */
+  --marker-bg:    rgb(192 138 62 / 0.22);  /* semitransparent marker */
+
+  /* ---------------------------------------------------------
+     TYPE — three families, three jobs.
+     Instrument Serif: display, gravitas, italic flourishes
+     EB Garamond:      body, longform, the workhorse
+     JetBrains Mono:   metadata, captions, technical asides
+     --------------------------------------------------------- */
+  --font-display: 'Instrument Serif', 'Cormorant Garamond', 'EB Garamond', Georgia, serif;
+  --font-body:    'EB Garamond', 'Iowan Old Style', 'Charter', Georgia, serif;
+  --font-mono:    'JetBrains Mono', 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* Type scale — modular, generous. Tuned for reading.
+     Sizes name the role, not the px. */
+  --t-display-xl: clamp(64px, 9vw, 132px);
+  --t-display-l:  clamp(48px, 6.5vw, 96px);
+  --t-display-m:  clamp(36px, 4.5vw, 64px);
+  --t-h1:         clamp(32px, 3.6vw, 48px);
+  --t-h2:         clamp(24px, 2.6vw, 34px);
+  --t-h3:         20px;
+  --t-h4:         17px;
+  --t-body:       19px;     /* body serif reads big */
+  --t-body-sm:    17px;
+  --t-caption:    14px;
+  --t-meta:       12px;     /* mono, all-caps */
+  --t-marginalia: 13px;     /* mono, sidenotes */
+
+  /* Leading — serifs need air */
+  --lh-tight:   1.05;
+  --lh-snug:    1.18;
+  --lh-normal:  1.5;
+  --lh-loose:   1.7;        /* body */
+  --lh-airy:    1.85;
+
+  /* Tracking */
+  --tk-tight:   -0.02em;
+  --tk-normal:  0;
+  --tk-wide:    0.04em;
+  --tk-wider:   0.12em;     /* uppercase mono labels */
+
+  /* ---------------------------------------------------------
+     SPACING — 4px base, scholarly generosity at the high end.
+     --------------------------------------------------------- */
+  --s-0:   2px;
+  --s-1:   4px;
+  --s-2:   8px;
+  --s-3:   12px;
+  --s-4:   16px;
+  --s-5:   24px;
+  --s-6:   32px;
+  --s-7:   48px;
+  --s-8:   64px;
+  --s-9:   96px;
+  --s-10: 128px;
+  --s-11: 192px;
+
+  /* Reading widths */
+  --measure-narrow: 38ch;
+  --measure-text:   62ch;   /* primary text column */
+  --measure-wide:   88ch;
+
+  /* ---------------------------------------------------------
+     RADIUS — almost none. This system rounds reluctantly.
+     --------------------------------------------------------- */
+  --r-0: 0px;
+  --r-1: 2px;
+  --r-2: 4px;
+  --r-pill: 999px;
+
+  /* ---------------------------------------------------------
+     BORDERS & RULES — hairlines, in ink.
+     --------------------------------------------------------- */
+  --border-hair:   1px solid var(--rule);
+  --border-thin:   1px solid var(--ink-3);
+  --border-strong: 1.5px solid var(--ink);
+  --border-double: 3px double var(--ink-3);
+
+  /* ---------------------------------------------------------
+     SHADOWS — almost never. Paper does not float.
+     Reserved for modals + lifted cards.
+     --------------------------------------------------------- */
+  --shadow-paper: 0 1px 0 rgb(26 20 16 / 0.04), 0 2px 6px rgb(26 20 16 / 0.06);
+  --shadow-lift:  0 2px 0 rgb(26 20 16 / 0.06), 0 12px 28px rgb(26 20 16 / 0.10);
+  --shadow-deep:  0 24px 60px rgb(26 20 16 / 0.22);
+
+  /* ---------------------------------------------------------
+     MOTION — slow, considered. No bounces.
+     --------------------------------------------------------- */
+  --ease-out:   cubic-bezier(0.2, 0.6, 0.2, 1);
+  --ease-in:    cubic-bezier(0.4, 0, 0.6, 0.4);
+  --ease-soft:  cubic-bezier(0.4, 0, 0.2, 1);
+  --dur-1: 120ms;
+  --dur-2: 220ms;
+  --dur-3: 420ms;
+  --dur-4: 680ms;    /* page fades */
+}
+
+/* ============================================================
+   SEMANTIC ELEMENT STYLES
+   ============================================================ */
+
+html {
+  background: var(--bg-1);
+  color: var(--fg-1);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: var(--lh-loose);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  margin: 0;
+  font-feature-settings: 'kern', 'liga', 'onum', 'pnum';
+}
+
+/* — Display — */
+.display-xl, h1.display { font-family: var(--font-display); font-size: var(--t-display-xl); line-height: var(--lh-tight); letter-spacing: var(--tk-tight); font-weight: 400; }
+.display-l            { font-family: var(--font-display); font-size: var(--t-display-l);  line-height: var(--lh-tight); letter-spacing: var(--tk-tight); font-weight: 400; }
+.display-m            { font-family: var(--font-display); font-size: var(--t-display-m);  line-height: var(--lh-snug);  letter-spacing: var(--tk-tight); font-weight: 400; }
+
+/* — Headings — */
+h1 { font-family: var(--font-display); font-size: var(--t-h1); line-height: var(--lh-snug); letter-spacing: var(--tk-tight); font-weight: 400; margin: 0 0 var(--s-5); }
+h2 { font-family: var(--font-display); font-size: var(--t-h2); line-height: var(--lh-snug); font-weight: 400; margin: var(--s-7) 0 var(--s-4); }
+h3 { font-family: var(--font-body); font-size: var(--t-h3); line-height: var(--lh-snug); font-weight: 600; margin: var(--s-6) 0 var(--s-3); font-style: italic; }
+h4 { font-family: var(--font-mono); font-size: var(--t-h4); line-height: var(--lh-normal); font-weight: 500; letter-spacing: var(--tk-wider); text-transform: uppercase; margin: var(--s-5) 0 var(--s-2); color: var(--fg-3); }
+
+/* — Body — */
+p { font-size: var(--t-body); line-height: var(--lh-loose); margin: 0 0 1.1em; max-width: var(--measure-text); text-wrap: pretty; }
+p.lede { font-size: 1.3em; line-height: 1.5; color: var(--fg-2); font-style: italic; }
+
+/* drop cap */
+.dropcap::first-letter {
+  font-family: var(--font-display);
+  font-size: 5.2em;
+  line-height: 0.85;
+  float: left;
+  margin: 0.08em 0.08em 0 -0.04em;
+  color: var(--ink);
+}
+
+/* — Inline — */
+a {
+  color: var(--link);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  transition: color var(--dur-1) var(--ease-soft);
+}
+a:hover { color: var(--link-hover); }
+
+strong { font-weight: 600; color: var(--ink); }
+em     { font-style: italic; }
+mark   { background: var(--marker-bg); color: inherit; padding: 0 0.15em; }
+
+small  { font-family: var(--font-mono); font-size: var(--t-caption); letter-spacing: var(--tk-wide); color: var(--fg-3); }
+
+/* — Mono / meta — */
+.meta, .eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--t-meta);
+  letter-spacing: var(--tk-wider);
+  text-transform: uppercase;
+  color: var(--fg-3);
+  font-weight: 500;
+}
+code, kbd, samp {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  background: var(--bg-3);
+  padding: 0.08em 0.32em;
+  border: 1px solid var(--rule);
+}
+
+/* — Blockquote / pull quote — */
+blockquote {
+  font-family: var(--font-display);
+  font-size: 1.55em;
+  line-height: 1.25;
+  font-style: italic;
+  color: var(--ink);
+  border-left: 2px solid var(--ink);
+  padding: 0 0 0 var(--s-5);
+  margin: var(--s-7) 0;
+  max-width: var(--measure-text);
+}
+blockquote cite {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--t-meta);
+  letter-spacing: var(--tk-wider);
+  text-transform: uppercase;
+  font-style: normal;
+  color: var(--fg-3);
+  margin-top: var(--s-3);
+}
+
+/* — Lists — */
+ul, ol { font-size: var(--t-body); line-height: var(--lh-loose); max-width: var(--measure-text); padding-left: 1.2em; }
+ul { list-style: none; }
+ul > li::before { content: "—"; color: var(--fg-3); display: inline-block; width: 1em; margin-left: -1.2em; }
+
+/* — Rules — */
+hr {
+  border: 0;
+  border-top: 1px solid var(--rule);
+  margin: var(--s-7) 0;
+}
+hr.ornament {
+  border: 0;
+  text-align: center;
+  margin: var(--s-8) 0;
+  color: var(--fg-3);
+}
+hr.ornament::before {
+  content: "❦";
+  font-size: 18px;
+  color: var(--fg-3);
+}
+
+/* — Selection — */
+::selection { background: var(--marker-bg); color: var(--ink); }
+
+/* — Reduced motion — */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
