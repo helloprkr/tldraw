@@ -39,3 +39,12 @@ body,
   right: var(--s-5);
   bottom: var(--s-5);
 }
+
+/* Terracotta means absence. It is the only alarm this app has. */
+.counter__alarm {
+  color: var(--terracotta);
+}
+
+.counter__sep {
+  color: var(--ink-4);
+}

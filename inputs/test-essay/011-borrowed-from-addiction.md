@@ -1,0 +1,1 @@
+Under the spending view, rest is the only cure, and so we are told to unplug, to detox, to abstain—language borrowed wholesale from addiction, as though the mind were an account to be left alone until it refilled itself.

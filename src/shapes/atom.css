@@ -1,0 +1,94 @@
+/* The card — BUILD.md §5.3. Paper on paper: a hairline rule, a pigment
+   hairline at the top, nothing that floats. Every offset is set inline from
+   the single layout in AtomShapeUtil so the DOM and the exported SVG cannot
+   drift apart. */
+
+.ec-atom {
+  box-sizing: border-box;
+  background: var(--paper-warm);
+  border-radius: var(--r-1);
+  /* Paper does not float. */
+  box-shadow: none;
+  overflow: hidden;
+  color: var(--ink);
+  font-family: var(--font-body);
+  /* Stated rather than inherited, so the text measurer, the card and the
+     exported SVG all lay out on the same metrics. */
+  font-feature-settings: 'kern', 'liga', 'onum', 'pnum';
+  user-select: none;
+}
+
+/* The hairline is drawn as an overlay rather than as a border on the card: a
+   real border would shrink the containing block for everything inside it, and
+   every offset would land 1px away from where toSvg puts it. */
+.ec-atom::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--bone);
+  border-radius: var(--r-1);
+  pointer-events: none;
+}
+
+.ec-atom__rule,
+.ec-atom__eyebrow,
+.ec-atom__body,
+.ec-atom__meta {
+  position: absolute;
+}
+
+/* The atom type is carried by this hairline and by the eyebrow — a printer's
+   convention. Never a left-border stripe (Brand/README.md anti-patterns). */
+.ec-atom__rule {
+  height: 1px;
+}
+
+.ec-atom__eyebrow,
+.ec-atom__meta {
+  display: flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: var(--t-meta);
+  line-height: 1;
+}
+
+.ec-atom__eyebrow {
+  font-weight: 500;
+  letter-spacing: var(--tk-wider);
+  text-transform: uppercase;
+}
+
+.ec-atom__body {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  /* Line count comes from the card height; overflow ends in an ellipsis, and
+     the card can be resized to read the rest. */
+  overflow: hidden;
+  font-size: var(--t-body-sm);
+  /* line-height is set inline: --lh-normal snapped to a whole pixel, so the
+     card, the text measurer and the exported SVG break lines identically. */
+  color: var(--ink);
+}
+
+.ec-atom__meta {
+  justify-content: space-between;
+  font-weight: 400;
+  letter-spacing: var(--tk-wide);
+  color: var(--ink-4);
+}
+
+/* §5.6: type changes fade in. Fades only — no springs. Keyed on the atom type
+   in the component, so the new label and rule arrive rather than cross-blend. */
+@keyframes ec-atom-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.ec-atom__rule,
+.ec-atom__eyebrow {
+  animation: ec-atom-fade-in var(--dur-2) var(--ease-out);
+}

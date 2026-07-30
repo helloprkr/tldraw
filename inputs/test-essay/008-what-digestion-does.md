@@ -1,0 +1,1 @@
+A wallet has one operation: subtraction. A gut has dozens—it selects, it ferments, it refuses, it stores, it converts one thing into another thing entirely, and none of this shows up as a number going down.

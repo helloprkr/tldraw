@@ -6,7 +6,11 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "spread": "tsx scripts/spread-cli.ts",
+    "readout": "tsx scripts/readout-cli.ts",
+    "corpus": "tsx scripts/corpus-cli.ts",
+    "save": "tsx scripts/save-cli.ts"
   },
   "dependencies": {
     "react": "^19.2.1",

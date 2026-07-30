@@ -1,5 +1,8 @@
-import type { TLComponents, TLUiOverrides } from 'tldraw'
+import type { Editor, TLComponents, TLUiOverrides } from 'tldraw'
 import { HairlineGrid } from './ui/Grid'
+import { ATOM_BY_KEY } from './types'
+import type { AtomType } from './types'
+import type { AtomShape } from './shapes/AtomShapeUtil'
 
 /**
  * Slots set to null render nothing. This is BUILD.md §5.5's removal list:
@@ -67,6 +70,22 @@ const RELEASED_ACTION_SHORTCUTS = [
   'print',
 ]
 
+/**
+ * Types every selected card at once — six cards in one keystroke (§7 Stage 3).
+ * The pigment rule and eyebrow follow from the prop; the fade is CSS.
+ */
+function typeSelection(editor: Editor, atom: AtomType) {
+  const selected = editor
+    .getSelectedShapes()
+    .filter((shape): shape is AtomShape => shape.type === 'atom')
+
+  if (selected.length === 0) return
+
+  editor.updateShapes(
+    selected.map((shape) => ({ id: shape.id, type: 'atom' as const, props: { atom } }))
+  )
+}
+
 export const overrides: TLUiOverrides = {
   tools(_editor, tools) {
     for (const id of Object.keys(tools)) {
@@ -74,15 +93,29 @@ export const overrides: TLUiOverrides = {
     }
     return tools
   },
-  actions(_editor, actions) {
+  actions(editor, actions) {
     for (const id of RELEASED_ACTION_SHORTCUTS) {
       delete actions[id]
     }
+
     // BUILD.md §11 binds F to "frame the selection". tldraw ships that behavior
     // as frame-selection on cmd+alt+g; the f key was the frame *tool*, now gone.
     if (actions['frame-selection']) {
       actions['frame-selection'] = { ...actions['frame-selection'], kbd: 'f' }
     }
+
+    for (const [key, atom] of Object.entries(ATOM_BY_KEY)) {
+      const id = atom === 'untyped' ? 'untype' : `type-${atom}`
+      actions[id] = {
+        id,
+        kbd: key,
+        label: atom === 'untyped' ? 'Untype selection' : `Type selection as ${atom}`,
+        onSelect() {
+          typeSelection(editor, atom)
+        },
+      }
+    }
+
     return actions
   },
 }
