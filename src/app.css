@@ -1,0 +1,41 @@
+/* ============================================================
+   essay-canvas — app shell.
+   The page is a sheet of cream stock under a reading lamp.
+   ============================================================ */
+
+html,
+body,
+#root {
+  height: 100%;
+  background: var(--paper);
+  overscroll-behavior: none;
+}
+
+.essay-canvas {
+  position: fixed;
+  inset: 0;
+  background: var(--paper);
+}
+
+/* The margin is sacred: overlays sit in it, in mono, and do not float. */
+.margin-note {
+  position: absolute;
+  z-index: 300;
+  font-family: var(--font-mono);
+  font-size: var(--t-meta);
+  letter-spacing: var(--tk-wider);
+  text-transform: uppercase;
+  color: var(--ink-3);
+  pointer-events: none;
+  user-select: none;
+}
+
+.margin-note--bottom-left {
+  left: var(--s-5);
+  bottom: var(--s-5);
+}
+
+.margin-note--bottom-right {
+  right: var(--s-5);
+  bottom: var(--s-5);
+}

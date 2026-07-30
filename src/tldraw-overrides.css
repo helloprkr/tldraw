@@ -1,0 +1,248 @@
+/* ============================================================
+   The de-tldraw pass.
+   Imported after tldraw/tldraw.css. Every rule here exists to
+   remove something tldraw ships that this system forbids:
+   shadows, radii above 2px, blue, sans-serif UI, bounce.
+   ============================================================ */
+
+/* ---- Theme variables ------------------------------------------------
+   One look. Both theme classes get identical values; there is no dark
+   mode here — cream-on-ink is the brand.
+   -------------------------------------------------------------------- */
+.tl-theme__light,
+.tl-theme__dark,
+.tl-container {
+  /* Canvas */
+  --tl-color-background: var(--paper);
+  --tl-color-selection-stroke: var(--ink);
+  --tl-color-selection-fill: transparent;
+  --tl-color-grid: var(--bone);
+
+  /* UI surfaces */
+  --tl-color-low: var(--paper-warm);
+  --tl-color-low-border: var(--bone);
+  --tl-color-muted-none: transparent;
+  --tl-color-muted-0: rgb(26 20 16 / 0.02);
+  --tl-color-muted-1: rgb(26 20 16 / 0.08);
+  --tl-color-muted-2: rgb(26 20 16 / 0.04);
+  --tl-color-hint: rgb(26 20 16 / 0.05);
+  --tl-color-overlay: rgb(26 20 16 / 0.2);
+  --tl-color-divider: var(--bone);
+  --tl-color-panel: var(--bg-2);
+  --tl-color-panel-contrast: var(--paper);
+  --tl-color-panel-overlay: var(--bg-2);
+  --tl-color-panel-transparent: rgb(235 226 207 / 0);
+  --tl-color-selected: var(--ink);
+  --tl-color-selected-contrast: var(--paper);
+  --tl-color-focus: var(--ink);
+  --tl-color-tooltip: var(--ink);
+
+  /* Text */
+  --tl-color-text: var(--ink);
+  --tl-color-text-0: var(--ink);
+  --tl-color-text-1: var(--ink);
+  --tl-color-text-2: var(--ink-2);
+  --tl-color-text-3: var(--ink-3);
+  --tl-color-text-disabled: var(--ink-4);
+  --tl-color-text-shadow: transparent;
+  --tl-color-text-highlight: var(--marker-bg);
+  --tl-color-text-highlight-p3: var(--marker-bg);
+
+  /* Named — the pigments, never tldraw's palette */
+  --tl-color-primary: var(--ink);
+  --tl-color-success: var(--moss);
+  --tl-color-info: var(--lapis);
+  --tl-color-warning: var(--ochre);
+  --tl-color-danger: var(--terracotta);
+
+  /* Fonts */
+  --tl-font-draw: var(--font-display);
+  --tl-font-sans: var(--font-body);
+  --tl-font-serif: var(--font-body);
+  --tl-font-mono: var(--font-mono);
+
+  /* Radius — this system rounds reluctantly */
+  --tl-radius-0: var(--r-0);
+  --tl-radius-1: var(--r-1);
+  --tl-radius-2: var(--r-1);
+  --tl-radius-3: var(--r-1);
+  --tl-radius-4: var(--r-1);
+
+  /* Shadows — paper does not float */
+  --tl-shadow-1: none;
+  --tl-shadow-2: none;
+  --tl-shadow-3: none;
+  --tl-shadow-4: none;
+}
+
+/* ---- Ground ---------------------------------------------------------- */
+.tl-background,
+.tl-container {
+  background-color: var(--paper);
+}
+
+/* Hairline grid, not dots. See ui/Grid.tsx. */
+.essay-grid-rule {
+  stroke: var(--bone);
+  stroke-width: 1;
+  stroke-opacity: 0.4;
+  fill: none;
+  vector-effect: non-scaling-stroke;
+}
+
+/* ---- Panels ---------------------------------------------------------
+   tldraw's panels are floating rounded cards with shadows. Here they are
+   sheets of stock with a hairline rule.
+   -------------------------------------------------------------------- */
+.tlui-layout__top__left,
+.tlui-layout__top__right,
+.tlui-toolbar__tools,
+.tlui-menu,
+.tlui-popover__content,
+.tlui-dialog__body,
+.tlui-toast__container,
+.tlui-panel,
+.tlui-buttons__horizontal,
+.tlui-buttons__grid,
+.tlui-menu__group {
+  box-shadow: none;
+  border-radius: var(--r-0);
+}
+
+.tlui-toolbar__tools,
+.tlui-menu,
+.tlui-popover__content,
+.tlui-toast__container {
+  background-color: var(--bg-2);
+  border: var(--border-hair);
+}
+
+/* Shadows are permitted on modals only. */
+.tlui-dialog__body,
+.tlui-dialog__header,
+.tlui-dialog__footer {
+  background-color: var(--bg-2);
+  border-radius: var(--r-0);
+}
+
+/* ---- Type in the UI --------------------------------------------------
+   Labels are mono, uppercase, wide-tracked. Content is the body serif.
+   -------------------------------------------------------------------- */
+.tl-container,
+.tlui-button,
+.tlui-menu__group,
+.tlui-kbd,
+.tlui-toast__title,
+.tlui-toast__description {
+  font-family: var(--font-mono);
+}
+
+.tlui-button__label,
+.tlui-menu-item__label,
+.tlui-toast__title {
+  font-family: var(--font-mono);
+  font-size: var(--t-meta);
+  letter-spacing: var(--tk-wider);
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.tlui-toast__description,
+.tlui-dialog__body {
+  font-family: var(--font-body);
+  font-size: var(--t-body-sm);
+  text-transform: none;
+  letter-spacing: var(--tk-normal);
+}
+
+.tlui-kbd {
+  font-family: var(--font-mono);
+  letter-spacing: var(--tk-wide);
+  border-radius: var(--r-0);
+}
+
+/* ---- Buttons --------------------------------------------------------- */
+.tlui-button {
+  border-radius: var(--r-0);
+  box-shadow: none;
+  transition:
+    background-color var(--dur-1) var(--ease-soft),
+    color var(--dur-1) var(--ease-soft);
+}
+
+.tlui-button:hover,
+.tlui-button:focus-visible {
+  background-color: var(--paper-deep);
+}
+
+.tlui-button:active {
+  transform: translateY(1px);
+}
+
+.tlui-button[data-state='selected'],
+.tlui-button[aria-pressed='true'] {
+  background-color: var(--paper-deep);
+  color: var(--ink);
+}
+
+/* ---- Focus ----------------------------------------------------------
+   A system that respects the keyboard: 2px ink outline, 2px offset.
+   -------------------------------------------------------------------- */
+.tl-container :focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+  box-shadow: none;
+}
+
+/* ---- Frames ---------------------------------------------------------
+   Frames are the essay's sections. The title is the display italic.
+   -------------------------------------------------------------------- */
+.tl-frame-label,
+.tl-frame-name-input,
+.tl-frame-heading {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: var(--tk-normal);
+  text-transform: none;
+  color: var(--ink);
+}
+
+.tl-frame-name-input {
+  background: transparent;
+  border: 0;
+  border-radius: var(--r-0);
+}
+
+/* ---- Motion ---------------------------------------------------------
+   Fades only. tldraw's slide-and-scale entrances are removed rather than
+   retimed; a menu that travels is a menu that bounces.
+   -------------------------------------------------------------------- */
+.tlui-menu,
+.tlui-popover__content,
+.tlui-dialog__body,
+.tlui-toast__container {
+  animation: tlui-fade-in var(--dur-2) var(--ease-out) !important;
+}
+
+@keyframes tlui-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ---- Removals -------------------------------------------------------
+   Slots hidden via the components prop leave no markup. These are the
+   pieces that survive as markup inside slots we keep.
+   -------------------------------------------------------------------- */
+.tlui-style-panel,
+.tlui-style-panel__wrapper {
+  display: none;
+}
+
+/* The "made with tldraw" watermark stays: it is license-governed, not
+   decoration. Do not add a rule hiding it. */
