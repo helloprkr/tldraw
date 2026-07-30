@@ -15,6 +15,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { readout } from '../src/lib/readout.ts'
 import { serializeJson } from '../src/lib/serialize.ts'
+import { nowStamp } from '../src/lib/stamp.ts'
 import type { StoreDocument } from '../src/readout-types.ts'
 
 const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
@@ -53,7 +54,7 @@ function parseArgs(argv: string[]): Args {
   if (slug.includes('/') || slug.includes('\\') || slug.includes('..')) die(`Invalid slug: ${slug}`)
 
   // Seconds precision, matching §7's example stamp.
-  return { slug, generated: generated || `${new Date().toISOString().slice(0, 19)}Z` }
+  return { slug, generated: generated || nowStamp() }
 }
 
 async function main(): Promise<void> {

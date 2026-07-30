@@ -30,11 +30,20 @@ function handleMount(editor: Editor) {
   if (!slug) return undefined
 
   document.title = `${slug} — essay-canvas`
-  void openEssay(editor, slug).catch((err) => {
-    console.error(`could not open essay ${slug}`, err)
-  })
 
-  return startAutosave(editor, slug)
+  // Nothing may be written back until the essay is fully on the canvas. Until
+  // then the store is empty, and an autosave would overwrite the file it is
+  // about to read.
+  let ready = false
+  void openEssay(editor, slug)
+    .then(() => {
+      ready = true
+    })
+    .catch((err: unknown) => {
+      console.error(`could not open essay ${slug}`, err)
+    })
+
+  return startAutosave(editor, slug, () => ready)
 }
 
 export default function App() {

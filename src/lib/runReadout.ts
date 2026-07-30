@@ -2,6 +2,7 @@ import { getSnapshot } from 'tldraw'
 import type { Editor } from 'tldraw'
 import { readout } from './readout'
 import { serializeJson } from './serialize'
+import { nowStamp } from './stamp'
 import { writeOut } from './essayFs'
 import type { StoreDocument } from '../readout-types'
 
@@ -17,7 +18,7 @@ export async function runReadout(editor: Editor, slug: string): Promise<{ cards:
   const { document } = getSnapshot(editor.store)
   const result = readout(document as unknown as StoreDocument, {
     slug,
-    generated: new Date().toISOString(),
+    generated: nowStamp(),
   })
 
   await writeOut(slug, [

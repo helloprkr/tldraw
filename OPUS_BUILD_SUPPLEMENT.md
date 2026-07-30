@@ -387,3 +387,20 @@ Generalization for M3 onward: **anything that must appear in an exported figure 
 ### E11. Open item for M4 — Ticket and Gap need a stable id (M2)
 
 §6.2's `TicketShape` and `GapShape` prop lists carry no id, but §7's example map shows `t-001` and `g-002`. `readout.ts` reads `props.sourceId` when present and otherwise falls back to the record id with `shape:` stripped, so without a `sourceId` prop the map's ticket lines will carry tldraw nanoids. Add `sourceId` to both shapes in M4.
+
+### E12. Autosave must never write before the essay is loaded, and never on teardown (M2 follow-up)
+
+A real data-loss bug, found while regenerating the fixture. `startAutosave` saved on its teardown callback. React StrictMode mounts, unmounts, and remounts in development, so the unmount between the two mounts wrote the **empty** store over `work/<slug>.tldr` — and the remount then read back the file it had just destroyed. Symptom: an essay opens with its cards freshly spread and every frame, arrow, and binding gone.
+
+Two guards, both in place:
+
+1. `startAutosave(editor, slug, isReady)` refuses to write until `openEssay` has resolved.
+2. It no longer saves on teardown. §7 Stage 8 names exactly two triggers, every 30s and on blur; teardown was never one of them. Saving on unmount reads whatever the store holds mid-teardown, which is the same failure in different clothes.
+
+General rule for anything that writes to `work/`: **the only thing worse than losing thirty seconds of work is losing the file.** A save path that can run against a half-initialized store must be gated, not trusted.
+
+Operational note that follows from this: a browser tab left open on `?essay=<slug>` owns that file and will overwrite it on blur. Park the tab before running any CLI that reads `work/`.
+
+### E13. One stamp helper, second precision (M3 prep, Jordan, 2026-07-30)
+
+`generated:` was written at millisecond precision by the in-app path and second precision by the CLI, so a committed fixture stopped matching a fresh run. BUILD.md §7's example is `2026-07-30T14:02:11Z` — seconds. `src/lib/stamp.ts` now holds the only formatter (`formatStamp`, pure) and the only clock read (`nowStamp`), and both edges call it. Same reasoning as E8: two edges formatting the same field independently is drift waiting to happen.
