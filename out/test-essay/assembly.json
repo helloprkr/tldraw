@@ -1,0 +1,137 @@
+{
+  "essay": "test-essay",
+  "title": "Test essay",
+  "generated": "2026-07-30T20:36:06.494Z",
+  "source": "work/test-essay.tldr",
+  "cards": 15,
+  "untyped": 10,
+  "sections": [
+    "Ground",
+    "The seam"
+  ],
+  "units": [
+    {
+      "id": "010-the-stance",
+      "atom": "untyped",
+      "text": "So I no longer ask how to protect my attention, as though guarding a balance, but what I am asking it to metabolize, and whether the diet I am feeding it—the feeds, the fragments, the endless untethered paragraphs—is a diet a practice can hold, and tend, rather than merely survive.",
+      "section": "Ground",
+      "position": 1
+    },
+    {
+      "id": "001-received-view",
+      "atom": "stance",
+      "text": "I keep hearing the same metaphor, offered as though it were simply how things are: attention is a resource, spent like currency, and the discipline of a life is mostly a discipline of budgeting it.",
+      "section": "Ground",
+      "position": 2
+    },
+    {
+      "id": "002-pay-attention",
+      "atom": "claim",
+      "text": "Pay attention, we say, as if the paying settled something—as if the mind kept a ledger, and the ledger, once emptied, simply closed for the day.",
+      "section": "Ground",
+      "position": 3
+    },
+    {
+      "id": "003-ground-the-economy",
+      "atom": "untyped",
+      "text": "The attention economy names something real: that noticing costs, that a mind spread thin produces thin noticing, and that no one attends to everything at once. This much I want to hold onto, even as I argue against the metaphor built on top of it.",
+      "section": "Ground",
+      "position": 4
+    },
+    {
+      "id": "004-the-concession",
+      "atom": "untyped",
+      "text": "I grant this much of the received view: something is indeed spent when I attend, some capacity narrows under steady use, and the evening mind is not the morning mind.",
+      "section": "Ground",
+      "position": 5
+    },
+    {
+      "id": "005-the-turn",
+      "atom": "untyped",
+      "text": "But a resource, once spent, is gone—while attention, oddly, comes back changed rather than emptied, the way a stomach does not vanish after a meal but sets to work on what it was given.",
+      "section": "Ground",
+      "position": 6
+    },
+    {
+      "id": "006-the-seam",
+      "atom": "untyped",
+      "text": "This is the seam I want to work: not spending but metabolizing, not depletion but digestion, and the difference is not decorative—it changes what discipline is for.",
+      "section": "Ground",
+      "position": 7
+    },
+    {
+      "id": "f-007",
+      "atom": "move",
+      "text": "Picture the gut, not the wallet—the figure worth carrying is a long, coiled, patient organ that does not care how much arrives at once so much as what it is asked to break down, and how well it was fed in the years before the test.",
+      "section": "The seam",
+      "position": 8
+    },
+    {
+      "id": "008-what-digestion-does",
+      "atom": "figure",
+      "text": "A wallet has one operation: subtraction. A gut has dozens—it selects, it ferments, it refuses, it stores, it converts one thing into another thing entirely, and none of this shows up as a number going down.",
+      "section": "The seam",
+      "position": 9
+    },
+    {
+      "id": "009-fed-not-spent",
+      "atom": "untyped",
+      "text": "Attention is not spent. It is fed.",
+      "section": "The seam",
+      "position": 10
+    },
+    {
+      "id": "011-borrowed-from-addiction",
+      "atom": "untyped",
+      "text": "Under the spending view, rest is the only cure, and so we are told to unplug, to detox, to abstain—language borrowed wholesale from addiction, as though the mind were an account to be left alone until it refilled itself.",
+      "section": "The seam",
+      "position": 11
+    },
+    {
+      "id": "012-a-diet-a-practice-can-hold",
+      "atom": "untyped",
+      "text": "Under the metabolic view, rest still matters, but so does what gets carried in: the discipline is not withdrawal but composition, the slow work of choosing a diet of claims and figures and long clausal sentences the mind can actually break down, hold, and eventually turn into something of its own—which is, I think, the only definition of understanding I still trust, and the only reason I keep writing sentences this long instead of shorter ones that would spend less and carry less as well.",
+      "section": "The seam",
+      "position": 12
+    },
+    {
+      "id": "notes-1",
+      "atom": "stance",
+      "text": "2026-07-14 — the wallet metaphor is Puritan in disguise: spend wisely, save diligently, guard the balance. It smuggles in a whole ethics of scarcity that the digestive metaphor simply refuses.",
+      "section": null,
+      "position": 13
+    },
+    {
+      "id": "notes-2",
+      "atom": "untyped",
+      "text": "2026-07-19 — “ruminate” already does this work for me. To ruminate is, literally, to chew again. The vocabulary of digestion is sitting inside the vocabulary of thought, waiting to be noticed and tended.",
+      "section": null,
+      "position": 14
+    },
+    {
+      "id": "notes-3",
+      "atom": "untyped",
+      "text": "2026-07-26 — open question for the seam: what is the attention-equivalent of malnutrition? Not distraction, which is too flat a word—something closer to a diet of fragments that never gets broken down into anything a practice can hold.",
+      "section": null,
+      "position": 15
+    }
+  ],
+  "tickets": [],
+  "program": [
+    "untyped",
+    "stance",
+    "claim",
+    "untyped",
+    "untyped",
+    "untyped",
+    "untyped",
+    "move",
+    "figure",
+    "untyped",
+    "untyped",
+    "untyped",
+    "stance",
+    "untyped",
+    "untyped"
+  ]
+}

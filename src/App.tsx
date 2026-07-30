@@ -9,12 +9,15 @@ import { components, overrides } from './tldraw-config'
 import { assetUrls } from './assets'
 import { essayTheme } from './theme'
 import { AtomShapeUtil } from './shapes/AtomShapeUtil'
+import { DependencyArrowUtil } from './shapes/DependencyArrowUtil'
 import { Counter } from './ui/Counter'
 import { essaySlugFromUrl } from './lib/essayFs'
 import { openEssay, startAutosave } from './lib/openEssay'
 
 const themes = { default: essayTheme }
-const shapeUtils = [AtomShapeUtil]
+// DependencyArrowUtil replaces tldraw's arrow rather than adding a type, so the
+// override reaches the canvas and the export from one place.
+const shapeUtils = [AtomShapeUtil, DependencyArrowUtil]
 
 function handleMount(editor: Editor) {
   // One look, always. There is no dark mode here.

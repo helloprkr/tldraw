@@ -1,0 +1,13 @@
+/*
+ * Arrow paint is NOT set here. Restyling the arrow in CSS works on canvas and
+ * silently fails on export, because the exporter renders shapes without the
+ * document stylesheet reaching their internals — the plates would carry 2px
+ * near-black arrows while the canvas showed 1px ink-3. It lives in
+ * shapes/DependencyArrowUtil.ts instead, which both paths go through.
+ */
+
+/* Armed: the canvas is waiting for a target, and says so in the cursor only. */
+.essay-bind-armed .tl-canvas,
+.essay-bind-armed .tl-shape {
+  cursor: crosshair;
+}

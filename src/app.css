@@ -48,3 +48,54 @@ body,
 .counter__sep {
   color: var(--ink-4);
 }
+
+/* ------------------------------------------------------------
+   Stage 4 — the unsupported-claim underline.
+   A mark in the margin of the drawing, not a badge: 1px of
+   terracotta under a card that sits above what it depends on.
+   ------------------------------------------------------------ */
+
+/* Screen space. Clipped like .tl-canvas so a mark parked far off
+   camera cannot extend the page. */
+.unsupported-layer {
+  position: absolute;
+  inset: 0;
+  overflow: clip;
+  pointer-events: none;
+}
+
+/* Page space: the camera transform lands here, so children are
+   positioned in page units and one CSS pixel is one page unit. */
+.unsupported-layer__page {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  transform-origin: 0 0;
+}
+
+.unsupported-mark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 1px;
+  /* Clear of the card's own border, the way a printer's rule sits
+     under a line of type. Layout offset; the transform carries the
+     page position. */
+  margin-top: var(--s-1);
+  background: var(--terracotta);
+  pointer-events: none;
+  animation: unsupported-mark-in var(--dur-2) var(--ease-out) both;
+}
+
+/* §5.6: fades only. The alarm arrives over 220ms; it leaves at once,
+   because the reward for fixing the order is silence, not a fade. */
+@keyframes unsupported-mark-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

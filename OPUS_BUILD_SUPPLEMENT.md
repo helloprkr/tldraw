@@ -309,3 +309,61 @@ Report each gate to Jordan in the format BUILD.md expects; the Plate Test (§14)
 5. Pure white `#fff`/`#ffffff` and pure black `#000`/`#000000` appear nowhere in code you write — grep your own work before each commit: `git diff main...HEAD -- src/ | grep -iE "#fff|#000"` plus the staged diff, and justify every hit (tldraw internals excepted).
 6. No emoji anywhere, including console output and code comments (§2.4 + brand).
 7. When any tldraw API surprises you, grep `node_modules/tldraw/DOCS.md` and the `.d.ts` files (§0) — never guess from training memory, and never npm-install a different tldraw version to "check".
+
+---
+
+## 10. Errata — findings and rulings from the build itself
+
+Appended by Opus 5 as milestones land. Same authority as the rest of this document: on API facts these correct BUILD.md; on design intent, Jordan's rulings below are final.
+
+### E1. Custom shapes register through `@tldraw/tlschema`, not `tldraw` (M1)
+
+§3.1's pattern is incomplete. Declaring a standalone `TLBaseShape` leaves the shape outside the `TLShape` union, so every `shape.type === 'atom'` narrowing fails to compile (`TS2677`, `TS2367`) and `editor.updateShapes` rejects the props.
+
+5.2.5 registers custom shapes by **module-augmenting `TLGlobalShapePropsMap`**, and that interface is declared in `@tldraw/tlschema` and **is not re-exported by `tldraw` or `@tldraw/editor`**. Augmenting `'tldraw'` compiles silently and does nothing.
+
+Working form — see `src/tldraw-shapes.d.ts`:
+
+```ts
+declare module '@tldraw/tlschema' {
+  interface TLGlobalShapePropsMap {
+    atom: { w: number; h: number; atom: AtomType; /* … */ }
+  }
+}
+```
+
+Then `type AtomShape = TLShape<'atom'>`. Every later shape (Ticket, Gap, Band) goes in the same file.
+
+### E2. The canvas chrome is not CSS (M0)
+
+§4.3's variable-override recipe cannot reach the selection box, resize corners, brush, or snap lines. In 5.x those are drawn to a raster context from `editor.getCurrentTheme().colors[mode]` — a JS record. Ink selection and paper-filled square handles come from a custom theme passed as `themes={{ default: … }}`, in `src/theme.ts`. CSS variables still govern everything the DOM renders.
+
+### E3. tldraw is not local by default (M0)
+
+Out of the box the app fetched roughly forty assets per load from `cdn.tldraw.com`: the icon sprite, translations, eighteen embed icons, and all four of its typefaces. That contradicts BUILD.md §2.6, and the CDN `@font-face` rules sat on the document as cross-origin sources — the exact condition §5.4 says makes export embedding fail silently. All redirected to `public/` in `src/assets.ts`; load is now zero external requests. No new dependency.
+
+### E4. `resolveLineHeightPx` governs text parity (M1)
+
+tldraw's text measurer snaps line-height to whole pixels. A card whose CSS uses the unsnapped value drifts from its own export — 1.5px over four lines, enough to change where lines break. `component()` and `toSvg()` must both derive leading from `resolveLineHeightPx(fontSize, lineHeight)`, a public 5.2.5 export. Related: with a 1px border, absolutely-positioned children lay out against the padding box, so the border must be an `::after` overlay or every element sits 1px off its SVG twin.
+
+### E5. Ruling — pigment on the compose canvas (M1, Jordan, 2026-07-30)
+
+§2.5 "one pigment per view" and §5.2's four-pigment atom mapping appeared to conflict. Resolved:
+
+- **§2.5 governs decoration and UI chrome.** §5.2/§5.3 are explicit that a typed card carries its atom pigment as a hairline rule and eyebrow — those are **semantic marks, not decoration**. The specific rule wins over the general one; Stage 3 would be unbuildable otherwise.
+- **§8's "the one place multiple pigments appear together"** refers to pigment as **area fill** (band segments). That stays true.
+- So: pigmented eyebrows and hairline rules on the compose canvas are correct. Pigment as a fill or wash remains corpus-wall-only.
+
+### E6. Ruling — untyped eyebrow (M1, Jordan, 2026-07-30)
+
+Reads bare `UNTYPED`, no ordinal. §5.3's literal wording and its stated intent agree: untyped cards should look unfinished. The ordinal still appears bottom-right as `¶ NNN`. Closed.
+
+### E7. `@types/node` is a devDependency (M2, Jordan, 2026-07-30)
+
+Approved as an exception to §9.4. Without it `scripts/` had zero type checking — `node:fs`, `process`, and `Buffer` all resolved to nothing, and the M2 gate turns on serialization details a silent type error would hide. `tsconfig.json` still includes only `src`; `scripts/` and `vite.config.ts` are checked by `tsconfig.scripts.json`, which `npm run build` now runs. It caught a real bug on first run.
+
+### E8. One serializer, structurally (M2, Jordan, 2026-07-30)
+
+§6.2's pure-core rule puts both readout paths through the same `readout()`. That is necessary but not sufficient: the **file-writing edges** must also share one serializer rather than each reaching for `JSON.stringify` or a template string. Key order, indent width, and the trailing newline are exactly where a byte-identical gate dies. `src/lib/serialize.ts` is the only place either path turns a value into bytes.
+
+Corollary: `readout()` takes its `generated` timestamp as an argument. A clock read inside the pure core would make the function non-deterministic and the gate unprovable.

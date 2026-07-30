@@ -1,5 +1,9 @@
 import type { Editor, TLComponents, TLUiOverrides } from 'tldraw'
 import { HairlineGrid } from './ui/Grid'
+import { UnsupportedMarks } from './ui/UnsupportedMarks'
+import { startBindMode } from './lib/bind'
+import { runReadout } from './lib/runReadout'
+import { essaySlugFromUrl } from './lib/essayFs'
 import { ATOM_BY_KEY } from './types'
 import type { AtomType } from './types'
 import type { AtomShape } from './shapes/AtomShapeUtil'
@@ -14,6 +18,8 @@ import type { AtomShape } from './shapes/AtomShapeUtil'
  */
 export const components: TLComponents = {
   Grid: HairlineGrid,
+  // Page space, so the marks track their cards through pan, zoom, and drag.
+  InFrontOfTheCanvas: UnsupportedMarks,
   StylePanel: null,
   SharePanel: null,
   PageMenu: null,
@@ -93,7 +99,12 @@ export const overrides: TLUiOverrides = {
     }
     return tools
   },
-  actions(editor, actions) {
+  actions(editor, actions, helpers) {
+    // Writes to disk report in mono, in the toast slot §4.1 keeps for exactly
+    // this. Silence after a keystroke that touched the filesystem is worse than
+    // a line of type.
+    const announce = (title: string) => helpers.addToast({ title, severity: 'info' })
+
     for (const id of RELEASED_ACTION_SHORTCUTS) {
       delete actions[id]
     }
@@ -114,6 +125,35 @@ export const overrides: TLUiOverrides = {
           typeSelection(editor, atom)
         },
       }
+    }
+
+    // B arms the bind mode; the next click on a card completes the dependency.
+    actions['bind-mode'] = {
+      id: 'bind-mode',
+      kbd: 'b',
+      label: 'Bind selection to next click',
+      onSelect() {
+        startBindMode(editor)
+      },
+    }
+
+    // Readout writes to disk, so it reports. cmd+r is the browser's reload and
+    // tldraw's shortcut manager is the only thing standing between the two.
+    actions['readout'] = {
+      id: 'readout',
+      kbd: 'cmd+r,ctrl+r',
+      label: 'Read out to map.md',
+      onSelect() {
+        const slug = essaySlugFromUrl()
+        if (!slug) return
+        void runReadout(editor, slug).then(
+          () => announce(`map written · ${slug}`),
+          (err: unknown) => {
+            console.error('readout failed', err)
+            announce('readout failed')
+          }
+        )
+      },
     }
 
     return actions

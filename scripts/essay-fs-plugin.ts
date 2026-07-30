@@ -14,6 +14,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import type { ServerResponse } from 'node:http'
 import type { Connect, Plugin } from 'vite'
+import { serializeJson } from '../src/lib/serialize.ts'
 
 const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const INPUTS_DIR = path.join(REPO_ROOT, 'inputs')
@@ -122,6 +123,12 @@ async function writeAtomic(target: string, data: string | Uint8Array): Promise<n
  * Re-serialized, never re-sorted: JSON.parse preserves the order it was given,
  * so the git diff Jordan reads stays a diff of his structure, not of key order.
  */
+/**
+ * Validates, then hands off to the one serializer in the codebase. The M2 gate
+ * diffs the browser's readout against the CLI's byte for byte, and this edge
+ * having its own idea of indent width or trailing newline is exactly how that
+ * fails. See supplement §10 E8.
+ */
 function prettyJson(raw: string, what: string): string {
   let parsed: unknown
   try {
@@ -129,7 +136,7 @@ function prettyJson(raw: string, what: string): string {
   } catch {
     throw new HttpError(400, `${what} is not valid JSON`)
   }
-  return `${JSON.stringify(parsed, null, 2)}\n`
+  return serializeJson(parsed)
 }
 
 function isJsonPath(target: string): boolean {
@@ -254,7 +261,8 @@ async function handle(
       res.statusCode = 200
       res.setHeader('content-type', 'application/json')
       res.setHeader('cache-control', 'no-store')
-      return res.end(raw)
+      res.end(raw)
+      return
     }
 
     expect('PUT')
