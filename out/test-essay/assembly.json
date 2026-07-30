@@ -1,7 +1,7 @@
 {
   "essay": "test-essay",
   "title": "Test essay",
-  "generated": "2026-07-30T20:36:06.494Z",
+  "generated": "2026-07-30T20:35:44.262Z",
   "source": "work/test-essay.tldr",
   "cards": 15,
   "untyped": 10,
@@ -11,72 +11,72 @@
   ],
   "units": [
     {
-      "id": "010-the-stance",
-      "atom": "untyped",
-      "text": "So I no longer ask how to protect my attention, as though guarding a balance, but what I am asking it to metabolize, and whether the diet I am feeding it—the feeds, the fragments, the endless untethered paragraphs—is a diet a practice can hold, and tend, rather than merely survive.",
-      "section": "Ground",
-      "position": 1
-    },
-    {
       "id": "001-received-view",
       "atom": "stance",
       "text": "I keep hearing the same metaphor, offered as though it were simply how things are: attention is a resource, spent like currency, and the discipline of a life is mostly a discipline of budgeting it.",
       "section": "Ground",
-      "position": 2
+      "position": 1
     },
     {
       "id": "002-pay-attention",
       "atom": "claim",
       "text": "Pay attention, we say, as if the paying settled something—as if the mind kept a ledger, and the ledger, once emptied, simply closed for the day.",
       "section": "Ground",
-      "position": 3
+      "position": 2
     },
     {
       "id": "003-ground-the-economy",
       "atom": "untyped",
       "text": "The attention economy names something real: that noticing costs, that a mind spread thin produces thin noticing, and that no one attends to everything at once. This much I want to hold onto, even as I argue against the metaphor built on top of it.",
       "section": "Ground",
-      "position": 4
+      "position": 3
     },
     {
       "id": "004-the-concession",
       "atom": "untyped",
       "text": "I grant this much of the received view: something is indeed spent when I attend, some capacity narrows under steady use, and the evening mind is not the morning mind.",
       "section": "Ground",
-      "position": 5
+      "position": 4
     },
     {
       "id": "005-the-turn",
       "atom": "untyped",
       "text": "But a resource, once spent, is gone—while attention, oddly, comes back changed rather than emptied, the way a stomach does not vanish after a meal but sets to work on what it was given.",
       "section": "Ground",
-      "position": 6
+      "position": 5
     },
     {
       "id": "006-the-seam",
       "atom": "untyped",
       "text": "This is the seam I want to work: not spending but metabolizing, not depletion but digestion, and the difference is not decorative—it changes what discipline is for.",
       "section": "Ground",
-      "position": 7
+      "position": 6
     },
     {
       "id": "f-007",
       "atom": "move",
       "text": "Picture the gut, not the wallet—the figure worth carrying is a long, coiled, patient organ that does not care how much arrives at once so much as what it is asked to break down, and how well it was fed in the years before the test.",
       "section": "The seam",
-      "position": 8
+      "position": 7
     },
     {
       "id": "008-what-digestion-does",
       "atom": "figure",
       "text": "A wallet has one operation: subtraction. A gut has dozens—it selects, it ferments, it refuses, it stores, it converts one thing into another thing entirely, and none of this shows up as a number going down.",
       "section": "The seam",
-      "position": 9
+      "position": 8
     },
     {
       "id": "009-fed-not-spent",
       "atom": "untyped",
       "text": "Attention is not spent. It is fed.",
+      "section": "The seam",
+      "position": 9
+    },
+    {
+      "id": "010-the-stance",
+      "atom": "untyped",
+      "text": "So I no longer ask how to protect my attention, as though guarding a balance, but what I am asking it to metabolize, and whether the diet I am feeding it—the feeds, the fragments, the endless untethered paragraphs—is a diet a practice can hold, and tend, rather than merely survive.",
       "section": "The seam",
       "position": 10
     },
@@ -118,7 +118,6 @@
   ],
   "tickets": [],
   "program": [
-    "untyped",
     "stance",
     "claim",
     "untyped",
@@ -127,6 +126,7 @@
     "untyped",
     "move",
     "figure",
+    "untyped",
     "untyped",
     "untyped",
     "untyped",

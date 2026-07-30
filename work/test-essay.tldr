@@ -1,241 +1,57 @@
 {
   "store": {
-    "shape:kd0FaDxZHsGIm39OyneFN": {
-      "x": 368,
-      "y": 248,
+    "shape:SdkuWQNIXi_d0o8aqyAf4": {
+      "x": 40,
+      "y": 40,
       "rotation": 0,
       "isLocked": false,
       "opacity": 1,
       "meta": {},
-      "id": "shape:kd0FaDxZHsGIm39OyneFN",
+      "id": "shape:SdkuWQNIXi_d0o8aqyAf4",
       "type": "atom",
       "props": {
         "w": 320,
         "h": 200,
-        "atom": "figure",
-        "text": "Picture the gut, not the wallet—the figure worth carrying is a long, coiled, patient organ that does not care how much arrives at once so much as what it is asked to break down, and how well it was fed in the years before the test.",
-        "sourceId": "f-007",
+        "atom": "stance",
+        "text": "I keep hearing the same metaphor, offered as though it were simply how things are: attention is a resource, spent like currency, and the discipline of a life is mostly a discipline of budgeting it.",
+        "sourceId": "001-received-view",
         "created": "2026-07-30",
-        "ordinal": 7
+        "ordinal": 1
       },
-      "parentId": "page:page",
-      "index": "a73YU",
+      "parentId": "shape:NrfEUK3ihwKQcQ7AYYYqI",
+      "index": "a1",
       "typeName": "shape"
     },
-    "shape:j75WXTy4ypASgqQqZcvIp": {
-      "x": 1472,
-      "y": 496,
+    "shape:6ywKw1_wwV1slSL97C46G": {
+      "x": 776,
+      "y": 40,
       "rotation": 0,
       "isLocked": false,
       "opacity": 1,
       "meta": {},
-      "id": "shape:j75WXTy4ypASgqQqZcvIp",
-      "type": "atom",
-      "props": {
-        "w": 320,
-        "h": 200,
-        "atom": "move",
-        "text": "2026-07-26 — open question for the seam: what is the attention-equivalent of malnutrition? Not distraction, which is too flat a word—something closer to a diet of fragments that never gets broken down into anything a practice can hold.",
-        "sourceId": "notes-3",
-        "created": "2026-07-30",
-        "ordinal": 15
-      },
-      "parentId": "page:page",
-      "index": "aFjgf",
-      "typeName": "shape"
-    },
-    "shape:xM-l7qFoasMSGSPvTyG30": {
-      "x": 1104,
-      "y": 0,
-      "rotation": 0,
-      "isLocked": false,
-      "opacity": 1,
-      "meta": {},
-      "id": "shape:xM-l7qFoasMSGSPvTyG30",
+      "id": "shape:6ywKw1_wwV1slSL97C46G",
       "type": "atom",
       "props": {
         "w": 320,
         "h": 200,
         "atom": "untyped",
-        "text": "I grant this much of the received view: something is indeed spent when I attend, some capacity narrows under steady use, and the evening mind is not the morning mind.",
-        "sourceId": "004-the-concession",
+        "text": "The attention economy names something real: that noticing costs, that a mind spread thin produces thin noticing, and that no one attends to everything at once. This much I want to hold onto, even as I argue against the metaphor built on top of it.",
+        "sourceId": "003-ground-the-economy",
         "created": "2026-07-30",
-        "ordinal": 4
+        "ordinal": 3
       },
-      "parentId": "page:page",
-      "index": "a4ycI",
+      "parentId": "shape:NrfEUK3ihwKQcQ7AYYYqI",
+      "index": "a3Ugw",
       "typeName": "shape"
     },
-    "shape:wMP3VanyBwtQKs4yq6AYj": {
-      "x": 1472,
-      "y": 0,
+    "shape:-pbRkVShnaPD5EIWrglmj": {
+      "x": 776,
+      "y": 184,
       "rotation": 0,
       "isLocked": false,
       "opacity": 1,
       "meta": {},
-      "id": "shape:wMP3VanyBwtQKs4yq6AYj",
-      "type": "atom",
-      "props": {
-        "w": 320,
-        "h": 200,
-        "atom": "move",
-        "text": "But a resource, once spent, is gone—while attention, oddly, comes back changed rather than emptied, the way a stomach does not vanish after a meal but sets to work on what it was given.",
-        "sourceId": "005-the-turn",
-        "created": "2026-07-30",
-        "ordinal": 5
-      },
-      "parentId": "page:page",
-      "index": "a52tb",
-      "typeName": "shape"
-    },
-    "user:vq8nLR3ErvsQSb6j-dziI": {
-      "name": "",
-      "color": "#FF802B",
-      "imageUrl": "",
-      "meta": {},
-      "id": "user:vq8nLR3ErvsQSb6j-dziI",
-      "typeName": "user"
-    },
-    "shape:ak4QsF9IUAcWCYyg9oBNP": {
-      "x": 0,
-      "y": 248,
-      "rotation": 0,
-      "isLocked": false,
-      "opacity": 1,
-      "meta": {},
-      "id": "shape:ak4QsF9IUAcWCYyg9oBNP",
-      "type": "atom",
-      "props": {
-        "w": 320,
-        "h": 200,
-        "atom": "untyped",
-        "text": "This is the seam I want to work: not spending but metabolizing, not depletion but digestion, and the difference is not decorative—it changes what discipline is for.",
-        "sourceId": "006-the-seam",
-        "created": "2026-07-30",
-        "ordinal": 6
-      },
-      "parentId": "page:page",
-      "index": "a6xTX",
-      "typeName": "shape"
-    },
-    "shape:zNi8cP9RzMEkhQRY4G7H7": {
-      "x": 0,
-      "y": 496,
-      "rotation": 0,
-      "isLocked": false,
-      "opacity": 1,
-      "meta": {},
-      "id": "shape:zNi8cP9RzMEkhQRY4G7H7",
-      "type": "atom",
-      "props": {
-        "w": 320,
-        "h": 200,
-        "atom": "untyped",
-        "text": "Under the spending view, rest is the only cure, and so we are told to unplug, to detox, to abstain—language borrowed wholesale from addiction, as though the mind were an account to be left alone until it refilled itself.",
-        "sourceId": "011-borrowed-from-addiction",
-        "created": "2026-07-30",
-        "ordinal": 11
-      },
-      "parentId": "page:page",
-      "index": "aB2mA",
-      "typeName": "shape"
-    },
-    "shape:pxlm69LzkRPGPx1sep7rj": {
-      "x": 1104,
-      "y": 248,
-      "rotation": 0,
-      "isLocked": false,
-      "opacity": 1,
-      "meta": {},
-      "id": "shape:pxlm69LzkRPGPx1sep7rj",
-      "type": "atom",
-      "props": {
-        "w": 320,
-        "h": 200,
-        "atom": "untyped",
-        "text": "Attention is not spent. It is fed.",
-        "sourceId": "009-fed-not-spent",
-        "created": "2026-07-30",
-        "ordinal": 9
-      },
-      "parentId": "page:page",
-      "index": "a9ue2",
-      "typeName": "shape"
-    },
-    "shape:zNcZAR7HGxAx_qkO92NXR": {
-      "x": 736,
-      "y": 248,
-      "rotation": 0,
-      "isLocked": false,
-      "opacity": 1,
-      "meta": {},
-      "id": "shape:zNcZAR7HGxAx_qkO92NXR",
-      "type": "atom",
-      "props": {
-        "w": 320,
-        "h": 200,
-        "atom": "untyped",
-        "text": "A wallet has one operation: subtraction. A gut has dozens—it selects, it ferments, it refuses, it stores, it converts one thing into another thing entirely, and none of this shows up as a number going down.",
-        "sourceId": "008-what-digestion-does",
-        "created": "2026-07-30",
-        "ordinal": 8
-      },
-      "parentId": "page:page",
-      "index": "a8ECf",
-      "typeName": "shape"
-    },
-    "shape:QuW7kpgSoyRRuVpPwYmYt": {
-      "x": 736,
-      "y": 496,
-      "rotation": 0,
-      "isLocked": false,
-      "opacity": 1,
-      "meta": {},
-      "id": "shape:QuW7kpgSoyRRuVpPwYmYt",
-      "type": "atom",
-      "props": {
-        "w": 320,
-        "h": 200,
-        "atom": "move",
-        "text": "2026-07-14 — the wallet metaphor is Puritan in disguise: spend wisely, save diligently, guard the balance. It smuggles in a whole ethics of scarcity that the digestive metaphor simply refuses.",
-        "sourceId": "notes-1",
-        "created": "2026-07-30",
-        "ordinal": 13
-      },
-      "parentId": "page:page",
-      "index": "aDDGr",
-      "typeName": "shape"
-    },
-    "shape:UpHQCa0dPGBrYHFniJXj-": {
-      "x": 368,
-      "y": 0,
-      "rotation": 0,
-      "isLocked": false,
-      "opacity": 1,
-      "meta": {},
-      "id": "shape:UpHQCa0dPGBrYHFniJXj-",
-      "type": "atom",
-      "props": {
-        "w": 320,
-        "h": 200,
-        "atom": "untyped",
-        "text": "Pay attention, we say, as if the paying settled something—as if the mind kept a ledger, and the ledger, once emptied, simply closed for the day.",
-        "sourceId": "002-pay-attention",
-        "created": "2026-07-30",
-        "ordinal": 2
-      },
-      "parentId": "page:page",
-      "index": "a2G0b",
-      "typeName": "shape"
-    },
-    "shape:Q43eqTAuthHGFzmFJ6nby": {
-      "x": 368,
-      "y": 496,
-      "rotation": 0,
-      "isLocked": false,
-      "opacity": 1,
-      "meta": {},
-      "id": "shape:Q43eqTAuthHGFzmFJ6nby",
+      "id": "shape:-pbRkVShnaPD5EIWrglmj",
       "type": "atom",
       "props": {
         "w": 320,
@@ -246,52 +62,251 @@
         "created": "2026-07-30",
         "ordinal": 12
       },
-      "parentId": "page:page",
-      "index": "aC4YU",
+      "parentId": "shape:OrypP3apbvLqca33-xLSd",
+      "index": "a6hSX",
       "typeName": "shape"
     },
-    "shape:H3qcD16RtpUDm_RDFubvG": {
-      "x": 1104,
-      "y": 496,
+    "shape:GE9tKRRi9zwqN5e6gCdFe": {
+      "x": 408,
+      "y": 40,
       "rotation": 0,
       "isLocked": false,
       "opacity": 1,
       "meta": {},
-      "id": "shape:H3qcD16RtpUDm_RDFubvG",
+      "id": "shape:GE9tKRRi9zwqN5e6gCdFe",
       "type": "atom",
       "props": {
         "w": 320,
         "h": 200,
-        "atom": "move",
+        "atom": "claim",
+        "text": "Pay attention, we say, as if the paying settled something—as if the mind kept a ledger, and the ledger, once emptied, simply closed for the day.",
+        "sourceId": "002-pay-attention",
+        "created": "2026-07-30",
+        "ordinal": 2
+      },
+      "parentId": "shape:NrfEUK3ihwKQcQ7AYYYqI",
+      "index": "a2lLU",
+      "typeName": "shape"
+    },
+    "shape:uQU_YmtGpyijix8pNOwIn": {
+      "x": 40,
+      "y": 184,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {},
+      "id": "shape:uQU_YmtGpyijix8pNOwIn",
+      "type": "atom",
+      "props": {
+        "w": 320,
+        "h": 200,
+        "atom": "untyped",
+        "text": "So I no longer ask how to protect my attention, as though guarding a balance, but what I am asking it to metabolize, and whether the diet I am feeding it—the feeds, the fragments, the endless untethered paragraphs—is a diet a practice can hold, and tend, rather than merely survive.",
+        "sourceId": "010-the-stance",
+        "created": "2026-07-30",
+        "ordinal": 10
+      },
+      "parentId": "shape:OrypP3apbvLqca33-xLSd",
+      "index": "a4BRM",
+      "typeName": "shape"
+    },
+    "shape:5h56M-S2JwBpdmDcUTSaB": {
+      "x": 408,
+      "y": 184,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {},
+      "id": "shape:5h56M-S2JwBpdmDcUTSaB",
+      "type": "atom",
+      "props": {
+        "w": 320,
+        "h": 200,
+        "atom": "untyped",
+        "text": "Under the spending view, rest is the only cure, and so we are told to unplug, to detox, to abstain—language borrowed wholesale from addiction, as though the mind were an account to be left alone until it refilled itself.",
+        "sourceId": "011-borrowed-from-addiction",
+        "created": "2026-07-30",
+        "ordinal": 11
+      },
+      "parentId": "shape:OrypP3apbvLqca33-xLSd",
+      "index": "a52tz",
+      "typeName": "shape"
+    },
+    "user:vq8nLR3ErvsQSb6j-dziI": {
+      "name": "",
+      "color": "#FF802B",
+      "imageUrl": "",
+      "meta": {},
+      "id": "user:vq8nLR3ErvsQSb6j-dziI",
+      "typeName": "user"
+    },
+    "shape:f79kIxp3mfh0cOk4RiolA": {
+      "x": 408,
+      "y": -64,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {},
+      "id": "shape:f79kIxp3mfh0cOk4RiolA",
+      "type": "atom",
+      "props": {
+        "w": 320,
+        "h": 200,
+        "atom": "figure",
+        "text": "A wallet has one operation: subtraction. A gut has dozens—it selects, it ferments, it refuses, it stores, it converts one thing into another thing entirely, and none of this shows up as a number going down.",
+        "sourceId": "008-what-digestion-does",
+        "created": "2026-07-30",
+        "ordinal": 8
+      },
+      "parentId": "shape:OrypP3apbvLqca33-xLSd",
+      "index": "a21tv",
+      "typeName": "shape"
+    },
+    "shape:inWNoPuYFi6GlYyy9o3xD": {
+      "x": 368,
+      "y": 992,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {},
+      "id": "shape:inWNoPuYFi6GlYyy9o3xD",
+      "type": "atom",
+      "props": {
+        "w": 320,
+        "h": 200,
+        "atom": "untyped",
         "text": "2026-07-19 — “ruminate” already does this work for me. To ruminate is, literally, to chew again. The vocabulary of digestion is sitting inside the vocabulary of thought, waiting to be noticed and tended.",
         "sourceId": "notes-2",
         "created": "2026-07-30",
         "ordinal": 14
       },
       "parentId": "page:page",
-      "index": "aEFgA",
+      "index": "aT0n6",
       "typeName": "shape"
     },
-    "shape:JbjFb4J2OtWjh34mXcnY1": {
-      "x": 736,
+    "shape:Mj-wgi5H69D9UQ97MvI_x": {
+      "x": 0,
+      "y": 992,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {},
+      "id": "shape:Mj-wgi5H69D9UQ97MvI_x",
+      "type": "atom",
+      "props": {
+        "w": 320,
+        "h": 200,
+        "atom": "stance",
+        "text": "2026-07-14 — the wallet metaphor is Puritan in disguise: spend wisely, save diligently, guard the balance. It smuggles in a whole ethics of scarcity that the digestive metaphor simply refuses.",
+        "sourceId": "notes-1",
+        "created": "2026-07-30",
+        "ordinal": 13
+      },
+      "parentId": "page:page",
+      "index": "aSIUo",
+      "typeName": "shape"
+    },
+    "shape:Gyu4lpEnHnvSXkD86lRby": {
+      "x": 40,
+      "y": -64,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {},
+      "id": "shape:Gyu4lpEnHnvSXkD86lRby",
+      "type": "atom",
+      "props": {
+        "w": 320,
+        "h": 200,
+        "atom": "move",
+        "text": "Picture the gut, not the wallet—the figure worth carrying is a long, coiled, patient organ that does not care how much arrives at once so much as what it is asked to break down, and how well it was fed in the years before the test.",
+        "sourceId": "f-007",
+        "created": "2026-07-30",
+        "ordinal": 7
+      },
+      "parentId": "shape:OrypP3apbvLqca33-xLSd",
+      "index": "a1",
+      "typeName": "shape"
+    },
+    "binding:YXsol0dtjqvvXdBg5Pdp8": {
+      "meta": {},
+      "id": "binding:YXsol0dtjqvvXdBg5Pdp8",
+      "type": "arrow",
+      "fromId": "shape:4ITibj9qBlqUk-nqdzhpL",
+      "toId": "shape:Gyu4lpEnHnvSXkD86lRby",
+      "props": {
+        "isPrecise": false,
+        "isExact": false,
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        },
+        "snap": "none",
+        "terminal": "start"
+      },
+      "typeName": "binding"
+    },
+    "shape:OrypP3apbvLqca33-xLSd": {
+      "x": -40,
+      "y": 560,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {},
+      "id": "shape:OrypP3apbvLqca33-xLSd",
+      "type": "frame",
+      "props": {
+        "w": 1120,
+        "h": 540,
+        "name": "The seam",
+        "color": "black"
+      },
+      "parentId": "page:page",
+      "index": "aWblr",
+      "typeName": "shape"
+    },
+    "shape:4ITibj9qBlqUk-nqdzhpL": {
+      "x": 0,
       "y": 0,
       "rotation": 0,
       "isLocked": false,
       "opacity": 1,
       "meta": {},
-      "id": "shape:JbjFb4J2OtWjh34mXcnY1",
-      "type": "atom",
+      "id": "shape:4ITibj9qBlqUk-nqdzhpL",
+      "type": "arrow",
       "props": {
-        "w": 320,
-        "h": 200,
-        "atom": "claim",
-        "text": "The attention economy names something real: that noticing costs, that a mind spread thin produces thin noticing, and that no one attends to everything at once. This much I want to hold onto, even as I argue against the metaphor built on top of it.",
-        "sourceId": "003-ground-the-economy",
-        "created": "2026-07-30",
-        "ordinal": 3
+        "kind": "arc",
+        "elbowMidPoint": 0.5,
+        "dash": "solid",
+        "size": "s",
+        "fill": "fill",
+        "color": "black",
+        "labelColor": "black",
+        "bend": 0,
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 2,
+          "y": 0
+        },
+        "arrowheadStart": "none",
+        "arrowheadEnd": "triangle",
+        "richText": {
+          "type": "doc",
+          "content": [
+            {
+              "type": "paragraph"
+            }
+          ]
+        },
+        "labelPosition": 0.5,
+        "font": "draw",
+        "scale": 1
       },
       "parentId": "page:page",
-      "index": "a3pSb",
+      "index": "aX4rU",
       "typeName": "shape"
     },
     "page:page": {
@@ -308,48 +323,151 @@
       "id": "document:document",
       "typeName": "document"
     },
-    "shape:KS39BR8yOtZX5gs7eOpkR": {
-      "x": 0,
-      "y": 0,
+    "shape:5QEbM6zOTTCvmWLnCuJe6": {
+      "x": 408,
+      "y": 288,
       "rotation": 0,
       "isLocked": false,
       "opacity": 1,
       "meta": {},
-      "id": "shape:KS39BR8yOtZX5gs7eOpkR",
+      "id": "shape:5QEbM6zOTTCvmWLnCuJe6",
       "type": "atom",
       "props": {
         "w": 320,
         "h": 200,
         "atom": "untyped",
-        "text": "I keep hearing the same metaphor, offered as though it were simply how things are: attention is a resource, spent like currency, and the discipline of a life is mostly a discipline of budgeting it.",
-        "sourceId": "001-received-view",
+        "text": "But a resource, once spent, is gone—while attention, oddly, comes back changed rather than emptied, the way a stomach does not vanish after a meal but sets to work on what it was given.",
+        "sourceId": "005-the-turn",
         "created": "2026-07-30",
-        "ordinal": 1
+        "ordinal": 5
       },
-      "parentId": "page:page",
-      "index": "a1JdM",
+      "parentId": "shape:NrfEUK3ihwKQcQ7AYYYqI",
+      "index": "a53er",
       "typeName": "shape"
     },
-    "shape:8J2aFwaga6tzA7VNrr10X": {
-      "x": 1472,
-      "y": 248,
+    "shape:Sc8Xe6pnwhIecKVfS4g5G": {
+      "x": 40,
+      "y": 288,
       "rotation": 0,
       "isLocked": false,
       "opacity": 1,
       "meta": {},
-      "id": "shape:8J2aFwaga6tzA7VNrr10X",
+      "id": "shape:Sc8Xe6pnwhIecKVfS4g5G",
       "type": "atom",
       "props": {
         "w": 320,
         "h": 200,
-        "atom": "stance",
-        "text": "So I no longer ask how to protect my attention, as though guarding a balance, but what I am asking it to metabolize, and whether the diet I am feeding it—the feeds, the fragments, the endless untethered paragraphs—is a diet a practice can hold, and tend, rather than merely survive.",
-        "sourceId": "010-the-stance",
+        "atom": "untyped",
+        "text": "I grant this much of the received view: something is indeed spent when I attend, some capacity narrows under steady use, and the evening mind is not the morning mind.",
+        "sourceId": "004-the-concession",
         "created": "2026-07-30",
-        "ordinal": 10
+        "ordinal": 4
+      },
+      "parentId": "shape:NrfEUK3ihwKQcQ7AYYYqI",
+      "index": "a4lNU",
+      "typeName": "shape"
+    },
+    "shape:JG98tOuH9r-ApCdVBp_55": {
+      "x": 736,
+      "y": 992,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {},
+      "id": "shape:JG98tOuH9r-ApCdVBp_55",
+      "type": "atom",
+      "props": {
+        "w": 320,
+        "h": 200,
+        "atom": "untyped",
+        "text": "2026-07-26 — open question for the seam: what is the attention-equivalent of malnutrition? Not distraction, which is too flat a word—something closer to a diet of fragments that never gets broken down into anything a practice can hold.",
+        "sourceId": "notes-3",
+        "created": "2026-07-30",
+        "ordinal": 15
       },
       "parentId": "page:page",
-      "index": "aA5Uq",
+      "index": "aU8Hj",
+      "typeName": "shape"
+    },
+    "shape:NrfEUK3ihwKQcQ7AYYYqI": {
+      "x": -40,
+      "y": -40,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {},
+      "id": "shape:NrfEUK3ihwKQcQ7AYYYqI",
+      "type": "frame",
+      "props": {
+        "w": 1120,
+        "h": 540,
+        "name": "Ground",
+        "color": "black"
+      },
+      "parentId": "page:page",
+      "index": "aV6Lb",
+      "typeName": "shape"
+    },
+    "shape:szFOcsItC8ZPVBL_XbOJ0": {
+      "x": 776,
+      "y": 288,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {},
+      "id": "shape:szFOcsItC8ZPVBL_XbOJ0",
+      "type": "atom",
+      "props": {
+        "w": 320,
+        "h": 200,
+        "atom": "untyped",
+        "text": "This is the seam I want to work: not spending but metabolizing, not depletion but digestion, and the difference is not decorative—it changes what discipline is for.",
+        "sourceId": "006-the-seam",
+        "created": "2026-07-30",
+        "ordinal": 6
+      },
+      "parentId": "shape:NrfEUK3ihwKQcQ7AYYYqI",
+      "index": "a6O6M",
+      "typeName": "shape"
+    },
+    "binding:RwWV6aZuzweANoa_WXFra": {
+      "meta": {},
+      "id": "binding:RwWV6aZuzweANoa_WXFra",
+      "type": "arrow",
+      "fromId": "shape:4ITibj9qBlqUk-nqdzhpL",
+      "toId": "shape:GE9tKRRi9zwqN5e6gCdFe",
+      "props": {
+        "isPrecise": false,
+        "isExact": false,
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        },
+        "snap": "none",
+        "terminal": "end"
+      },
+      "typeName": "binding"
+    },
+    "shape:6ixsFzTpt0mhZWKH7kJAr": {
+      "x": 776,
+      "y": -64,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {},
+      "id": "shape:6ixsFzTpt0mhZWKH7kJAr",
+      "type": "atom",
+      "props": {
+        "w": 320,
+        "h": 200,
+        "atom": "untyped",
+        "text": "Attention is not spent. It is fed.",
+        "sourceId": "009-fed-not-spent",
+        "created": "2026-07-30",
+        "ordinal": 9
+      },
+      "parentId": "shape:OrypP3apbvLqca33-xLSd",
+      "index": "a3VRv",
       "typeName": "shape"
     }
   },

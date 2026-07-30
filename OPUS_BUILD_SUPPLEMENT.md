@@ -367,3 +367,23 @@ Approved as an exception to §9.4. Without it `scripts/` had zero type checking 
 §6.2's pure-core rule puts both readout paths through the same `readout()`. That is necessary but not sufficient: the **file-writing edges** must also share one serializer rather than each reaching for `JSON.stringify` or a template string. Key order, indent width, and the trailing newline are exactly where a byte-identical gate dies. `src/lib/serialize.ts` is the only place either path turns a value into bytes.
 
 Corollary: `readout()` takes its `generated` timestamp as an argument. A clock read inside the pure core would make the function non-deterministic and the gate unprovable.
+
+### E9. `InFrontOfTheCanvas` is screen space, not page space (M2)
+
+Worth knowing before any later overlay. `DefaultCanvas` renders that slot into `.tl-canvas__in-front`, a **sibling** of `.tl-canvas` with `position:absolute; inset:0`. It is not inside the html layer, so children are positioned in **screen** pixels and do not track pan or zoom on their own.
+
+`OnTheCanvas` is the page-space slot, but it renders *behind* shapes, which is wrong for a mark that must sit over the paper.
+
+`src/ui/UnsupportedMarks.tsx` therefore stays in `InFrontOfTheCanvas` and applies the camera itself: an `inset:0` clipped wrapper holding a 0x0 `transform-origin:0 0` layer carrying `scale(z) translate(x,y)`. Inside that layer one CSS pixel is one page unit. **Moving the component to `OnTheCanvas` would double-transform it.**
+
+### E10. Arrow paint must come from display values, not CSS (M2)
+
+BUILD.md §5.5 wants dependency arrows at ink-3, 1px. Neither is reachable through arrow props: `theme.ts` collapses every named color to solid ink, and stroke width is `theme.strokeWidth (2) * STROKE_SIZES[size]` with a minimum multiplier of 1.
+
+Restyling in CSS works on canvas and **silently fails on export** — `getSvgString`/`toImage` render shapes without the document stylesheet reaching their internals, so plates would ship 2px near-black arrows while the canvas showed 1px ink-3. `src/shapes/DependencyArrowUtil.ts` subclasses `ArrowShapeUtil` and overrides `options.getCustomDisplayValues` instead, which both paths go through. `options` is a class field on the parent, so it is amended in the constructor — a field initializer cannot see it and `super.options` is not accessible.
+
+Generalization for M3 onward: **anything that must appear in an exported figure has to be a display value, a shape prop, or `toSvg` output. CSS reaches the canvas only.**
+
+### E11. Open item for M4 — Ticket and Gap need a stable id (M2)
+
+§6.2's `TicketShape` and `GapShape` prop lists carry no id, but §7's example map shows `t-001` and `g-002`. `readout.ts` reads `props.sourceId` when present and otherwise falls back to the record id with `shape:` stripped, so without a `sourceId` prop the map's ticket lines will carry tldraw nanoids. Add `sourceId` to both shapes in M4.
