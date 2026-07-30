@@ -1,0 +1,80 @@
+/* The plate — BUILD.md §10. A page from a book: cream ground, a hairline
+   border, the printer's double rule, the caption in mono, the colophon bottom
+   right. Nothing here is load-bearing for the exported figure — E10: CSS
+   reaches the canvas only, so every mark below also exists as literal SVG in
+   PlateShapeUtil.toSvg. This file is the on-canvas twin of that, and the two
+   are compared side by side at the M3 gate. */
+
+.ec-plate {
+  box-sizing: border-box;
+  background: var(--paper);
+  /* Brand/README: "Images and figures are sharp-cornered." The card rounds 2px;
+     a plate does not round at all. */
+  border-radius: var(--r-0);
+  /* Paper does not float. */
+  box-shadow: none;
+  font-family: var(--font-mono);
+  /* Stated rather than inherited, so the text measurer, the plate and the
+     exported SVG all lay out on the same metrics. */
+  font-feature-settings: 'kern', 'liga', 'onum', 'pnum';
+  user-select: none;
+}
+
+/* The hairline is drawn as an overlay rather than as a border on the plate: a
+   real border would shrink the containing block for everything inside it, and
+   every element would land 1px away from where toSvg puts it (E4). It also has
+   to paint over the ends of the double rule, which runs the full measure. */
+.ec-plate::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--bone);
+  border-radius: var(--r-0);
+  pointer-events: none;
+}
+
+/* Rule, caption and colophon are laid out in flow and the block is anchored to
+   the bottom edge, so the caption grows upward into the figure's margin instead
+   of pushing the colophon off the plate. Height then falls out of the line
+   count, exactly as plateCaptionBlockHeight computes it. */
+.ec-plate__foot {
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
+/* `3px double var(--ink-3)`: two hairlines with a 1px gap. Drawn as two borders
+   on a 3px box rather than as `border-top: 3px double` so the DOM and the SVG
+   place the same two strokes at the same two offsets, and so the rule cannot
+   quietly collapse into one thick line — it is the single most recognizable
+   element in the house language. */
+.ec-plate__rule {
+  box-sizing: border-box;
+  height: 3px;
+  border-top: 1px solid var(--ink-3);
+  border-bottom: 1px solid var(--ink-3);
+}
+
+.ec-plate__caption,
+.ec-plate__colophon {
+  font-size: var(--t-meta);
+  /* line-height is set inline: --lh-normal snapped to a whole pixel, so the
+     plate, the text measurer and the exported SVG break lines identically. */
+}
+
+/* Uppercased in JS, not by text-transform: the measurer is handed the same
+   string the DOM renders, so there is one source of truth for the label. */
+.ec-plate__caption {
+  font-weight: 500;
+  letter-spacing: var(--tk-wider);
+  color: var(--ink-3);
+}
+
+/* The colophon is a mark, not a label — lighter, and tracked like the card's
+   baseline meta rather than like a heading. */
+.ec-plate__colophon {
+  font-weight: 400;
+  letter-spacing: var(--tk-wide);
+  color: var(--ink-4);
+  text-align: right;
+}

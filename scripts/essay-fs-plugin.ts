@@ -293,6 +293,27 @@ async function handle(
     return sendJson(res, 200, { path: repoRelative(target), bytes })
   }
 
+  // Reading back from out/ exists for one reason: the figure registry decides
+  // the next figure number, and §10 says that number comes from figures.json on
+  // disk rather than from anything the app remembers. Text only — a generated
+  // PNG has no reason to travel back into the browser.
+  if (area === 'out' && segments.length > 3 && method === 'GET') {
+    const slug = requireSegment(param, 'slug')
+    const rest = segments.slice(3).map((segment) => requireSegment(segment, 'path'))
+    const target = resolveInRepo('out', slug, ...rest)
+    let raw: string
+    try {
+      raw = await fs.readFile(target, 'utf8')
+    } catch {
+      throw new HttpError(404, `no such file: out/${slug}/${rest.join('/')}`)
+    }
+    res.statusCode = 200
+    res.setHeader('content-type', 'text/plain; charset=utf-8')
+    res.setHeader('cache-control', 'no-store')
+    res.end(raw)
+    return
+  }
+
   if (area === 'out' && segments.length === 3) {
     expect('POST')
     const slug = requireSegment(param, 'slug')

@@ -3,6 +3,8 @@ import { HairlineGrid } from './ui/Grid'
 import { UnsupportedMarks } from './ui/UnsupportedMarks'
 import { startBindMode } from './lib/bind'
 import { runReadout } from './lib/runReadout'
+import { exportFigure } from './lib/exportFigure'
+import { promptForCaption } from './ui/CaptionDialog'
 import { essaySlugFromUrl } from './lib/essayFs'
 import { ATOM_BY_KEY } from './types'
 import type { AtomType } from './types'
@@ -134,6 +136,42 @@ export const overrides: TLUiOverrides = {
       label: 'Bind selection to next click',
       onSelect() {
         startBindMode(editor)
+      },
+    }
+
+    // Stage 7. The caption is authored first, because it names and numbers the
+    // figure; cancelling the prompt cancels the export and writes nothing.
+    actions['export-figure'] = {
+      id: 'export-figure',
+      kbd: 'cmd+e,ctrl+e',
+      label: 'Export figure from selection',
+      async onSelect() {
+        const slug = essaySlugFromUrl()
+        if (!slug) return
+        if (editor.getSelectedShapeIds().length === 0) {
+          announce('nothing selected')
+          return
+        }
+
+        const authored = await promptForCaption(editor, helpers.addDialog)
+        if (!authored) return
+
+        try {
+          const { number, svgPath } = await exportFigure(
+            editor,
+            slug,
+            authored.caption,
+            authored.paragraph
+          )
+          await navigator.clipboard.writeText(svgPath).catch(() => {
+            // A figure that exported but could not reach the clipboard is still
+            // a figure; the toast names it either way.
+          })
+          announce(`fig. ${String(number).padStart(2, '0')} exported`)
+        } catch (err: unknown) {
+          console.error('export failed', err)
+          announce('export failed')
+        }
       },
     }
 

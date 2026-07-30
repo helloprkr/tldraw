@@ -1,8 +1,8 @@
 {
   "store": {
     "shape:SdkuWQNIXi_d0o8aqyAf4": {
-      "x": 40,
-      "y": 40,
+      "x": 24,
+      "y": 48,
       "rotation": 0,
       "isLocked": false,
       "opacity": 1,
@@ -23,8 +23,8 @@
       "typeName": "shape"
     },
     "shape:6ywKw1_wwV1slSL97C46G": {
-      "x": 776,
-      "y": 40,
+      "x": 760,
+      "y": 48,
       "rotation": 0,
       "isLocked": false,
       "opacity": 1,
@@ -45,8 +45,8 @@
       "typeName": "shape"
     },
     "shape:-pbRkVShnaPD5EIWrglmj": {
-      "x": 776,
-      "y": 184,
+      "x": 760,
+      "y": 296,
       "rotation": 0,
       "isLocked": false,
       "opacity": 1,
@@ -67,8 +67,8 @@
       "typeName": "shape"
     },
     "shape:GE9tKRRi9zwqN5e6gCdFe": {
-      "x": 408,
-      "y": 40,
+      "x": 392,
+      "y": 48,
       "rotation": 0,
       "isLocked": false,
       "opacity": 1,
@@ -89,8 +89,8 @@
       "typeName": "shape"
     },
     "shape:uQU_YmtGpyijix8pNOwIn": {
-      "x": 40,
-      "y": 184,
+      "x": 24,
+      "y": 296,
       "rotation": 0,
       "isLocked": false,
       "opacity": 1,
@@ -111,8 +111,8 @@
       "typeName": "shape"
     },
     "shape:5h56M-S2JwBpdmDcUTSaB": {
-      "x": 408,
-      "y": 184,
+      "x": 392,
+      "y": 296,
       "rotation": 0,
       "isLocked": false,
       "opacity": 1,
@@ -141,8 +141,8 @@
       "typeName": "user"
     },
     "shape:f79kIxp3mfh0cOk4RiolA": {
-      "x": 408,
-      "y": -64,
+      "x": 392,
+      "y": 48,
       "rotation": 0,
       "isLocked": false,
       "opacity": 1,
@@ -207,8 +207,8 @@
       "typeName": "shape"
     },
     "shape:Gyu4lpEnHnvSXkD86lRby": {
-      "x": 40,
-      "y": -64,
+      "x": 24,
+      "y": 48,
       "rotation": 0,
       "isLocked": false,
       "opacity": 1,
@@ -324,8 +324,8 @@
       "typeName": "document"
     },
     "shape:5QEbM6zOTTCvmWLnCuJe6": {
-      "x": 408,
-      "y": 288,
+      "x": 392,
+      "y": 296,
       "rotation": 0,
       "isLocked": false,
       "opacity": 1,
@@ -346,8 +346,8 @@
       "typeName": "shape"
     },
     "shape:Sc8Xe6pnwhIecKVfS4g5G": {
-      "x": 40,
-      "y": 288,
+      "x": 24,
+      "y": 296,
       "rotation": 0,
       "isLocked": false,
       "opacity": 1,
@@ -409,8 +409,8 @@
       "typeName": "shape"
     },
     "shape:szFOcsItC8ZPVBL_XbOJ0": {
-      "x": 776,
-      "y": 288,
+      "x": 760,
+      "y": 296,
       "rotation": 0,
       "isLocked": false,
       "opacity": 1,
@@ -449,8 +449,8 @@
       "typeName": "binding"
     },
     "shape:6ixsFzTpt0mhZWKH7kJAr": {
-      "x": 776,
-      "y": -64,
+      "x": 760,
+      "y": 48,
       "rotation": 0,
       "isLocked": false,
       "opacity": 1,
@@ -501,6 +501,7 @@
       "com.tldraw.shape.image": 5,
       "com.tldraw.shape.video": 4,
       "com.tldraw.shape.atom": 0,
+      "com.tldraw.shape.plate": 0,
       "com.tldraw.shape.arrow": 8,
       "com.tldraw.binding.arrow": 1
     }

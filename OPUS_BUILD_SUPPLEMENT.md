@@ -404,3 +404,27 @@ Operational note that follows from this: a browser tab left open on `?essay=<slu
 ### E13. One stamp helper, second precision (M3 prep, Jordan, 2026-07-30)
 
 `generated:` was written at millisecond precision by the in-app path and second precision by the CLI, so a committed fixture stopped matching a fresh run. BUILD.md §7's example is `2026-07-30T14:02:11Z` — seconds. `src/lib/stamp.ts` now holds the only formatter (`formatStamp`, pure) and the only clock read (`nowStamp`), and both edges call it. Same reasoning as E8: two edges formatting the same field independently is drift waiting to happen.
+
+### E14. The exporter masks frame children, and that is correct (M3)
+
+`getSvgJsx` builds an SVG clip path for any shape whose parent is a frame, whether or not the frame is itself in the export. During the M3 gate two cards came out with their pigment rules and eyebrows sliced off, which looked like an export bug. It was not: those cards genuinely overhung their frame's top edge, and tldraw clips frame children **on canvas** too. The export was faithfully reproducing what the canvas showed.
+
+Diagnostic, when a figure looks cropped: compare `editor.getShapePageBounds(id)` against `editor.getShapeMask(id)`. If the bounds fall outside the mask, the card is hanging out of its frame and the canvas is clipping it as well — fix the arrangement, not the exporter.
+
+Consequence worth knowing for §10: a figure cut from framed cards inherits their frames' clipping. If a future figure ever needs to escape that, clone the shapes onto the page first — which is what BUILD.md §10's "clone the selected shapes" would buy. It is not needed while cards sit inside their frames.
+
+### E15. The plate is a shape, not a wrapper (M3)
+
+Following E10, the book-plate wrapper is a real `plate` shape created behind the selection, exported with it by id, and deleted in a `history: 'ignore'` run so it never enters the undo stack or outlives the call. One geometry therefore produces the SVG and the PNG, and neither can drift from the canvas.
+
+The double rule is two 1px rects with a 1px gap in `toSvg`, and two 1px borders on a 3px `border-box` div on canvas — deliberately not `border: 3px double`, so the DOM cannot resolve the gap differently from the SVG. Verified in the exported file: `<rect y="896" height="1" fill="#6b5a4c"/>` and `<rect y="898" .../>`.
+
+Plate height is `figureHeight + PLATE_PAD * 2 + captionHeight(caption, n, editor, plateW)`. `plateW` is required because the caption wraps and its height cannot be known without the measure it wraps to.
+
+### E16. Driving a gate without the browser extension (M3)
+
+The Chrome extension dropped mid-gate. Exports need a real browser, so the run was finished by driving headless Chrome over CDP with no dependencies (node 23 has global `WebSocket` and `fetch`): launch with `--remote-debugging-port`, `PUT /json/new?<url>`, connect to `webSocketDebuggerUrl`, then `Runtime.evaluate` with `awaitPromise` against `await import('/src/lib/exportFigure.ts')`.
+
+Useful beyond the outage: it makes the export gate reproducible without a human in the loop. The harness lives in the session scratchpad, not the repo.
+
+Headless note: `--screenshot` renders the file and then sometimes hangs on shutdown. Poll for the output file and kill the process rather than waiting on exit.

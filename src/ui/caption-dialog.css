@@ -1,0 +1,198 @@
+/* ============================================================
+   The ⌘E caption prompt (BUILD.md §10).
+   A modal is the one place §2.2 permits a shadow. Everything
+   else here is the same paper-on-paper as the canvas.
+   ============================================================ */
+
+/* Scoped to this dialog so the rules cannot leak to any other one. */
+.tl-container:has(.caption-dialog) .tlui-dialog__overlay {
+  /* An ink tint, never frosted glass — paper is opaque. --tl-color-overlay is
+     already rgb(26 20 16 / 0.2) in the de-tldraw pass. */
+  animation: caption-dialog-in var(--dur-2) var(--ease-out);
+}
+
+.tl-container:has(.caption-dialog) .tlui-dialog__content {
+  background-color: var(--bg-2);
+  border: var(--border-hair);
+  border-radius: var(--r-1);
+  /* Warm, ink-tinted, no blue. The sheet has to read as lifted off the canvas
+     it covers, and a hairline alone cannot do that over live drawing. */
+  box-shadow: var(--shadow-deep);
+  /* tldraw clips the modal; a 2px ring at 2px offset would be cut. */
+  overflow: visible;
+  animation: caption-dialog-in var(--dur-2) var(--ease-out);
+}
+
+.caption-dialog {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+  width: 520px;
+  max-width: 100%;
+  padding: var(--s-6);
+  background: var(--bg-2);
+}
+
+/* ---- Label ----------------------------------------------------------
+   Mono is only ever a label: uppercase, wide-tracked, smaller than the
+   body. It names the field and is the field's accessible name.
+   -------------------------------------------------------------------- */
+.caption-dialog__title.tlui-dialog__header__title {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--t-meta);
+  font-weight: 500;
+  letter-spacing: var(--tk-wider);
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* ---- The field ------------------------------------------------------
+   The caption is prose, so it is set in the body serif at reading size.
+   -------------------------------------------------------------------- */
+.caption-dialog__input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: var(--s-3) var(--s-4);
+  font-family: var(--font-body);
+  font-size: var(--t-body);
+  line-height: var(--lh-normal);
+  color: var(--ink);
+  background: var(--paper);
+  border: var(--border-hair);
+  border-radius: var(--r-1);
+  transition: border-color var(--dur-1) var(--ease-soft);
+}
+
+.caption-dialog__input::placeholder {
+  color: var(--ink-4);
+  font-style: italic;
+}
+
+.caption-dialog__input:hover {
+  border-color: var(--ink-4);
+}
+
+/* A system that respects the keyboard. */
+.caption-dialog__input:focus,
+.caption-dialog__aside-input:focus,
+.caption-dialog__action:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+/* ---- The margin -----------------------------------------------------
+   Hint left, paragraph reference right. Both are marginalia: mono, quiet,
+   and never the reason the dialog is open.
+   -------------------------------------------------------------------- */
+.caption-dialog__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-5);
+}
+
+.caption-dialog__hint,
+.caption-dialog__label {
+  font-family: var(--font-mono);
+  font-size: var(--t-meta);
+  letter-spacing: var(--tk-wider);
+  text-transform: uppercase;
+  color: var(--ink-4);
+}
+
+.caption-dialog__aside {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: var(--s-2);
+}
+
+.caption-dialog__aside-input {
+  width: 5ch;
+  padding: var(--s-0) var(--s-1);
+  font-family: var(--font-body);
+  font-size: var(--t-body-sm);
+  color: var(--ink-2);
+  text-align: center;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--rule);
+  border-radius: var(--r-0);
+}
+
+.caption-dialog__aside-input::placeholder {
+  color: var(--ink-4);
+}
+
+/* ---- Footer ---------------------------------------------------------
+   A hairline, not the plate's double rule — that mark belongs to the
+   figure and would be spent if the UI wore it too.
+   -------------------------------------------------------------------- */
+.caption-dialog__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-4);
+  margin-top: var(--s-2);
+  padding-top: var(--s-4);
+  border-top: var(--border-hair);
+}
+
+.caption-dialog__action {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--s-2);
+  padding: var(--s-2) var(--s-4);
+  font-family: var(--font-mono);
+  font-size: var(--t-meta);
+  font-weight: 500;
+  letter-spacing: var(--tk-wider);
+  text-transform: uppercase;
+  color: var(--ink-2);
+  background: transparent;
+  border: var(--border-hair);
+  border-radius: var(--r-1);
+  cursor: pointer;
+  transition: background-color var(--dur-1) var(--ease-soft);
+}
+
+.caption-dialog__action--commit {
+  color: var(--ink);
+  border-color: var(--ink);
+}
+
+.caption-dialog__action:not(:disabled):hover {
+  background-color: var(--paper-deep);
+}
+
+.caption-dialog__action:not(:disabled):active {
+  transform: translateY(1px);
+}
+
+/* Nothing to commit reads as unfinished, not as an error. */
+.caption-dialog__action:disabled {
+  color: var(--ink-4);
+  border-color: var(--rule);
+  cursor: default;
+}
+
+.caption-dialog__key {
+  padding: 0;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: var(--tk-wide);
+  color: var(--ink-4);
+  background: transparent;
+  border: 0;
+}
+
+/* §5.6: fades only. No slide, no scale, no spring. */
+@keyframes caption-dialog-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

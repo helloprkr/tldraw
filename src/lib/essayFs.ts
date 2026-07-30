@@ -37,6 +37,18 @@ export async function writeWork(slug: string, snapshot: unknown): Promise<void> 
   if (!res.ok) throw new Error(`write work/${slug}: ${res.status} ${res.statusText}`)
 }
 
+/**
+ * Reads a text file back out of out/<slug>/. Exists so the figure registry can
+ * decide the next figure number from disk (§10) rather than from anything the
+ * app remembers across reloads. Null when it has not been written yet.
+ */
+export async function readOut(slug: string, path: string): Promise<string | null> {
+  const res = await fetch(`/api/out/${encodeURIComponent(slug)}/${path}`)
+  if (res.status === 404) return null
+  if (!res.ok) throw new Error(`read out/${slug}/${path}: ${res.status} ${res.statusText}`)
+  return await res.text()
+}
+
 export interface OutFile {
   path: string
   content?: string

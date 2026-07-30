@@ -1,0 +1,23 @@
+{
+  "essay": "test-essay",
+  "figures": [
+    {
+      "number": 1,
+      "caption": "The delta between received and mine",
+      "slug": "the-delta-between-received-and-mine",
+      "paragraph": "26",
+      "shapeIds": [
+        "shape:SdkuWQNIXi_d0o8aqyAf4",
+        "shape:GE9tKRRi9zwqN5e6gCdFe",
+        "shape:Gyu4lpEnHnvSXkD86lRby",
+        "shape:f79kIxp3mfh0cOk4RiolA"
+      ],
+      "created": "2026-07-30T21:32:45Z",
+      "sourceHash": "9155016b0f0407b3",
+      "files": {
+        "svg": "figures/fig-01-the-delta-between-received-and-mine.svg",
+        "png": "figures/fig-01-the-delta-between-received-and-mine@2x.png"
+      }
+    }
+  ]
+}

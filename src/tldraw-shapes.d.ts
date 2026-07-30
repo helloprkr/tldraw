@@ -20,5 +20,20 @@ declare module '@tldraw/tlschema' {
       created: string
       ordinal: number
     }
+    /**
+     * The book-plate wrapper (§10). It carries only its own chrome — ground,
+     * hairline border, double rule, caption, colophon. The figure's content is
+     * the cloned shapes laid over it, so the plate never has to know what it
+     * is wrapping.
+     */
+    plate: {
+      w: number
+      h: number
+      /** Rendered uppercase; stored as Jordan wrote it. */
+      caption: string
+      figureNumber: number
+      /** Paragraph reference for the colophon, or empty. */
+      paragraph: string
+    }
   }
 }
