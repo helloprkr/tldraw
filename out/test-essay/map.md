@@ -1,6 +1,6 @@
 ---
 essay: test-essay
-generated: 2026-07-31T14:42:38Z
+generated: 2026-07-31T14:54:26Z
 source: work/test-essay.tldr
 cards: 15
 untyped: 10
@@ -31,6 +31,15 @@ untyped: 10
 13. **[stance]** 2026-07-14 — the wallet metaphor is Puritan in disguise: spend wisely, save diligently, guard the balance. It smuggles in a whole ethics of scarcity that the digestive metaphor simply refuses. `notes-1`
 14. **[untyped]** 2026-07-19 — “ruminate” already does this work for me. To ruminate is, literally, to chew again. The vocabulary of digestion is sitting inside the vocabulary of thought, waiting to be noticed and tended. `notes-2`
 15. **[untyped]** 2026-07-26 — open question for the seam: what is the attention-equivalent of malnutrition? Not distraction, which is too flat a word—something closer to a diet of fragments that never gets broken down into anything a practice can hold. `notes-3`
+
+## Open tickets
+
+- [ ] UNANSWERED — Focus is a muscle, and the remedy for weakness is repetition. `g-r-005`
+- [ ] UNANSWERED — Interruption is theft: every notification takes something that does not come back. `g-r-006`
+- [ ] UNANSWERED — The scarce good is time, and attention is how time is spent. `g-r-007`
+- [ ] UNANSWERED — Willpower depletes, so the wise arrange their day to spend less of it. `g-r-008`
+- [ ] UNANSWERED — Information is abundant and attention is the bottleneck. `g-r-009`
+- [ ] UNANSWERED — The cure for a distracted age is a stricter accounting. `g-r-010`
 
 ## Assembly program
 

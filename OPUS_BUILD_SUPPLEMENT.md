@@ -471,3 +471,29 @@ node scripts/headless-eval.mjs --essay test-essay --file step.js
 ```
 
 Headless Chrome over CDP, no dependencies (node 23 has global `WebSocket` and `fetch`). Evaluates in the running app with top-level `await`, prints the result, exits non-zero if the expression throws — so a gate can depend on it. Vite serves ES modules, so `await import('/src/lib/delta.ts')` reaches the real code rather than a copy. It needs the dev server running and does not need the editor extension.
+
+### E22. The fixture-desync gate step — mandatory from M5 (Jordan, 2026-07-31)
+
+Twice now the committed evidence has failed to reproduce a gate claim. At M2 the committed `work/test-essay.tldr` predated the frames, so it did not produce the committed `map.md`. At M4 the same thing happened with the delta arrangement: the snapshot held three gaps and thirty-six atoms of accumulated gate debris, and a fresh readout added an `## Open tickets` section the committed file lacked. Same failure twice is a pattern, not an accident: a gate is driven from **live editor state**, and the live state is only evidence once it has been saved and the outputs regenerated from the saved file.
+
+**Required before any milestone commit, in this order:**
+
+1. Drive the gate, then **save the final arrangement** (blur, or an explicit write) so `work/<slug>.tldr` holds exactly what the gate claimed.
+2. Verify the saved snapshot's census matches the claim — count the shapes, do not assume.
+3. **Regenerate `out/` from the saved file**, via `npm run readout -- <slug>`.
+4. `git diff` must then be **timestamp-only**. Anything else means the fixture and the outputs describe different canvases, and the gate is unproven.
+5. Prove determinism at a fixed stamp: rerun with `--generated <same>` and diff to nothing.
+
+A gate claim that a clean checkout cannot reproduce is a claim about a canvas that no longer exists.
+
+### E23. No resolved-ticket state (M4, Jordan, 2026-07-31)
+
+Closed permanently. **Deletion is closure** — that is what makes §7 Stage 6's "progress is visible by subtraction" literal, and what keeps `N OPEN` legible at a glance.
+
+Retention already exists and does not need a canvas state: `work/*.tldr` is committed to git (§7.3), so every deleted ticket is recoverable from history. **The canvas stays alarm-only; git is the archive.**
+
+In particular, a "resolved but retained" ticket must never be styled by draining its terracotta to ink. That would put a non-alarm ticket on the canvas and break the one-meaning rule the counter depends on.
+
+### E24. Agent lifecycle (Jordan, 2026-07-31, non-negotiable)
+
+**No gate commit until every spawned agent and shell has reported or been killed.** Twice an agent's report arrived after the milestone commit, and each time its late edits had to be reconciled by hand. Confirm three things before committing: every agent has returned, the task list is empty, and the process table holds nothing but the dev server.

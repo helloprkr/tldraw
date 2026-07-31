@@ -1,7 +1,7 @@
 {
   "essay": "test-essay",
   "title": "Test essay",
-  "generated": "2026-07-31T14:42:38Z",
+  "generated": "2026-07-31T14:54:26Z",
   "source": "work/test-essay.tldr",
   "cards": 15,
   "untyped": 10,
@@ -116,7 +116,38 @@
       "position": 15
     }
   ],
-  "tickets": [],
+  "tickets": [
+    {
+      "id": "g-r-005",
+      "text": "UNANSWERED — Focus is a muscle, and the remedy for weakness is repetition.",
+      "kind": "gap"
+    },
+    {
+      "id": "g-r-006",
+      "text": "UNANSWERED — Interruption is theft: every notification takes something that does not come back.",
+      "kind": "gap"
+    },
+    {
+      "id": "g-r-007",
+      "text": "UNANSWERED — The scarce good is time, and attention is how time is spent.",
+      "kind": "gap"
+    },
+    {
+      "id": "g-r-008",
+      "text": "UNANSWERED — Willpower depletes, so the wise arrange their day to spend less of it.",
+      "kind": "gap"
+    },
+    {
+      "id": "g-r-009",
+      "text": "UNANSWERED — Information is abundant and attention is the bottleneck.",
+      "kind": "gap"
+    },
+    {
+      "id": "g-r-010",
+      "text": "UNANSWERED — The cure for a distracted age is a stricter accounting.",
+      "kind": "gap"
+    }
+  ],
   "program": [
     "stance",
     "claim",
