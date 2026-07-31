@@ -582,3 +582,35 @@ Four items found in the final sweep, none worth changing behavior for, all recor
 2. **`getSvgString` is called with `background: false`**, where §10's call passes `background: true`. C3 authorizes the method change but not the flag. It is correct here: the plate's own `--paper` rect spans the full viewBox, so a background the exporter painted would be invisible underneath it, and asking for one would only risk a second ground of a different color.
 3. **The toast said `FIG. 01 EXPORTED`** while the plate said `FIG. 1`. §10's example is unpadded in both places. Fixed rather than logged as a deviation — the zero padding belongs to the filename, where it sorts.
 4. **Correction to §4.2 and C5:** `cmd+e` is *not* tldraw's default "export image" in 5.2.5. No default action or tool holds it; the only `cmd+e` in the package is an inert label inside the keyboard-shortcuts dialog, which is nulled. No deletion was needed and none should be added.
+
+### E34. Frame headings in plates — tldraw hard-codes Arial for SVG (Finalize, Jordan, 2026-07-31)
+
+**Upstream cause.** `node_modules/tldraw/dist-cjs/lib/shapes/frame/frameHelpers.js:60` reads `fontFamily: isSvg ? "Arial" : "Inter, sans-serif"`. The frame heading's export font is not a theme value, not a font slot, and not reachable through `assetUrls` — it is a literal, chosen per-path. `FrameShapeUtil.toSvg` then draws the heading in a chip with `rx: 4`.
+
+So every plate cut from a selection containing a frame shipped its **section titles in Arial**, unembedded, inside a 4px-radius chip — while the canvas showed those same titles correctly in Instrument Serif italic 20px, because there the font comes from CSS on `.tl-frame-heading`. Two failures at once: §5.4's silent-fallback failure, on someone else's machine, and a radius §2.3 forbids. It was invisible until a figure was opened somewhere else, and the committed `fig-01` did not catch it because that figure was cut from four bare cards with no frame in the selection.
+
+**Ruling — render them, matching the canvas.** Section titles are content, not chrome: a figure of an argument spine whose sections are unnamed has lost the map. Omission is already available by selecting cards without their frame, so building an omit option would duplicate a choice the selection model already provides.
+
+`src/shapes/SectionFrameUtil.tsx` subclasses `FrameShapeUtil` and overrides **`toSvg` only** — the canvas was already right — plus `getFontFaces`, without which the embedder never fetches the italic face and the title falls back to a system serif one step further along. The heading is drawn as text alone: tldraw's chip is a hit target for dragging a frame by its title, which is a canvas affordance with no meaning in a printed figure.
+
+**Parity is defined at zoom 1**, and that is not a shortcut. The canvas heading is scaled by `1/zoom` so it stays legible while zooming, so a fixed-scale export can only agree with it at one zoom — the one where a page unit is a CSS pixel. Measured against the running canvas there: the 24px heading box spans -28 to -4 from the frame's top edge and the text's line box spans -32.875 to +1.125, both centred on -16, which is why a single constant places the text. The three numbers behind it (`--tl-frame-height: 24`, `FRAME_HEADING_NOCOLORS_OFFSET_X: -7`, `FRAME_HEADING_OFFSET_Y: 4`) are transcribed with the same posture as the token literals in `AtomShapeUtil`.
+
+Verified the E14 way, against the artifact rather than the intention. Exported a selection of a frame and its six cards: `grep -c Arial` = **0**, `grep -c 'rx="4"'` = **0**, 21 embedded `data:font` faces, and the heading emitted as `<text x="-7" y="-16" dominant-baseline="central" font-family="'Instrument Serif'…" font-size="20" font-style="italic" fill="#1a1410">The seam</text>`. Canvas measured x = -6.875 and centre y = -15.875 against the export's -7 and -16 — **0.125px on both axes**, which is `getBoundingClientRect` sub-pixel rounding and an order of magnitude inside the tolerance E4 set for the card. Opened from `file://` with the dev server stopped and **zero listeners on 5173** confirmed before, during and after: `Instrument Serif italic 400 loaded`, alongside EB Garamond and JetBrains Mono.
+
+That trio is the first time §10's M3 gate has been satisfied in full. Until now no exported figure contained Instrument Serif at all, because the only shapes that declare it are the band and the frame label, and no gate had ever exported either.
+
+The verification figure was deliberately **not** committed. It was cut to prove the export, not to become part of the fixture Jordan runs the Plate Test against; `out/` is back to exactly what M5 committed.
+
+### E35. Ticket ids were allocated against one page (Finalize, 2026-07-31)
+
+`nextTicketId()` built its set of taken ids from `editor.getCurrentPageShapes()`. Tickets live on every page. `readout.ts` collects them from the whole store on purpose (E20) and the margin counter counts them the same way (E28) — **allocation was the third place that had to agree, and it was the one that did not.**
+
+Repro, run through the real `T` key in the running app: press `T` on Compose and get `t-001`; switch to the delta page and press `T`; the scan cannot see across, so `t-001` is handed out a second time. `map.md` then carries two `## Open tickets` lines under one id, and the trace from a line in the map back to the shape on the canvas — the thing E11 added `sourceId` to preserve — is gone for both of them.
+
+`usedTicketIds` now walks `getPages()` → `getPageShapeIds()` → `getShape()`, which is the same walk `Counter.tsx` makes for `openTicketCount`, deliberately, so the two read as one decision rather than two that happen to agree. Allocation order is unchanged: the lowest free `t-NNN` wins, so a deleted ticket's id is reused, which is what E23 means by deletion being closure.
+
+Verified after the fix, same repro: `t-001` on Compose, `t-002` on the delta page, two distinct lines in `map.md`.
+
+`scripts/check-tickets.ts` is the regression guard, and it earns its place by failing against the old implementation rather than merely passing against the new one — with the page-scoped body restored, 6 of its 12 cases fail, including `three presses, three ids in order` returning `["t-001","t-001","t-002"]`. It is its own suite rather than a case inside an existing one because `tickets.ts` is editor-facing, and the other suites' stated worth is that they prove the pure core runs outside a browser (§6.2); importing tldraw into one of them would spend that proof to save a file.
+
+**Gap ids are not affected, and this was checked rather than assumed.** `g-*` ids are derived, not allocated: `gapSourceId()` computes `g-` plus the facing card's own `sourceId`, with no scan and no counter, so there is no set that can be under-scoped. Its inputs are store-wide already.

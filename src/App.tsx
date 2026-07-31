@@ -18,6 +18,7 @@ import { PlateShapeUtil } from './shapes/PlateShapeUtil'
 import { TicketShapeUtil } from './shapes/TicketShapeUtil'
 import { GapShapeUtil } from './shapes/GapShapeUtil'
 import { BandShapeUtil } from './shapes/BandShapeUtil'
+import { SectionFrameUtil } from './shapes/SectionFrameUtil'
 import { Counter } from './ui/Counter'
 import { DeltaCounter } from './ui/DeltaCounter'
 import { DeltaReconciler } from './ui/DeltaReconciler'
@@ -27,8 +28,9 @@ import { openEssay, startAutosave } from './lib/openEssay'
 import { shapeVisibility } from './lib/deltaView'
 
 const themes = { default: essayTheme }
-// DependencyArrowUtil replaces tldraw's arrow rather than adding a type, so the
-// override reaches the canvas and the export from one place.
+// DependencyArrowUtil and SectionFrameUtil replace tldraw's arrow and frame
+// rather than adding types, so each override reaches the canvas and the export
+// from one place.
 const shapeUtils = [
   AtomShapeUtil,
   TicketShapeUtil,
@@ -36,6 +38,7 @@ const shapeUtils = [
   BandShapeUtil,
   PlateShapeUtil,
   DependencyArrowUtil,
+  SectionFrameUtil,
 ]
 
 function handleMount(editor: Editor) {
