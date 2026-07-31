@@ -2,6 +2,7 @@ import { useEditor, useValue } from 'tldraw'
 import type { TLShape } from 'tldraw'
 import type { AtomShape } from '../shapes/AtomShapeUtil'
 import { liveUnsupportedIds } from '../lib/unsupported'
+import { isDeltaPage } from '../lib/deltaView'
 
 /**
  * The margin counter (BUILD.md §7 Stage 3, extended by Stage 4). Bottom-left,
@@ -28,17 +29,24 @@ export function Counter() {
   const counts = useValue(
     'atom counts',
     () => {
-      const atoms = editor.getCurrentPageShapes().filter(isAtom)
+      // The delta page has its own counter in the opposite margin; this one
+      // counts the essay, and the essay is not there.
+      if (isDeltaPage(editor)) return null
+
+      const shapes = editor.getCurrentPageShapes()
+      const atoms = shapes.filter(isAtom)
       return {
         cards: atoms.length,
         untyped: atoms.filter((s) => s.props.atom === 'untyped').length,
         unsupported: liveUnsupportedIds(editor).length,
+        // §7 Stage 6: when this reads zero, the map is clear.
+        open: shapes.filter((s) => s.type === 'ticket').length,
       }
     },
     [editor]
   )
 
-  if (counts.cards === 0) return null
+  if (!counts || counts.cards === 0) return null
 
   return (
     <div className="margin-note margin-note--bottom-left" aria-live="polite">
@@ -51,6 +59,12 @@ export function Counter() {
         <>
           <span className="counter__sep"> · </span>
           <span className="counter__alarm">{counts.unsupported} unsupported</span>
+        </>
+      )}
+      {counts.open > 0 && (
+        <>
+          <span className="counter__sep"> · </span>
+          <span className="counter__alarm">{counts.open} open</span>
         </>
       )}
     </div>

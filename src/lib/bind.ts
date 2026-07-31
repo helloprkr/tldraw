@@ -1,5 +1,7 @@
 import { atom, createShapeId } from 'tldraw'
 import type { Editor, Signal, TLArrowBinding, TLShape, TLShapeId } from 'tldraw'
+import { isRelation } from '../relations'
+import type { Relation } from '../relations'
 import '../ui/bind.css'
 
 /**
@@ -31,6 +33,24 @@ function isAtom(shape: TLShape): boolean {
   return shape.type === 'atom'
 }
 
+/**
+ * A hole stands where its Received card stands, and in DeltaView the card
+ * behind it is not drawn — so §9's closing gesture, "bind a Mine card to a
+ * Received card", can only land on the gap. The gap carries `facingId` for
+ * exactly this: clicking the hole binds to the card it stands in for, the
+ * correspondence closes, and the hole is reconciled away.
+ */
+function isBindTarget(shape: TLShape): boolean {
+  return shape.type === 'atom' || shape.type === 'gap'
+}
+
+function resolveTarget(editor: Editor, shape: TLShape): TLShapeId | null {
+  if (shape.type !== 'gap') return shape.id
+  const facingId = (shape.props as { facingId?: string | null }).facingId
+  if (!facingId) return null
+  return editor.getShape(facingId as TLShapeId) ? (facingId as TLShapeId) : null
+}
+
 /** Selected cards, in the order tldraw reports them. Arrows are not sources. */
 function selectedAtomIds(editor: Editor): TLShapeId[] {
   return editor.getSelectedShapes().filter(isAtom).map((shape) => shape.id)
@@ -41,9 +61,17 @@ function selectedAtomIds(editor: Editor): TLShapeId[] {
  * end.toId) is the edge. Walk from the source's bindings so the scan stays
  * proportional to that card's degree rather than to the page.
  */
-function hasEdge(editor: Editor, fromId: TLShapeId, toId: TLShapeId): boolean {
+function hasEdge(
+  editor: Editor,
+  fromId: TLShapeId,
+  toId: TLShapeId,
+  relation: Relation
+): boolean {
   return editor.getBindingsToShape<TLArrowBinding>(fromId, 'arrow').some((start) => {
     if (start.props.terminal !== 'start') return false
+    // A dependency and a correspondence between the same pair are different
+    // assertions; only a repeat of the same relation is a duplicate.
+    if (!isRelation(editor.getShape(start.fromId)?.meta, relation)) return false
     return editor
       .getBindingsFromShape<TLArrowBinding>(start.fromId, 'arrow')
       .some((end) => end.props.terminal === 'end' && end.toId === toId)
@@ -74,8 +102,13 @@ const ARROW_PROPS = {
   scale: 1,
 } as const
 
-function createArrows(editor: Editor, sources: TLShapeId[], targetId: TLShapeId): number {
-  const edges = sources.filter((id) => id !== targetId && !hasEdge(editor, id, targetId))
+function createArrows(
+  editor: Editor,
+  sources: TLShapeId[],
+  targetId: TLShapeId,
+  relation: Relation
+): number {
+  const edges = sources.filter((id) => id !== targetId && !hasEdge(editor, id, targetId, relation))
   if (edges.length === 0) return 0
 
   // One mark, one transaction: three cards bound at once undo as one keystroke.
@@ -83,7 +116,10 @@ function createArrows(editor: Editor, sources: TLShapeId[], targetId: TLShapeId)
   editor.run(() => {
     for (const fromId of edges) {
       const arrowId = createShapeId()
-      editor.createShape({ id: arrowId, type: 'arrow', props: ARROW_PROPS })
+      // The relation is stamped here and read by every consumer. Compose's
+      // dependency graph and DeltaView's correspondences share the arrow
+      // binding and must never share a graph.
+      editor.createShape({ id: arrowId, type: 'arrow', props: ARROW_PROPS, meta: { relation } })
       editor.createBinding({
         type: 'arrow',
         fromId: arrowId,
@@ -120,7 +156,7 @@ export function cancelBindMode(_editor?: Editor): void {
  * session; an empty selection is a no-op, which is why the mode can never be
  * armed with nothing to bind from.
  */
-export function startBindMode(editor: Editor): void {
+export function startBindMode(editor: Editor, relation: Relation = 'dependency'): void {
   disarm()
 
   const sources = selectedAtomIds(editor)
@@ -144,10 +180,13 @@ export function startBindMode(editor: Editor): void {
     if (event.button !== 0) return
 
     const point = editor.screenToPage({ x: event.clientX, y: event.clientY })
-    const target = editor.getShapeAtPoint(point, { hitInside: true, filter: isAtom })
-    if (!target) return
+    const hit = editor.getShapeAtPoint(point, { hitInside: true, filter: isBindTarget })
+    if (!hit) return
 
-    createArrows(editor, sources, target.id)
+    const targetId = resolveTarget(editor, hit)
+    if (!targetId) return
+
+    createArrows(editor, sources, targetId, relation)
   }
 
   function onKeyDown(event: KeyboardEvent): void {

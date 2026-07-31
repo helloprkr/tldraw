@@ -1,0 +1,130 @@
+/* The ticket — BUILD.md §7 Stage 6. A sibling of the card (§5.3): the same
+   paper on the same paper, the same mono eyebrow / body / baseline-meta rhythm,
+   the same padding. Two marks differ, and both are terracotta: the hairline top
+   rule and the eyebrow. §5.2 reserves that pigment for absence, so it appears
+   here and nowhere else in this file.
+
+   Every offset is set inline from the single layout in TicketShapeUtil so the
+   DOM and the exported SVG cannot drift apart. */
+
+.ec-ticket {
+  box-sizing: border-box;
+  /* Same ground as the card. A ticket is a card whose content is a question,
+     not a different material — if the substrate changed too, deleting one
+     would alter the paper rather than remove an alarm. */
+  background: var(--paper-warm);
+  border-radius: var(--r-1);
+  /* Paper does not float. */
+  box-shadow: none;
+  overflow: hidden;
+  color: var(--ink);
+  font-family: var(--font-body);
+  /* Stated rather than inherited, so the text measurer, the ticket and the
+     exported SVG all lay out on the same metrics. */
+  font-feature-settings: 'kern', 'liga', 'onum', 'pnum';
+  user-select: none;
+}
+
+/* E4: a real border would shrink the containing block for everything inside
+   it, and every absolutely-positioned child would land 1px away from where
+   toSvg puts it. Overlay instead. */
+.ec-ticket::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--bone);
+  border-radius: var(--r-1);
+  pointer-events: none;
+}
+
+.ec-ticket__rule,
+.ec-ticket__eyebrow,
+.ec-ticket__body,
+.ec-ticket__meta {
+  position: absolute;
+}
+
+/* The alarm, carried as a printer's rule rather than a UI stripe — a
+   left-border accent is a named anti-pattern (Brand/README.md). */
+.ec-ticket__rule {
+  height: 1px;
+  background: var(--terracotta);
+}
+
+.ec-ticket__eyebrow,
+.ec-ticket__meta {
+  display: flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: var(--t-meta);
+  line-height: 1;
+}
+
+/* The kind, uppercase. The second and last terracotta mark on the ticket. */
+.ec-ticket__eyebrow {
+  font-weight: 500;
+  letter-spacing: var(--tk-wider);
+  text-transform: uppercase;
+  color: var(--terracotta);
+}
+
+.ec-ticket__body {
+  font-family: var(--font-body);
+  font-size: var(--t-body-sm);
+  /* line-height is set inline: --lh-normal snapped to a whole pixel, so the
+     ticket, the text measurer and the exported SVG break lines identically. */
+  color: var(--ink);
+}
+
+.ec-ticket__display {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  /* Line count comes from the ticket height; overflow ends in an ellipsis, and
+     the ticket can be resized to read the rest. */
+  overflow: hidden;
+}
+
+/* Unlike a card, a ticket has no file behind it — Jordan writes it here, so it
+   has to be writable here. The field is the body box exactly: same measure,
+   same leading, no chrome of its own, so the question does not shift when
+   editing ends. */
+.ec-ticket__input {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: var(--ink);
+  /* Ink, not pigment. Terracotta is spent on the rule and the eyebrow and
+     nowhere else; a coloured caret would be decoration. */
+  caret-color: var(--ink);
+  font-feature-settings: 'kern', 'liga', 'onum', 'pnum';
+  resize: none;
+  overflow: hidden;
+  pointer-events: all;
+  user-select: text;
+}
+
+/* The id, so a line in map.md can be traced back to this shape. Ink, not
+   pigment: it is a reference mark, not an alarm. */
+.ec-ticket__meta {
+  justify-content: flex-end;
+  font-weight: 400;
+  letter-spacing: var(--tk-wide);
+  color: var(--ink-4);
+}
+
+/* §5.6: kind changes fade in. Fades only — no springs. Keyed on the kind in
+   the component, so the new label arrives rather than cross-blends. */
+@keyframes ec-ticket-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.ec-ticket__eyebrow {
+  animation: ec-ticket-fade-in var(--dur-2) var(--ease-out);
+}

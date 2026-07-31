@@ -428,3 +428,46 @@ The Chrome extension dropped mid-gate. Exports need a real browser, so the run w
 Useful beyond the outage: it makes the export gate reproducible without a human in the loop. The harness lives in the session scratchpad, not the repo.
 
 Headless note: `--screenshot` renders the file and then sometimes hangs on shutdown. Poll for the output file and kill the process rather than waiting on exit.
+
+### E17. Two relations, one binding type (M4, Jordan, 2026-07-31)
+
+Compose's dependency arrows and DeltaView's correspondence arrows are both native `arrow` bindings, and they must never mix. A correspondence reaching `topo.ts` fabricates unsupported-claim warnings; a dependency reaching `delta.ts` silently marks a Received card as answered when nothing answers it.
+
+The relation is stamped on the arrow shape's `meta` at creation and every consumer filters on it:
+
+```ts
+editor.createShape({ id, type: 'arrow', props: ARROW_PROPS, meta: { relation } })
+```
+
+`src/relations.ts` holds the vocabulary and the reader. `B` chooses by page: `dependency` on Compose, `correspondence` in the delta. **Arrows written before this rule carry no `relation` key and read as `dependency`**, which is what they were — the existing check fixtures carry no meta and still pass, which is that rule proving itself.
+
+Any future relation drawn with an arrow gets a name here, never an implicit one.
+
+### E18. §9's states table contradicts §9's prose (M4)
+
+The table says a Received card is answered when it "has an **outbound** binding", and a Mine card is novel when it has no **inbound** one. That puts the arrow's tail on the Received card. But the same section glosses a binding as "*this* answers *that*", and `B` makes the current selection the arrow's **start** — Jordan selects his own card and clicks the received claim it answers.
+
+Implemented: **the correspondence runs Mine (start) → Received (end)**. A Received card is answered when it is the *target*; a Mine card is novel when it is the *source* of none. The gloss and the interaction agree with each other and only two words in a table cell disagree. Taking the table literally would also make its two rows describe the same arrow twice, collapsing the asymmetry §9 is building.
+
+Direction is strict, not "an edge either way": a backwards arrow then fails visibly (the hole stays open) instead of working silently and entrenching an inconsistent canvas.
+
+### E19. A hole covers its card; the card is never moved (M4)
+
+§16 forbids the canvas moving a card Jordan placed, and a computed state has no business rewriting his arrangement. So `reconcileGaps` creates the `GapShape` as the card's sibling at the card's own coordinates, and the card is **hidden** through `getShapeVisibility`, derived from the gaps present rather than stored on the card. Answering deletes the hole and the card reappears exactly where he left it.
+
+Consequence for binding: in DeltaView the card behind a hole is not drawn, so §9's closing gesture can only land on the gap. `bind.ts` therefore accepts a gap as a target and resolves it through `facingId` to the real card. Without that, the one action that removes a hole is impossible in the view that displays holes.
+
+### E20. The delta page is not the essay (M4)
+
+DeltaView is its own tldraw page, so Compose's arrangement is never disturbed. That means `readout.ts` must scope the outline: **cards and frames on the delta page are excluded from `map.md`'s sections**, or Received and Mine would print as chapters of the essay. Gaps and tickets are collected from every page, because §9 requires a gap to become an open ticket wherever it lives.
+
+### E21. `scripts/headless-eval.mjs` (M4, Jordan, 2026-07-31)
+
+The browser gate is now a command, committed rather than improvised:
+
+```
+node scripts/headless-eval.mjs --essay test-essay --expr "<js>"
+node scripts/headless-eval.mjs --essay test-essay --file step.js
+```
+
+Headless Chrome over CDP, no dependencies (node 23 has global `WebSocket` and `fetch`). Evaluates in the running app with top-level `await`, prints the result, exits non-zero if the expression throws — so a gate can depend on it. Vite serves ES modules, so `await import('/src/lib/delta.ts')` reaches the real code rather than a copy. It needs the dev server running and does not need the editor extension.

@@ -4,6 +4,8 @@ import { UnsupportedMarks } from './ui/UnsupportedMarks'
 import { startBindMode } from './lib/bind'
 import { runReadout } from './lib/runReadout'
 import { exportFigure } from './lib/exportFigure'
+import { isDeltaPage, openDeltaView } from './lib/deltaView'
+import { createTicket } from './lib/tickets'
 import { promptForCaption } from './ui/CaptionDialog'
 import { essaySlugFromUrl } from './lib/essayFs'
 import { ATOM_BY_KEY } from './types'
@@ -129,13 +131,33 @@ export const overrides: TLUiOverrides = {
       }
     }
 
-    // B arms the bind mode; the next click on a card completes the dependency.
+    // B arms the bind mode. Which relation it draws depends on where Jordan is:
+    // on Compose an arrow is a dependency, in the delta it is a correspondence.
+    // The two must never share a graph (see src/relations.ts).
     actions['bind-mode'] = {
       id: 'bind-mode',
       kbd: 'b',
       label: 'Bind selection to next click',
       onSelect() {
-        startBindMode(editor)
+        startBindMode(editor, isDeltaPage(editor) ? 'correspondence' : 'dependency')
+      },
+    }
+
+    actions['new-ticket'] = {
+      id: 'new-ticket',
+      kbd: 't',
+      label: 'New ticket',
+      onSelect() {
+        createTicket(editor)
+      },
+    }
+
+    actions['delta-view'] = {
+      id: 'delta-view',
+      kbd: 'cmd+d,ctrl+d',
+      label: 'Delta view',
+      onSelect() {
+        openDeltaView(editor)
       },
     }
 

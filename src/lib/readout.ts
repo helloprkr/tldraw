@@ -13,6 +13,7 @@
  */
 
 import { serializeMarkdown } from './serialize'
+import { DELTA_PAGE } from '../delta-types'
 import { titleFromSlug } from '../readout-types'
 import type {
   Assembly,
@@ -56,6 +57,36 @@ function collectShapes(doc: StoreDocument): Map<string, TldrRecord> {
     if (record && record.typeName === 'shape') shapes.set(record.id, record)
   }
   return shapes
+}
+
+/**
+ * The delta page is a second reading of the material, not part of the essay, so
+ * its Received and Mine cards must not become sections of the outline (§9 asks
+ * only that its *gaps* reach the map, as open tickets). Everything else on the
+ * canvas is the essay.
+ */
+function deltaPageId(doc: StoreDocument): string | null {
+  for (const record of Object.values(doc.store ?? {})) {
+    if (record?.typeName === 'page' && stringProp(record, 'name') === DELTA_PAGE) return record.id
+    // Page records carry `name` at the top level rather than under props.
+    const named = (record as unknown as { typeName?: string; name?: string })
+    if (named?.typeName === 'page' && named.name === DELTA_PAGE) return record.id
+  }
+  return null
+}
+
+/** Walks to the page the shape ultimately sits on. */
+function pageOf(record: TldrRecord, shapes: Map<string, TldrRecord>): string | null {
+  const seen = new Set<string>()
+  let current: TldrRecord | undefined = record
+  while (current && !seen.has(current.id)) {
+    seen.add(current.id)
+    const parentId = current.parentId ?? ''
+    const parent = shapes.get(parentId)
+    if (!parent) return parentId || null
+    current = parent
+  }
+  return null
 }
 
 /**
@@ -164,8 +195,13 @@ export function readout(doc: StoreDocument, opts: ReadoutOptions): ReadoutResult
   const shapes = collectShapes(doc)
   const placed = [...shapes.values()].map((record) => pagePoint(record, shapes))
 
-  const frames = placed.filter((p) => p.record.type === 'frame').sort(byPosition)
-  const atoms = placed.filter((p) => p.record.type === 'atom')
+  // Tickets and gaps count wherever they are; cards and sections are the essay,
+  // and the essay is not on the delta page.
+  const delta = deltaPageId(doc)
+  const isEssay = (p: Placed) => delta === null || pageOf(p.record, shapes) !== delta
+
+  const frames = placed.filter((p) => p.record.type === 'frame').filter(isEssay).sort(byPosition)
+  const atoms = placed.filter((p) => p.record.type === 'atom').filter(isEssay)
   const openItems = placed
     .filter((p) => p.record.type === 'ticket' || p.record.type === 'gap')
     .sort(byPosition)

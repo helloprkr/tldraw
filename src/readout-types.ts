@@ -23,6 +23,8 @@ export interface TldrRecord {
   fromId?: string
   toId?: string
   index?: string
+  /** Arrows carry `{ relation }` here; see src/relations.ts. */
+  meta?: Record<string, unknown>
 }
 
 export interface ReadoutOptions {

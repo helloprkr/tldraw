@@ -20,6 +20,27 @@ declare module '@tldraw/tlschema' {
       created: string
       ordinal: number
     }
+    /** An open question, in terracotta (§7 Stage 6). */
+    ticket: {
+      w: number
+      h: number
+      text: string
+      kind: 'grill' | 'research' | 'trial'
+      /** Stable id so the map can name it `t-001` rather than a tldraw nanoid. */
+      sourceId: string
+    }
+    /**
+     * A hole (§9). Stands in for a Received card that nothing answers. Drawn
+     * empty, in a terracotta hairline, so it reads as a missing tooth.
+     */
+    gap: {
+      w: number
+      h: number
+      label: string
+      /** The Received card this stands in for, or null. */
+      facingId: string | null
+      sourceId: string
+    }
     /**
      * The book-plate wrapper (§10). It carries only its own chrome — ground,
      * hairline border, double rule, caption, colophon. The figure's content is

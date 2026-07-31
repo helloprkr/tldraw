@@ -1,0 +1,64 @@
+/* The hole — BUILD.md §9. What is absent here is the card: no ground, no
+   border, no rule, no shadow. The canvas paper is what shows inside the frame,
+   so a gap in a row of cards reads as a missing tooth rather than as another
+   card that happens to be pale. */
+
+.ec-gap {
+  box-sizing: border-box;
+  /* Stated, not inherited. A gap that resolved to any ground at all would be a
+     card again, and the one thing it must not look like is a card. */
+  background: none;
+  border: 0;
+  border-radius: var(--r-0);
+  /* Paper does not float, and this is not even paper. */
+  box-shadow: none;
+  overflow: hidden;
+  color: var(--ink-4);
+  font-family: var(--font-body);
+  /* Stated rather than inherited, so the text measurer, the gap and the
+     exported SVG all lay out on the same metrics. */
+  font-feature-settings: 'kern', 'liga', 'onum', 'pnum';
+  user-select: none;
+}
+
+/* The hairline is a drawn stroke, not a border: a CSS border hands the dash
+   rhythm to the user agent, which will not match stroke-dasharray in the
+   export, and it would shrink the containing block so every child landed 1px
+   from where toSvg puts it. The dash array is set inline from the single
+   frame description in GapShapeUtil. */
+.ec-gap__frame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+.ec-gap__eyebrow,
+.ec-gap__body {
+  position: absolute;
+}
+
+/* The only terracotta on the shape, alongside the frame. Warm alarm, spent
+   once. */
+.ec-gap__eyebrow {
+  display: flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: var(--t-meta);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: var(--tk-wider);
+  text-transform: uppercase;
+  color: var(--terracotta);
+}
+
+/* The facing card's text, quoted. Grey because it is not this shape's to own. */
+.ec-gap__body {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: var(--t-body-sm);
+  /* line-height is set inline: --lh-normal snapped to a whole pixel, so the
+     gap, the text measurer and the exported SVG break lines identically. */
+  color: var(--ink-4);
+}

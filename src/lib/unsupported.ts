@@ -1,6 +1,7 @@
 import type { Editor, TLArrowBinding, TLShape } from 'tldraw'
 import { unsupportedFrom } from './topo'
 import type { DependencyEdge } from './topo'
+import { isRelation } from '../relations'
 
 /**
  * The live-canvas path to the unsupported-claim check (BUILD.md §7 Stage 4).
@@ -25,6 +26,10 @@ export function liveDependencyEdges(editor: Editor): DependencyEdge[] {
   const edges: DependencyEdge[] = []
 
   for (const arrow of editor.getCurrentPageShapes().filter(isArrow)) {
+    // Correspondence arrows assert something else entirely (§9); they are not
+    // part of the reading-order graph.
+    if (!isRelation(arrow.meta, 'dependency')) continue
+
     const bindings = editor.getBindingsInvolvingShape<TLArrowBinding>(arrow, 'arrow')
     const start = bindings.find((b) => b.fromId === arrow.id && b.props.terminal === 'start')
     const end = bindings.find((b) => b.fromId === arrow.id && b.props.terminal === 'end')
