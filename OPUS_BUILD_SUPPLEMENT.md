@@ -507,3 +507,78 @@ It survived because the verification was aimed at the wrong artifact: the clean-
 **The check has to run the generator, not read its output.** In a clean clone: run `npm run readout` and require the result to match the committed `out/` on everything but the timestamp. That is the only form of the check that can fail when `work/` and `out/` disagree.
 
 Corollary: never run `git stash` in a verification path. Verification must not be able to change the tree it is verifying.
+
+### E26. `⌘⇧C` is only free because M0 emptied it (M5 follow-up, Jordan, 2026-07-31)
+
+Worth recording because the dependency is invisible at the call site. `corpus-wall` binds `cmd+shift+c,ctrl+shift+c`, and that key is available only because `copy-as-png` and `copy-as-json` — both of which tldraw 5.2.5 ships on exactly that chord — are deleted in `RELEASED_ACTION_SHORTCUTS`.
+
+Nothing in `tldraw-config.ts` links the deletion to the binding except order in the file. **If either action is ever restored, the collision comes back**, and it comes back quietly: two handlers match the same keystroke, the registry fires the first one that matches, and the corpus wall stops opening for reasons that have nothing to do with the corpus wall.
+
+The same reasoning covers `⌘D` (needs `duplicate` deleted) and `F` (needs the frame *tool* deleted, C5). Any future binding of a chord tldraw already uses gets the deletion and the binding reviewed together, never separately.
+
+### E27. The strip carries the hole too (M5, Jordan, 2026-07-31)
+
+§8 specifies `--ink-4` hatching for unclassified *segments* and says nothing about the mono sequence strip above the band. Ruled: **unclassified units render in the strip as well, in `--ink-4`**, as `—` in the position the atom name would have occupied.
+
+The alternative was to omit them, which would have made the strip read as a complete sequence of whatever happened to be classified — an analysis that looks finished because its gaps are invisible. §8's stated purpose for the `--ink-4` hatch is that "the gaps in the analysis are as visible as the analysis," and a strip that hides them would work against the band directly beneath it. Printing the hole in both places makes the hole in the legend and the hole in the band one fact rather than two.
+
+Approved as reasoned. `UNCLASSIFIED_MARK` in `BandShapeUtil.tsx`.
+
+### E28. `0 OPEN` is the absent segment, and the count spans pages (M5 follow-up, Jordan, 2026-07-31)
+
+Two rulings on §7 Stage 6's ticket counter.
+
+**On zero.** Stage 6 says "when it reads `0 OPEN`, the map is clear." The counter omits any segment reading zero rather than printing `0 OPEN`, so that literal string never appears. This satisfies the requirement rather than dodging it: the same section states that "progress is visible by subtraction" and "the absence of alarm *is* the progress bar." A row of zeroes is an alarm that has learned to say nothing. **The segment's absence is how the canvas says the map is clear** — consistent with the existing zero-omission rule for `UNSUPPORTED`, and with terracotta being spent only where something is actually missing.
+
+**On scope.** The count was scoped to the current page while `readout.ts` collects tickets from every page (E20). A ticket written on the delta page therefore appeared in `map.md` under `## Open tickets` and in no counter anywhere — the margin could read `2 OPEN` while the map carried three boxes, and it failed in the direction that hides work. `openTicketCount` now walks every page. `CARDS`, `UNTYPED` and `UNSUPPORTED` stay page-scoped, because those describe the arrangement in front of Jordan; an open question is open wherever he wrote it.
+
+### E29. `?` cannot be bound as `?` (M5 follow-up)
+
+Corrects supplement §4.2, which proposed `help-overlay` with `kbd: '?'` and hedged that the bare-key binding "may prove unreliable." It is not unreliable, it is impossible, and it fails silently in two separate places.
+
+`getHotkeysStringFromKbd` runs first and still honors tldraw's **legacy** modifier sigils, in which `?` means *alt*. It computes `alt = kbd.includes('?')`, strips the character with `kbd.replace(/[!?$]/g, '')`, and is left with an empty key, so `parseShortcut` returns `null`, `parsed.length === 0`, and `register` returns without adding anything. Even had it survived, `matchesEvent` opens with `if (e.shiftKey !== parsed.shift) return false`, and `?` is Shift+`/` on a US layout while `'?'` parses with `shift: false`.
+
+**The working binding is `kbd: 'shift+/'`.** `getEventKey` folds `?` back to `/` through `SHIFT_KEY_TO_BASE` when shift is held, so the shifted keystroke matches. Verified in the running app: `?` opens the overlay, `?` and Escape both close it.
+
+General rule: a `kbd` string containing `!`, `?` or `$` is being read as the legacy format. Never put those characters in a shortcut expecting them to be literal keys.
+
+### E30. Ruling — the selection handle stays 8px (M5 follow-up)
+
+§5.5 row 3 asks for `var(--ink)` square handles at **6px**. Shipped: square, 0 radius, ink stroke, paper fill, **8px**. Ruled acceptable, because the size is not reachable and the alternatives are worse than the miss.
+
+`handleSize` is a local `const handleSize = 8 / zoom` inside the private `_computeSelectionState` of `SelectionForegroundOverlayUtil`. The util's public options are `{ lineWidth, zIndex }` only, so `.configure()` cannot reach it, and TypeScript refuses a subclass that redeclares the private method (`TS2415`). The only remaining routes are copying roughly 200 of the file's 477 lines into a subclass, or monkey-patching — and both would also distort the crop handles, the mobile rotate puck and the text-resize bars, all of which derive from the same local. Both break on any 5.2.x patch.
+
+Two notes. The paper fill is not a miss but E2's existing ruling, which already describes "paper-filled square handles." And `6` does appear in that file — as `hitTargetSize = 6 / zoom`, the invisible hit target — so §5.5's "6px" looks like a transcription of the constant tldraw exposes to pointer maths rather than one it ever exposed to paint.
+
+### E31. Opening an essay must clear the undo history (M5 follow-up)
+
+A data-loss bug of the same family as E12, reached by a different road, and found by probing `⌘Z` during the final sweep rather than by anything failing.
+
+`openEssay` called `loadSnapshot` and then `createShapes` for new fragments. Neither is preceded by a history mark, so both sat on the undo stack. **The first `⌘Z` after opening an essay therefore unwound past them and emptied the canvas** — measured at eighteen shapes to zero on the test fixture, from a single undo. Autosave would then have written that empty store to `work/<slug>.tldr` within thirty seconds.
+
+E12's guard cannot catch this. It asks whether the store is ready, and a store that undo has just emptied is ready; it is simply empty.
+
+`editor.clearHistory()` now runs at the end of `openEssay`, which is what tldraw's own documentation prescribes when loading a document. `⌘Z` remains tldraw's default per §11 — it just no longer has the essay's arrival behind it to undo into. Re-verified: one undo now reverses one edit, and further undos are no-ops with all eighteen shapes standing.
+
+The general rule, third time it has come up: **anything that puts an essay on the canvas is not an edit, and must not be reachable by any mechanism that reverses edits.**
+
+### E32. The delta reconciles on change, not on entry (M5 follow-up)
+
+`reconcileGaps` ran only from `openDeltaView`, so it only ran on `⌘D`. §9's closing gesture — "binding a Mine card to a Received card converts the gap back to a normal card" — therefore appeared to do nothing: the arrow landed, and the hole stayed until the view was re-entered.
+
+Worse, the two indicators §9 exists to keep in agreement disagreed. `DeltaCounter` recomputes from the store on every change, so it dropped to `6 UNANSWERED` the instant the arrow landed while seven holes were still drawn. A counter and a canvas driven by different triggers will always find a moment to contradict each other.
+
+`src/ui/DeltaReconciler.tsx` now reconciles whenever the correspondence graph changes. It renders nothing. Its signature is the *wanted* state — which holes should exist, which cards are novel — and neither quantity is derived from the holes or the marks themselves, so reconciling cannot change its own input and the loop settles in one pass; `reconcileGaps` returns before touching the store when there is nothing to do.
+
+The same pass also closed §9's third state, which had never been rendered at all: `NOVEL_MARK` was declared in `delta-types.ts` and had **zero consumers**, so a Novel Mine card was pixel-identical to an answering one. It survived the M4 gate because the committed arrangement has `novel = 0`. Novelty is now stamped on the card's `meta` by the same reconciliation and read by both `component()` and `toSvg()` — on the record rather than recomputed at each edge, because E10 rules that anything appearing in an exported figure has to be reachable from the shape itself.
+
+Verified both directions: deleting one correspondence opens a seventh hole, marks its Mine card `※`, and reads `7 UNANSWERED · 1 NOVEL · DELTA 8`; drawing it again closes the hole, clears the mark, and returns the hidden card, with no `⌘D` in between.
+
+### E33. Small departures from §10's letter (M5 follow-up)
+
+Four items found in the final sweep, none worth changing behavior for, all recorded so they are deviations rather than drift.
+
+1. **The `⌘E` prompt has two fields, not one.** §10 says "a one-field prompt". The second is the optional `¶` reference, which §10 itself requires for the colophon ("plus the essay's paragraph reference, if given"). There is nowhere else to author it, so the two sentences cannot both be satisfied literally; the colophon wins and the field stays optional.
+2. **`getSvgString` is called with `background: false`**, where §10's call passes `background: true`. C3 authorizes the method change but not the flag. It is correct here: the plate's own `--paper` rect spans the full viewBox, so a background the exporter painted would be invisible underneath it, and asking for one would only risk a second ground of a different color.
+3. **The toast said `FIG. 01 EXPORTED`** while the plate said `FIG. 1`. §10's example is unpadded in both places. Fixed rather than logged as a deviation — the zero padding belongs to the filename, where it sorts.
+4. **Correction to §4.2 and C5:** `cmd+e` is *not* tldraw's default "export image" in 5.2.5. No default action or tool holds it; the only `cmd+e` in the package is an inert label inside the keyboard-shortcuts dialog, which is nulled. No deletion was needed and none should be added.

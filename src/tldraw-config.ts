@@ -8,6 +8,8 @@ import { isDeltaPage, openDeltaView } from './lib/deltaView'
 import { classifySelectedSegment, isCorpusPage, openCorpusWall } from './lib/corpusWall'
 import { createTicket } from './lib/tickets'
 import { promptForCaption } from './ui/CaptionDialog'
+import { openHelpOverlay } from './ui/HelpOverlay'
+import { saveWork } from './lib/openEssay'
 import { essaySlugFromUrl } from './lib/essayFs'
 import { ATOM_BY_KEY } from './types'
 import type { AtomType } from './types'
@@ -68,10 +70,12 @@ const RELEASED_ACTION_SHORTCUTS = [
   'toggle-dark-mode', // there is no dark mode here
   'toggle-debug-mode',
   'open-kbd-shortcuts', // replaced by the ? overlay
+  'open-cursor-chat', // "/" — a multiplayer feature in a single-user app (§2.6)
   'insert-media',
   'insert-embed',
   'convert-to-embed',
   'convert-to-bookmark',
+  'flatten-to-image', // shift+f — destructive, and one shifted keystroke from F
   'select-geo-tool',
   'select-zoom-tool',
   'select-fill-fill',
@@ -216,7 +220,11 @@ export const overrides: TLUiOverrides = {
             // A figure that exported but could not reach the clipboard is still
             // a figure; the toast names it either way.
           })
-          announce(`fig. ${String(number).padStart(2, '0')} exported`)
+          // Unpadded, matching §10's `FIG. 3 EXPORTED` and the plate's own
+          // caption. The zero padding belongs to the filename, where it sorts;
+          // on the plate and in the toast it would be a second way of writing
+          // the same figure number.
+          announce(`fig. ${number} exported`)
         } catch (err: unknown) {
           console.error('export failed', err)
           announce('export failed')
@@ -240,6 +248,42 @@ export const overrides: TLUiOverrides = {
             announce('readout failed')
           }
         )
+      },
+    }
+
+    // §7 Stage 8 names ⌘S. Autosave already covers the 30s tick and blur; this
+    // is the one Jordan presses when he wants the file on disk before he does
+    // something else with it, and it reports because it wrote.
+    actions['save-tldr'] = {
+      id: 'save-tldr',
+      kbd: 'cmd+s,ctrl+s',
+      label: 'Save the snapshot',
+      onSelect() {
+        const slug = essaySlugFromUrl()
+        if (!slug) return
+        void saveWork(editor, slug).then(
+          (written) => {
+            // Refused rather than failed: the essay is still loading, and E12's
+            // whole point is that a write in that window destroys the file.
+            announce(written ? `saved · work/${slug}.tldr` : 'not saved — still loading')
+          },
+          (err: unknown) => {
+            console.error('save failed', err)
+            announce('save failed')
+          }
+        )
+      },
+    }
+
+    // §11's `?`. It has to be bound as shift+/ — tldraw's matcher compares the
+    // event's shift flag against the parsed shortcut's, and a bare '?' parses
+    // with shift false, so it can never match the keystroke that produces it.
+    actions['help-overlay'] = {
+      id: 'help-overlay',
+      kbd: 'shift+/',
+      label: 'Keyboard map',
+      onSelect() {
+        openHelpOverlay(editor, helpers.addDialog)
       },
     }
 

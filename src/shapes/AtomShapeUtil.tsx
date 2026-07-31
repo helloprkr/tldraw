@@ -2,6 +2,7 @@ import { HTMLContainer, Rectangle2d, ShapeUtil, T, resizeBox, resolveLineHeightP
 import type { RecordProps, SvgExportContext, TLFontFace, TLResizeInfo, TLShape } from 'tldraw'
 import { ATOM_PIGMENT, ATOM_PIGMENT_HEX, ATOM_TYPES, CARD_H, CARD_W } from '../types'
 import type { AtomType } from '../types'
+import { NOVEL_MARK } from '../delta-types'
 
 /**
  * The card. BUILD.md §5.3: paper on paper — hairline border, a 1px top rule in
@@ -94,9 +95,24 @@ function pad(n: number, width: number): string {
   return String(Math.max(0, Math.trunc(n))).padStart(width, '0')
 }
 
-function eyebrowText(atom: AtomType, ordinal: number): string {
+function eyebrowText(atom: AtomType, ordinal: number, novel: boolean): string {
   // Untyped cards say so and stop there. They should read as unfinished.
-  return atom === 'untyped' ? 'UNTYPED' : `${atom.toUpperCase()} · ${pad(ordinal, 2)}`
+  const label = atom === 'untyped' ? 'UNTYPED' : `${atom.toUpperCase()} · ${pad(ordinal, 2)}`
+  // §9's third state: a Mine card that answers nothing anyone else said. The
+  // dingbat is the whole mark — no color, no badge, because novelty is not an
+  // alarm and terracotta is spent only on absence.
+  return novel ? `${label} ${NOVEL_MARK}` : label
+}
+
+/**
+ * Novelty is computed, not authored: `reconcileGaps` stamps it on the card's
+ * meta whenever the correspondence graph changes. Reading it off the record is
+ * what lets the canvas and `toSvg` agree without either recomputing the graph
+ * (E10 — anything that must appear in an exported figure has to be a display
+ * value, a shape prop, or toSvg output).
+ */
+function isNovel(shape: AtomShape): boolean {
+  return shape.meta.novel === true
 }
 
 function metaRight(ordinal: number): string {
@@ -248,7 +264,7 @@ export class AtomShapeUtil extends ShapeUtil<AtomShape> {
             color: pigment ?? 'var(--ink-4)',
           }}
         >
-          {eyebrowText(atom, ordinal)}
+          {eyebrowText(atom, ordinal, isNovel(shape))}
         </div>
         <div
           className="ec-atom__body"
@@ -333,7 +349,7 @@ export class AtomShapeUtil extends ShapeUtil<AtomShape> {
           fill={pigment ?? INK_4}
           style={{ fontFeatureSettings: FEATURES }}
         >
-          {preserveSpaces(eyebrowText(atom, ordinal))}
+          {preserveSpaces(eyebrowText(atom, ordinal, isNovel(shape)))}
         </text>
         <text
           fontFamily={BODY_FAMILY}

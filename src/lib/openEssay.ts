@@ -23,6 +23,10 @@ function isAtom(shape: TLShape): shape is AtomShape {
  * here by only ever calling createShapes.
  */
 export async function openEssay(editor: Editor, slug: string): Promise<void> {
+  // E12: nothing may write to work/ while the essay is still arriving. The flag
+  // is cleared here rather than only set at the end, so a reload part-way
+  // through cannot leave a stale "ready" standing over an empty store.
+  ready = false
   const [inputs, work] = await Promise.all([readInputs(slug), readWork(slug)])
 
   if (work) {
@@ -53,7 +57,40 @@ export async function openEssay(editor: Editor, slug: string): Promise<void> {
   }
 
   editor.selectNone()
+
+  // Opening an essay is not an edit, and must not be undoable.
+  //
+  // Without this, the snapshot load and the initial spread sit on the undo
+  // stack with no mark in front of them, so the first cmd+Z after opening an
+  // essay unwinds past them and empties the canvas — eighteen shapes to zero,
+  // measured. Autosave would then write that empty store to work/<slug>.tldr on
+  // the next tick, which is E12's failure reached by a different road: the guard
+  // there asks whether the store is ready, and a store emptied by undo is.
+  //
+  // cmd+Z stays tldraw's default (§11); it just no longer has anything behind
+  // the essay to undo into.
+  editor.clearHistory()
+
   editor.zoomToFit(CAMERA)
+  ready = true
+}
+
+/**
+ * Whether the canvas is safe to write to disk. See E12: an autosave that runs
+ * against a half-initialized store overwrites the file it is about to read.
+ */
+let ready = false
+
+/**
+ * Writes work/<slug>.tldr now. The shared write edge for all three triggers —
+ * the 30s timer, blur, and ⌘S — so the readiness guard cannot be honored by two
+ * of them and forgotten by the third.
+ */
+export async function saveWork(editor: Editor, slug: string): Promise<boolean> {
+  if (!ready) return false
+  const { document } = getSnapshot(editor.store)
+  await writeWork(slug, document)
+  return true
 }
 
 /**
@@ -72,11 +109,9 @@ export async function openEssay(editor: Editor, slug: string): Promise<void> {
  *    different hat. A timer and a blur are enough; anything unsaved at teardown
  *    is at most thirty seconds of work, and losing the file is unbounded.
  */
-export function startAutosave(editor: Editor, slug: string, isReady: () => boolean): () => void {
+export function startAutosave(editor: Editor, slug: string): () => void {
   const save = () => {
-    if (!isReady()) return
-    const { document } = getSnapshot(editor.store)
-    void writeWork(slug, document).catch((err) => {
+    void saveWork(editor, slug).catch((err) => {
       console.error('autosave failed', err)
     })
   }

@@ -20,6 +20,7 @@ import { GapShapeUtil } from './shapes/GapShapeUtil'
 import { BandShapeUtil } from './shapes/BandShapeUtil'
 import { Counter } from './ui/Counter'
 import { DeltaCounter } from './ui/DeltaCounter'
+import { DeltaReconciler } from './ui/DeltaReconciler'
 import { CorpusPicker } from './ui/CorpusPicker'
 import { essaySlugFromUrl } from './lib/essayFs'
 import { openEssay, startAutosave } from './lib/openEssay'
@@ -49,19 +50,14 @@ function handleMount(editor: Editor) {
 
   document.title = `${slug} — essay-canvas`
 
-  // Nothing may be written back until the essay is fully on the canvas. Until
-  // then the store is empty, and an autosave would overwrite the file it is
-  // about to read.
-  let ready = false
-  void openEssay(editor, slug)
-    .then(() => {
-      ready = true
-    })
-    .catch((err: unknown) => {
-      console.error(`could not open essay ${slug}`, err)
-    })
+  // Nothing may be written back until the essay is fully on the canvas (E12).
+  // openEssay owns that flag now, so the ⌘S path is held to the same guard as
+  // the timer and the blur.
+  void openEssay(editor, slug).catch((err: unknown) => {
+    console.error(`could not open essay ${slug}`, err)
+  })
 
-  return startAutosave(editor, slug, () => ready)
+  return startAutosave(editor, slug)
 }
 
 export default function App() {
@@ -79,6 +75,7 @@ export default function App() {
       >
         <Counter />
         <DeltaCounter />
+        <DeltaReconciler />
         <CorpusPicker />
       </Tldraw>
     </div>

@@ -44,7 +44,12 @@
   --tl-color-text-2: var(--ink-2);
   --tl-color-text-3: var(--ink-3);
   --tl-color-text-disabled: var(--ink-4);
-  --tl-color-text-shadow: transparent;
+  /* Not a shadow, despite the name: tldraw.css:3061 reuses this variable
+     as .tlui-tooltip's text color over an ink-filled tooltip. tldraw's
+     own value is pure white, against §2.1, and the transparent that
+     replaced it made tooltip text invisible. Paper is the legible cream
+     that is neither. See the Tooltips section below. */
+  --tl-color-text-shadow: var(--paper);
   --tl-color-text-highlight: var(--marker-bg);
   --tl-color-text-highlight-p3: var(--marker-bg);
 
@@ -185,6 +190,33 @@
   color: var(--ink);
 }
 
+/* ---- Menus ----------------------------------------------------------
+   The context menu is the one default UI slot this app keeps, so its
+   markup is the one place tldraw's menu chrome still reaches the screen.
+   Submenu triggers are the survivor: tldraw.css:2268 paints the open
+   trigger's ::after with a linear-gradient, and tldraw.css:2278 repeats
+   it under @media (hover: hover). §2.4 forbids gradients anywhere. The
+   flat overlay every other open control in this file gets — muted-2,
+   declared at the top — is the replacement, so an open submenu still
+   reads as open. Doubling the class puts this at (0,3,1), above
+   tldraw's (0,2,1), so it wins on specificity rather than on order.
+   -------------------------------------------------------------------- */
+.tlui-menu__submenu__trigger.tlui-menu__submenu__trigger::after {
+  background: var(--tl-color-muted-2);
+}
+
+/* ---- Tooltips -------------------------------------------------------
+   Kept legible rather than removed: menu items in the context menu
+   carry them. tldraw.css:3055 rounds the bubble to 4px, past the 2px
+   ceiling in §2.3. The color is restated here — not left to
+   --tl-color-text-shadow alone — so paper-on-ink survives if tldraw
+   ever stops routing the tooltip through that variable.
+   -------------------------------------------------------------------- */
+.tlui-tooltip {
+  color: var(--paper);
+  border-radius: var(--r-0);
+}
+
 /* ---- Focus ----------------------------------------------------------
    A system that respects the keyboard: 2px ink outline, 2px offset.
    -------------------------------------------------------------------- */
@@ -192,6 +224,22 @@
   outline: 2px solid var(--ink);
   outline-offset: 2px;
   box-shadow: none;
+}
+
+/* The rule above is (0,2,0) and loses on any button. tldraw.css:1658 —
+   .tl-container__focused:not(.tl-container__no-focus-ring)
+   .tlui-button:focus-visible — is (0,4,0) and drags the ring back to
+   outline-offset: -5px on a 10px radius; tldraw.css:1663 takes tool
+   buttons to 12px. That is an inset ring on a pill, against §5.5 row 7
+   (2px ink, 2px offset) and §2.3 (radius 0-2px). Repeating .tlui-button
+   raises this to (0,5,0), which beats both. One selector is enough for
+   the tool case: every tool button also carries .tlui-button
+   (TldrawUiButton.tsx:36). */
+.tl-container__focused:not(.tl-container__no-focus-ring)
+  .tlui-button.tlui-button:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+  border-radius: var(--r-0);
 }
 
 /* ---- Frames ---------------------------------------------------------

@@ -1,6 +1,6 @@
 import { EASINGS, createShapeId, getSnapshot } from 'tldraw'
-import type { Editor, TLPageId, TLParentId, TLShape } from 'tldraw'
-import { gapPlacements } from './delta'
+import type { Editor, TLPageId, TLParentId, TLShape, TLShapeId } from 'tldraw'
+import { cardSides, deltaState, gapPlacements } from './delta'
 import { DELTA_PAGE, GAP_LABEL, MINE_FRAME, RECEIVED_FRAME } from '../delta-types'
 import { CARD_H, CARD_W, GUTTER } from '../types'
 import type { StoreDocument } from '../readout-types'
@@ -83,8 +83,13 @@ function isGap(shape: TLShape): boolean {
  * Runs with history ignored: reconciliation is a consequence of a binding, and
  * undo should step over the binding, not over the bookkeeping it caused.
  */
-export function reconcileGaps(editor: Editor): { created: number; removed: number } {
-  const placements = gapPlacements(snapshotOf(editor))
+export function reconcileGaps(editor: Editor): {
+  created: number
+  removed: number
+  marked: number
+} {
+  const doc = snapshotOf(editor)
+  const placements = gapPlacements(doc)
   const wanted = new Map(placements.map((p) => [p.facingId, p]))
 
   const existing = new Map<string, TLShape>()
@@ -97,12 +102,37 @@ export function reconcileGaps(editor: Editor): { created: number; removed: numbe
   const stale = [...existing.entries()].filter(([facingId]) => !wanted.has(facingId))
   const missing = placements.filter((p) => !existing.has(p.facingId))
 
-  if (stale.length === 0 && missing.length === 0) return { created: 0, removed: 0 }
+  // §9's third state. Novelty is a fact about the correspondence graph, so it is
+  // recomputed here alongside the holes rather than stored by hand — but it has
+  // to land on the card's record, because the eyebrow that carries it is drawn
+  // by both `component()` and `toSvg()` and E10 rules that anything appearing in
+  // an exported figure must be reachable from the shape itself.
+  const novel = new Set(deltaState(doc).novel)
+  const sides = cardSides(doc)
+  const remarks: { id: TLShapeId; novel: boolean }[] = []
+  for (const shape of editor.getCurrentPageShapes()) {
+    if (shape.type !== 'atom') continue
+    if (sides.get(shape.id) !== MINE_FRAME) continue
+    const should = novel.has(shape.id)
+    if ((shape.meta.novel === true) !== should) remarks.push({ id: shape.id, novel: should })
+  }
+
+  if (stale.length === 0 && missing.length === 0 && remarks.length === 0) {
+    return { created: 0, removed: 0, marked: 0 }
+  }
 
   editor.run(
     () => {
       // An answered card simply has its hole removed; it never moved.
       for (const [, gap] of stale) editor.deleteShapes([gap.id])
+
+      for (const remark of remarks) {
+        editor.updateShape({
+          id: remark.id,
+          type: 'atom',
+          meta: { novel: remark.novel },
+        })
+      }
 
       for (const placement of missing) {
         editor.createShape({
@@ -124,7 +154,7 @@ export function reconcileGaps(editor: Editor): { created: number; removed: numbe
     { history: 'ignore' }
   )
 
-  return { created: missing.length, removed: stale.length }
+  return { created: missing.length, removed: stale.length, marked: remarks.length }
 }
 
 /** `⌘D`. Creates the page and its furniture on first use, then just returns to it. */

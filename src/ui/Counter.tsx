@@ -1,5 +1,5 @@
 import { useEditor, useValue } from 'tldraw'
-import type { TLShape } from 'tldraw'
+import type { Editor, TLShape } from 'tldraw'
 import type { AtomShape } from '../shapes/AtomShapeUtil'
 import { liveUnsupportedIds } from '../lib/unsupported'
 import { isDeltaPage } from '../lib/deltaView'
@@ -23,6 +23,28 @@ function isAtom(shape: TLShape): shape is AtomShape {
   return shape.type === 'atom'
 }
 
+/**
+ * Tickets on every page, not just this one.
+ *
+ * `readout.ts` collects tickets from all pages on purpose (E20) — a question is
+ * open wherever Jordan wrote it. A page-scoped count here would let `map.md`
+ * carry three unchecked boxes while the margin read `2 OPEN`, and it would
+ * under-report in exactly the direction that hides work. The two numbers answer
+ * the same question and have to come from the same set.
+ *
+ * Cards, untyped, and unsupported stay page-scoped: those describe the
+ * arrangement in front of him, which is a per-page fact.
+ */
+function openTicketCount(editor: Editor): number {
+  let open = 0
+  for (const page of editor.getPages()) {
+    for (const id of editor.getPageShapeIds(page.id)) {
+      if (editor.getShape(id)?.type === 'ticket') open += 1
+    }
+  }
+  return open
+}
+
 export function Counter() {
   const editor = useEditor()
 
@@ -40,13 +62,15 @@ export function Counter() {
         untyped: atoms.filter((s) => s.props.atom === 'untyped').length,
         unsupported: liveUnsupportedIds(editor).length,
         // §7 Stage 6: when this reads zero, the map is clear.
-        open: shapes.filter((s) => s.type === 'ticket').length,
+        open: openTicketCount(editor),
       }
     },
     [editor]
   )
 
-  if (!counts || counts.cards === 0) return null
+  // An empty canvas has nothing to report. A canvas holding only tickets does:
+  // those are the open questions, and they are the whole of Stage 6.
+  if (!counts || (counts.cards === 0 && counts.open === 0)) return null
 
   return (
     <div className="margin-note margin-note--bottom-left" aria-live="polite">

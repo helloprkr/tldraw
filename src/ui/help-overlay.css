@@ -1,0 +1,145 @@
+/* ============================================================
+   The ? overlay (BUILD.md §11) — the keyboard map.
+   A modal, so §2.2 permits the shadow. Nothing else here is
+   allowed to be softer than the canvas: hairline rules, 2px
+   radius, mono throughout, no fill but --bg-2.
+   ============================================================ */
+
+/* Scoped the same way the caption prompt is, so neither dialog's
+   rules can reach the other. */
+.tl-container:has(.help-overlay) .tlui-dialog__overlay {
+  animation: help-overlay-in var(--dur-2) var(--ease-out);
+}
+
+.tl-container:has(.help-overlay) .tlui-dialog__content {
+  background-color: var(--bg-2);
+  border: var(--border-hair);
+  border-radius: var(--r-1);
+  box-shadow: var(--shadow-deep);
+  overflow: visible;
+  animation: help-overlay-in var(--dur-2) var(--ease-out);
+}
+
+.help-overlay {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-5);
+  width: 640px;
+  max-width: 100%;
+  padding: var(--s-6);
+  background: var(--bg-2);
+  /* The whole sheet is a label; nothing in it is prose. */
+  font-family: var(--font-mono);
+}
+
+/* ---- Title ----------------------------------------------------------
+   The same mono label the caption prompt wears, so the two modals
+   read as the same furniture.
+   -------------------------------------------------------------------- */
+.help-overlay__title.tlui-dialog__header__title {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--t-meta);
+  font-weight: 500;
+  letter-spacing: var(--tk-wider);
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* Two columns of type on one sheet, the way a printed card would set it. */
+.help-overlay__columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-5) var(--s-7);
+  align-items: start;
+}
+
+.help-overlay__section-title {
+  margin: 0 0 var(--s-3);
+  padding-bottom: var(--s-2);
+  font-family: var(--font-mono);
+  font-size: var(--t-meta);
+  font-weight: 500;
+  letter-spacing: var(--tk-wider);
+  text-transform: uppercase;
+  color: var(--ink-4);
+  /* A hairline under a heading is a rule, not a box. */
+  border-bottom: var(--border-hair);
+}
+
+.help-overlay__list {
+  margin: 0;
+}
+
+.help-overlay__row {
+  display: grid;
+  /* A fixed key column so every action starts on the same vertical,
+     which is what makes the map scannable rather than read. */
+  grid-template-columns: 6.5ch 1fr;
+  gap: var(--s-3);
+  padding: var(--s-1) 0;
+}
+
+.help-overlay__keys {
+  font-family: var(--font-mono);
+  font-size: var(--t-meta);
+  font-weight: 500;
+  letter-spacing: var(--tk-wide);
+  color: var(--ink);
+  /* No key caps: a bordered pill for every shortcut would be eleven
+     boxes on one sheet, and §2.3 has no pills in it. */
+  white-space: nowrap;
+}
+
+.help-overlay__action {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--t-meta);
+  letter-spacing: var(--tk-wider);
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+/* Where the shipped behavior diverges from the table. Marginalia:
+   quieter than the row it qualifies, and never uppercase, because it
+   is a sentence rather than a label. */
+.help-overlay__note {
+  display: block;
+  margin-top: var(--s-0);
+  font-size: 10px;
+  letter-spacing: var(--tk-wide);
+  text-transform: none;
+  color: var(--ink-4);
+}
+
+/* ---- Footer ---------------------------------------------------------
+   The thesis on the left, the way out on the right. A hairline, not
+   the plate's double rule — that mark belongs to the figure.
+   -------------------------------------------------------------------- */
+.help-overlay__footer {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-5);
+  padding-top: var(--s-4);
+  font-size: var(--t-meta);
+  letter-spacing: var(--tk-wider);
+  text-transform: uppercase;
+  color: var(--ink-4);
+  border-top: var(--border-hair);
+}
+
+.help-overlay__dismiss {
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+
+/* §5.6: fades only. */
+@keyframes help-overlay-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
