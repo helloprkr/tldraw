@@ -67,6 +67,33 @@ function preserveSpaces(text: string): string {
 
 export class SectionFrameUtil extends FrameShapeUtil {
   /**
+   * A section frame does not clip its children.
+   *
+   * `BaseFrameLikeShapeUtil.getClipPath` returns the frame's own vertices, so a
+   * card overhanging the edge was drawn amputated — cut mid-sentence, and if it
+   * hung off the top, without the eyebrow that says what kind of atom it is.
+   * E14 examined that and ruled the export faithful, which it was: both paths
+   * read their mask from `getClipPath` through `editor.getShapeMask`, so the
+   * figure was reproducing the canvas exactly. The clipping itself was the
+   * defect, and it was wrong in both places at once.
+   *
+   * The ruling: **a frame is a section boundary, not a viewport.** Paper does
+   * not hide words. A section that has grown past its own edge is telling
+   * Jordan something true about the essay's shape, and the canvas answering by
+   * cutting the card in half destroys exactly the information he needs — §16 is
+   * explicit that the canvas must never quietly rewrite what he placed, and
+   * hiding half of it is a louder version of the same sin.
+   *
+   * Returning undefined is the documented way to opt out. Because one hook
+   * feeds both the canvas mask and the exporter's SVG clip path, parity holds
+   * by construction rather than by agreement (E10). This supersedes E14's
+   * diagnostic note; see E36.
+   */
+  override getClipPath(): undefined {
+    return undefined
+  }
+
+  /**
    * What the exporter must inline for a section title to survive leaving this
    * app (§5.4). Without the italic face declared here the embedder never fetches
    * it, and the title falls back to a system serif in the published figure —

@@ -1,5 +1,6 @@
-import { useEditor, useValue } from 'tldraw'
+import { useDialogs, useEditor, useValue } from 'tldraw'
 import type { Editor, TLShape } from 'tldraw'
+import { openHelpOverlay } from './HelpOverlay'
 import type { AtomShape } from '../shapes/AtomShapeUtil'
 import { liveUnsupportedIds } from '../lib/unsupported'
 import { isDeltaPage } from '../lib/deltaView'
@@ -47,6 +48,7 @@ function openTicketCount(editor: Editor): number {
 
 export function Counter() {
   const editor = useEditor()
+  const { addDialog } = useDialogs()
 
   const counts = useValue(
     'atom counts',
@@ -68,29 +70,46 @@ export function Counter() {
     [editor]
   )
 
-  // An empty canvas has nothing to report. A canvas holding only tickets does:
-  // those are the open questions, and they are the whole of Stage 6.
-  if (!counts || (counts.cards === 0 && counts.open === 0)) return null
+  // An empty canvas has nothing to count. The way into the keyboard map is
+  // shown anyway: it is the one thing on this canvas that must never depend on
+  // there being something on the canvas already.
+  const showCounts = counts !== null && (counts.cards > 0 || counts.open > 0)
 
   return (
     <div className="margin-note margin-note--bottom-left" aria-live="polite">
-      <span>{counts.cards} cards</span>
-      <span className="counter__sep"> · </span>
-      <span className={counts.untyped > 0 ? 'counter__alarm' : undefined}>
-        {counts.untyped} untyped
-      </span>
-      {counts.unsupported > 0 && (
+      {showCounts && counts && (
         <>
+          <span>{counts.cards} cards</span>
           <span className="counter__sep"> · </span>
-          <span className="counter__alarm">{counts.unsupported} unsupported</span>
+          <span className={counts.untyped > 0 ? 'counter__alarm' : undefined}>
+            {counts.untyped} untyped
+          </span>
+          {counts.unsupported > 0 && (
+            <>
+              <span className="counter__sep"> · </span>
+              <span className="counter__alarm">{counts.unsupported} unsupported</span>
+            </>
+          )}
+          {counts.open > 0 && (
+            <>
+              <span className="counter__sep"> · </span>
+              <span className="counter__alarm">{counts.open} open</span>
+            </>
+          )}
+          <span className="counter__sep"> · </span>
         </>
       )}
-      {counts.open > 0 && (
-        <>
-          <span className="counter__sep"> · </span>
-          <span className="counter__alarm">{counts.open} open</span>
-        </>
-      )}
+      {/* Jordan did not build this app, and a keyboard-only interface with no
+          visible way in is a locked door. Quiet enough to be marginalia, present
+          enough to be found. */}
+      <button
+        type="button"
+        className="counter__keys"
+        onClick={() => openHelpOverlay(editor, addDialog)}
+        title="Keyboard map"
+      >
+        ? keys
+      </button>
     </div>
   )
 }

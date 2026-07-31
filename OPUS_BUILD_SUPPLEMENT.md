@@ -614,3 +614,54 @@ Verified after the fix, same repro: `t-001` on Compose, `t-002` on the delta pag
 `scripts/check-tickets.ts` is the regression guard, and it earns its place by failing against the old implementation rather than merely passing against the new one — with the page-scoped body restored, 6 of its 12 cases fail, including `three presses, three ids in order` returning `["t-001","t-001","t-002"]`. It is its own suite rather than a case inside an existing one because `tickets.ts` is editor-facing, and the other suites' stated worth is that they prove the pure core runs outside a browser (§6.2); importing tldraw into one of them would spend that proof to save a file.
 
 **Gap ids are not affected, and this was checked rather than assumed.** `g-*` ids are derived, not allocated: `gapSourceId()` computes `g-` plus the facing card's own `sourceId`, with no scan and no counter, so there is no set that can be under-scoped. Its inputs are store-wide already.
+
+### E36. A frame is a section boundary, not a viewport — supersedes E14 (UX, Jordan, 2026-07-31)
+
+From Jordan's first real session: a card overhanging its frame was drawn amputated — cut mid-sentence, and where it hung off the top, cut above the eyebrow, so the card lost the one mark that says what kind of atom it is.
+
+**E14 examined this and got the diagnosis right but the verdict wrong.** It concluded the export was faithfully reproducing the canvas, and it was: `editor.getShapeMask` and the exporter's SVG clip path both read from `util.getClipPath()`, so the two agreed exactly. What E14 did not ask is whether the thing they agreed on was correct. Parity was holding while both halves were wrong, which is the failure mode parity checks are least able to see.
+
+**Ruling: paper never hides words.** A frame marks where a section begins and ends; it is not a window onto the section. A card that has grown past its frame is telling Jordan something true about the essay's shape, and answering that by cutting the card in half destroys precisely the information he needs to act on it. §16 forbids the canvas quietly rewriting an arrangement he made; hiding half of it is the same sin said louder.
+
+`SectionFrameUtil.getClipPath()` returns `undefined`, which is the documented opt-out. Because one hook feeds the canvas mask and the exporter's clip path alike, the fix lands on both paths at once — parity by construction rather than by agreement, which is E10's rule paying for itself a second time.
+
+Verified with a card pushed 82px above its frame's top edge: `getShapeMask` returns `null`, `getClipPath` returns `null`, the exported SVG contains **zero** `clip-path` attributes and zero `<clipPath>` definitions, the eyebrow survives into the export, and the canvas screenshot shows the whole card — pigment rule, eyebrow, body and meta line intact.
+
+One second mechanism was checked before calling it done, because removing a clip is worthless if something else crops the same pixels. `FrameShapeUtil.isExportBoundsContainer()` returns true, so a frame in the selection sets the export's boundary — which could have cropped the overhang at the viewBox instead. It does not: exporting the frame with a card hanging 92px above it produced `viewBox="-40 468 1120 632"`, starting at the card's top rather than the frame's and standing 632 tall against the frame's 540, which is the frame plus the overhang exactly. The bounds expand to hold what escapes.
+
+E14's diagnostic advice still stands and is still useful: comparing `getShapePageBounds` against `getShapeMask` is how you tell a clipping problem from a rendering one. Only its conclusion — that the clipping was correct because it was faithful — is withdrawn.
+
+**The general lesson is about parity, not frames.** Parity between canvas and export is a check on *consistency*, and a consistency check cannot see a fault that both sides share. Every rule in this build that forces one source to feed both paths — E10's display values, E15's plate shape, E8's single serializer — buys agreement, not correctness. Agreement is worth having because it makes a fault appear in both places at once instead of hiding in one; it is not evidence that there is no fault.
+
+### E37. The rename state was ours to break (UX, 2026-07-31)
+
+Double-clicking a section title showed a title that appeared doubled and heavier, on a ground that did not match the canvas, inside a box the display state does not have. Four causes, and **two of them were this repo's own overrides regressing behavior tldraw had right**:
+
+1. **The doubling was ours.** tldraw sets `.tl-frame-label__editing { color: transparent }` to hide the static text node while the input is live. The de-tldraw pass then restored `color: var(--ink)` on `.tl-frame-label` at equal specificity but later in the cascade, un-hiding it — so the title printed twice, the second copy 5px low, which reads as a heavier, taller face rather than as two copies.
+2. **The second focus ring was ours.** `.tl-container :focus-visible` at (0,2,0) put a 2px ink outline around the input, because a text field matches `:focus-visible` on a plain mouse click, not only from the keyboard.
+3. tldraw's own `background-color: var(--tl-color-panel)` gave the input paper-warm where display is paper.
+4. tldraw's own `box-shadow: inset 0 0 0 1.5px var(--tl-color-selected)` drew a ring display does not have.
+
+The font was never wrong: the input already computed `Instrument Serif italic 20px` in `--ink`. It only looked wrong because two copies of it were overlapping.
+
+Fixed by specificity, no `!important`. The ground stays painted rather than transparent on purpose — tldraw flips the heading to `overflow: visible` while editing so a long title can grow past its box, and an unpainted overflow would drop the tail onto bare canvas. It is painted `var(--paper)`, the same value `theme.ts` already gives the heading as `negativeSpace`, so the box is seamless rather than announcing itself.
+
+Verified at runtime rather than in the stylesheet: with the frame in its editing state, the input computes byte-identically to the display input on family, size, style, weight and colour; the static label computes `rgba(0, 0, 0, 0)`; box-shadow is `none`; the focus outline is `none`. The only visible difference between reading a title and renaming it is a caret and the selection highlight.
+
+The lesson worth keeping: **an override that repaints a property tldraw uses as a state signal will silently disable that state.** `color: transparent` was not decoration; it was how the editing state hid the text underneath it.
+
+### E38. Discoverability, and one caveat about marginalia in plates (UX, Jordan, 2026-07-31)
+
+Jordan did not build this app. Everything it does is on a key, and a key is only a feature if you already know it is there. Three affordances, one principle — nothing new is added to what the app *can* do, only to what it *shows*:
+
+- **A custom context menu**, right-click anywhere on the canvas. Selection-aware: typing, framing, binding, exporting and deleting when something is selected; tickets, readout, the two views, save and the keyboard map when nothing is. Brand-styled — `--bg-2`, hairline bone, 2px radius, mono uppercase labels with the shortcut right-aligned in `--ink-4`, and a restrained `--shadow-lift` rather than the modals' `--shadow-deep`, because a menu that casts a modal's shadow is claiming to be a modal.
+- **`? KEYS` in the bottom-left counter strip**, always present and clickable. The margin strip is pointer-transparent so it never steals a click meant for the paper, so this one element takes its pointer events back. It renders even on an empty canvas: the way into the map is the one thing that must not depend on there already being something on the canvas.
+- **The marginalia row in the `?` overlay**, documenting a discovery rather than a feature.
+
+**Every row invokes the same action the key invokes**, read from the actions registry by id — so §8's reinterpretation of `1`-`4` on the corpus wall and E17's dependency-versus-correspondence branch come along for free, because those branches live inside the action rather than beside it. The shortcut a row prints is read from the same registry entry it calls, so a rebinding cannot leave the menu lying. One exception is documented in the code: `help-overlay` is bound `shift+/` (E29), which tldraw's formatter would print as `⇧/`, so the row passes a literal escape to print `?` — the key §11 names and the key Jordan presses.
+
+Verified end to end rather than by inspection: with a card selected, the menu's `Type as claim` row moved the card from `untyped` to `claim` and closed the menu; with nothing selected, `New ticket` created a ticket and put it straight into edit mode, which is exactly what `T` does.
+
+**Ruling — double-clicking empty paper makes a tldraw text shape, and it stays.** It is marginalia. `readout.ts` collects atoms, frames, tickets and gaps and knows nothing about text shapes, so a note never reaches `map.md` or `assembly.json` — verified against Jordan's own two notes. That is correct and deliberate: an annotation is not an atom, and a canvas that forced every scribble into the outline would stop being a place to think.
+
+**The caveat, which is new and matters.** A text shape included in a `⌘E` selection exports inside a **`<foreignObject>`** — the exact mechanism BUILD.md §6.2 and §10 single out as fragile, and the reason all five custom shapes implement `toSvg` by hand. Measured on a real export: the note renders correctly from `file://` with the fonts embedded, so it is not broken in a browser. But §10's warning is about *other* renderers, and Substack is the named one. So: **marginalia is safe on the canvas and in the map; it is a risk inside a published plate.** The practical advice is to leave notes out of an exported selection. Whether the app should refuse them, warn, or say nothing is a §15-class decision and is Jordan's, not mine.

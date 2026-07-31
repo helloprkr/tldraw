@@ -24,8 +24,15 @@
   display: flex;
   flex-direction: column;
   gap: var(--s-5);
-  width: 640px;
+  width: 720px;
   max-width: 100%;
+  /* tldraw caps the dialog frame at 80% of the viewport while this sheet keeps
+     overflow visible for its focus rings, so without a matching cap here a long
+     map spills out past its own border — footer and all — instead of being
+     contained. The scroll is a safety net, not the intended reading: the map is
+     meant to fit. */
+  max-height: 78vh;
+  overflow-y: auto;
   padding: var(--s-6);
   background: var(--bg-2);
   /* The whole sheet is a label; nothing in it is prose. */
@@ -67,16 +74,24 @@
   border-bottom: var(--border-hair);
 }
 
+/* The grid lives on the list, not the row, so every row in a section shares
+   one pair of columns and the actions all start on the same vertical — that
+   alignment is what makes the map scannable rather than read. Sizing the key
+   column to max-content lets a long binding like `Double-click paper` set the
+   column instead of overflowing a fixed width into the label beside it. */
 .help-overlay__list {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  column-gap: var(--s-3);
   margin: 0;
 }
 
 .help-overlay__row {
-  display: grid;
-  /* A fixed key column so every action starts on the same vertical,
-     which is what makes the map scannable rather than read. */
-  grid-template-columns: 6.5ch 1fr;
-  gap: var(--s-3);
+  display: contents;
+}
+
+.help-overlay__keys,
+.help-overlay__action {
   padding: var(--s-1) 0;
 }
 

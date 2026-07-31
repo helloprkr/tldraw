@@ -1,5 +1,6 @@
 import type { Editor, TLComponents, TLUiOverrides } from 'tldraw'
 import { HairlineGrid } from './ui/Grid'
+import { EssayContextMenu } from './ui/ContextMenu'
 import { UnsupportedMarks } from './ui/UnsupportedMarks'
 import { startBindMode } from './lib/bind'
 import { runReadout } from './lib/runReadout'
@@ -25,6 +26,10 @@ import type { AtomShape } from './shapes/AtomShapeUtil'
  */
 export const components: TLComponents = {
   Grid: HairlineGrid,
+  // Jordan did not build this app. Every command it has is on a key, and a key
+  // is only a feature if you already know it is there — so the same actions are
+  // reachable by right-click, invoked through the same registry (§11).
+  ContextMenu: EssayContextMenu,
   // Page space, so the marks track their cards through pan, zoom, and drag.
   InFrontOfTheCanvas: UnsupportedMarks,
   StylePanel: null,

@@ -1,0 +1,140 @@
+/* ============================================================
+   The right-click menu (BUILD.md §11) — the commands, listed.
+   A transient overlay, so §2.2's modal allowance covers the one
+   shadow. Everything else is the canvas furniture: hairline
+   rules between groups, 2px radius at the edge and none inside,
+   mono uppercase labels, no fill but --bg-2.
+   ============================================================ */
+
+/* Scoped through :has(), the way both dialogs scope themselves. Radix owns
+   the content element and gives it tldraw's own .tlui-menu; the wrapper div
+   inside it is the only class this file controls, so every rule below is
+   written from it. Nothing here can reach another menu. */
+.tlui-menu:has(.essay-context-menu) {
+  /* Wide enough that the shortcut column lands in the same place on every
+     row — a list is scanned, not read, and that only works from a rule. */
+  min-width: 240px;
+  padding: 0;
+  background-color: var(--bg-2);
+  border: var(--border-hair);
+  border-radius: var(--r-1);
+  /* §2.2 permits a shadow on an overlay, and this one has to separate itself
+     from live drawing a hairline cannot cut through. --shadow-deep is the two
+     modals' mark: 60px of blur, weighted to lift a 640px sheet off a
+     full-screen scrim. This is a small card that appears under the pointer
+     and leaves, so it takes --shadow-lift instead — the same warm ink, half
+     the reach. Restraint here is not timidity; a menu that casts a modal's
+     shadow claims to be a modal. */
+  box-shadow: var(--shadow-lift);
+  /* tldraw scrolls the menu and caps it at 70vh on short viewports. A 2px
+     focus ring at 2px offset would be clipped by both, the same reason
+     caption-dialog.css opens its sheet up. Nothing this menu prints is tall
+     enough to have needed the scroll. */
+  overflow: visible;
+  max-height: none;
+}
+
+/* ---- Groups ---------------------------------------------------------
+   A hairline between kinds of work, not a box around each. The last
+   group carries no rule, because a rule at the edge is the border.
+   The value is restated rather than left to --tl-color-divider so the
+   rule survives if tldraw ever stops routing the divider through it.
+   -------------------------------------------------------------------- */
+.essay-context-menu .tlui-menu__group {
+  border-bottom: var(--border-hair);
+}
+
+.essay-context-menu .tlui-menu__group:last-of-type {
+  border-bottom: none;
+}
+
+/* ---- Rows -----------------------------------------------------------
+   The de-tldraw pass already set .tlui-button in mono and squared its
+   radius (§5.5 rows 3, 6). What is left is geometry: tldraw's menu row
+   is 40px tall, centered, and overlaps its neighbour by -4px, which is
+   a touch toolbar's arithmetic. Here the rows are a printed list.
+   -------------------------------------------------------------------- */
+.essay-context-menu .tlui-button__menu {
+  height: auto;
+  min-height: 0;
+  margin: 0;
+  padding: var(--s-2) var(--s-4);
+  justify-content: flex-start;
+  /* The gutter is a floor, not the gap: the label grows and pushes the
+     shortcut to the right edge. */
+  gap: var(--s-5);
+  line-height: var(--lh-normal);
+  color: var(--ink-2);
+}
+
+/* Stated here rather than inherited from the pass's .tlui-button__label,
+   because these are the tokens §5.3 names for a mono label and this menu
+   should not go quiet if that rule is ever narrowed to the toolbar. */
+.essay-context-menu .tlui-button__label {
+  flex-grow: 1;
+  font-family: var(--font-mono);
+  font-size: var(--t-meta);
+  font-weight: 500;
+  letter-spacing: var(--tk-wider);
+  text-transform: uppercase;
+}
+
+/* ---- The shortcut ---------------------------------------------------
+   Right-aligned and quieter than the label: the row says what happens,
+   the margin says which key does it. Marginalia, in --ink-4.
+
+   tokens.css styles bare <kbd> as a bordered chip on --bg-3, which is
+   right in prose and wrong in a menu — eleven boxes down one card, and
+   §2.3 has no pills in it. The caption prompt neutralizes the same
+   three declarations for the same reason.
+   -------------------------------------------------------------------- */
+.essay-context-menu .tlui-kbd {
+  margin-inline-start: auto;
+  padding: 0;
+  font-family: var(--font-mono);
+  font-size: var(--t-meta);
+  letter-spacing: var(--tk-wide);
+  color: var(--ink-4);
+  background: transparent;
+  border: 0;
+}
+
+.essay-context-menu .tlui-kbd > span {
+  padding: 0 var(--s-0);
+  border-radius: var(--r-0);
+}
+
+/* ---- Hover and keyboard highlight -----------------------------------
+   tldraw paints both as an inset ::after with a 4px radius, drawn over
+   the label rather than behind it — which is why its own fill is a 4%
+   ink wash and could never be a real color. Removed, and replaced with
+   the flat --paper-deep every other hovered control in this system
+   takes (see .tlui-button:hover in the de-tldraw pass and
+   .caption-dialog__action:hover). Radix sets [data-highlighted] for the
+   pointer and the arrow keys alike, so the two land on the same row the
+   same way.
+   -------------------------------------------------------------------- */
+.essay-context-menu .tlui-button__menu::after {
+  display: none;
+}
+
+.essay-context-menu .tlui-button__menu:hover,
+.essay-context-menu .tlui-button__menu[data-highlighted] {
+  background-color: var(--paper-deep);
+  color: var(--ink);
+  transition: background-color var(--dur-1) var(--ease-soft);
+}
+
+/* ---- Focus ----------------------------------------------------------
+   §5.5 row 7. The pass already rings every .tlui-button this way; it is
+   restated locally so a discoverability surface cannot be left without
+   a visible focus if that selector is ever narrowed.
+   -------------------------------------------------------------------- */
+.essay-context-menu .tlui-button__menu:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+  border-radius: var(--r-0);
+}
+
+/* §5.6: fades only. The pass's tlui-fade-in already carries this menu in;
+   nothing here reintroduces a slide or a scale. */

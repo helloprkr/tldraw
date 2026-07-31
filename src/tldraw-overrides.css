@@ -263,6 +263,63 @@
   border-radius: var(--r-0);
 }
 
+/* ---- Frames: the rename state ---------------------------------------
+   §7 Stage 2 says the title is "editable in place". In place means the
+   glyphs do not move, change face, or acquire a box the moment you
+   double-click them. Three rules pulled the rename state away from the
+   display state above; one of them was this file's.
+
+   The markup is FrameHeading.js: an outer .tl-frame-heading (its only
+   editing-state change is an inline overflow: visible), then
+   .tl-frame-heading-hit-area carrying the ground as an inline
+   background from src/theme.ts, then FrameLabelInput.js's
+   .tl-frame-label holding two children — <input class=
+   "tl-frame-name-input">, display: none until editing, and the raw name
+   as a bare text node after it. That text node is the title you see at
+   rest. The single editing-state hook the CSS gets is the
+   .tl-frame-label__editing class FrameLabelInput.js adds to the div;
+   useIsEditing never reaches the DOM as an attribute, and nothing marks
+   .tl-frame-heading. So every rule below hangs off that class, one class
+   deeper than tldraw's, and wins on specificity.
+
+   1. The doubled title was ours. tldraw.css:1290 hides the static text
+      node behind the live input with color: transparent at (0,1,0) —
+      the same weight as the .tl-frame-label rule above, which restores
+      var(--ink) later in the cascade and un-hid it. Measured on this
+      markup: the ghost's line box centres 17px down a 24px heading
+      against the input's 12px, so the title printed twice, the second
+      copy 5px low. Restated at (0,2,0).
+   2. tldraw.css:1296 also fills the box with --tl-color-panel and 1298
+      rings it with inset 0 0 0 1.5px --tl-color-selected, both (0,1,0) —
+      paper-warm inside an ink box where the display state has paper and
+      no box. A ground is still needed: the label is free to grow past
+      the heading while editing, and an unpainted overflow would drop
+      the tail of a long title onto bare canvas. It becomes the same
+      var(--paper) the hit area is already painted with, so the box is
+      seamless with the display state instead of announcing itself.
+   3. The outer ring was this file's: .tl-container :focus-visible above,
+      at (0,2,0). A text field matches :focus-visible on a plain mouse
+      click, not only from the keyboard — verified against a dispatched
+      click, not assumed — so renaming drew a 2px ink outline at 2px
+      offset around the input as well. §5.5 row 7 is about controls you
+      tab to; for a field opened by double-clicking its own text the
+      caret is the focus indicator. (0,3,0) drops it here only.
+
+   What already agreed is left alone: face, style, size, weight and
+   colour come from the .tl-frame-label rule above and measure identical
+   in both states; ::selection is the ochre marker from tokens.css:281,
+   never a system blue; the caret is var(--ink) by inheritance.
+   -------------------------------------------------------------------- */
+.tl-frame-heading .tl-frame-label__editing {
+  color: transparent;
+  background-color: var(--paper);
+  box-shadow: none;
+}
+
+.tl-frame-heading .tl-frame-name-input:focus-visible {
+  outline: none;
+}
+
 /* ---- Motion ---------------------------------------------------------
    Fades only. tldraw's slide-and-scale entrances are removed rather than
    retimed; a menu that travels is a menu that bounces.

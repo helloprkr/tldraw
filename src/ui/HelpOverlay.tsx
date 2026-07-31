@@ -85,6 +85,11 @@ const SECTIONS: Section[] = [
       { keys: 'Space-drag', action: 'Pan' },
       { keys: 'Scroll', action: 'Zoom' },
       { keys: '⌘Z', action: 'Undo' },
+      {
+        keys: 'Double-click paper',
+        action: 'Marginalia note',
+        note: 'Never enters the map',
+      },
     ],
   },
 ]
