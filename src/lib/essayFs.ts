@@ -37,6 +37,25 @@ export async function writeWork(slug: string, snapshot: unknown): Promise<void> 
   if (!res.ok) throw new Error(`write work/${slug}: ${res.status} ${res.statusText}`)
 }
 
+/** Everything in corpus/ — the assemblies and the raw essays beside them (§8). */
+export async function readCorpus(): Promise<InputFile[]> {
+  return json(await fetch('/api/corpus'), 'read corpus')
+}
+
+/**
+ * Writes a classification back to disk (§8's round trip). Only
+ * `*.assembly.json` is writable there; the essays themselves are the writers'
+ * material and the plugin refuses to touch them.
+ */
+export async function writeCorpusAssembly(name: string, content: string): Promise<void> {
+  const res = await fetch(`/api/corpus/${encodeURIComponent(name)}`, {
+    method: 'PUT',
+    headers: { 'content-type': 'application/json' },
+    body: content,
+  })
+  if (!res.ok) throw new Error(`write corpus/${name}: ${res.status} ${res.statusText}`)
+}
+
 /**
  * Reads a text file back out of out/<slug>/. Exists so the figure registry can
  * decide the next figure number from disk (§10) rather than from anything the

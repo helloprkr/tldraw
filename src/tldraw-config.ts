@@ -5,6 +5,7 @@ import { startBindMode } from './lib/bind'
 import { runReadout } from './lib/runReadout'
 import { exportFigure } from './lib/exportFigure'
 import { isDeltaPage, openDeltaView } from './lib/deltaView'
+import { classifySelectedSegment, isCorpusPage, openCorpusWall } from './lib/corpusWall'
 import { createTicket } from './lib/tickets'
 import { promptForCaption } from './ui/CaptionDialog'
 import { essaySlugFromUrl } from './lib/essayFs'
@@ -126,6 +127,20 @@ export const overrides: TLUiOverrides = {
         kbd: key,
         label: atom === 'untyped' ? 'Untype selection' : `Type selection as ${atom}`,
         onSelect() {
+          // On the wall the same keys record a judgment about someone else's
+          // paragraph, and it goes to disk rather than to the canvas (§8).
+          if (isCorpusPage(editor)) {
+            void classifySelectedSegment(editor, atom === 'untyped' ? null : atom).then(
+              (result) => {
+                if (result) announce(`${result.slug} · unit ${result.unit + 1} · ${atom}`)
+              },
+              (err: unknown) => {
+                console.error('classify failed', err)
+                announce('classify failed')
+              }
+            )
+            return
+          }
           typeSelection(editor, atom)
         },
       }
@@ -149,6 +164,18 @@ export const overrides: TLUiOverrides = {
       label: 'New ticket',
       onSelect() {
         createTicket(editor)
+      },
+    }
+
+    actions['corpus-wall'] = {
+      id: 'corpus-wall',
+      kbd: 'cmd+shift+c,ctrl+shift+c',
+      label: 'Corpus wall',
+      onSelect() {
+        void openCorpusWall(editor).catch((err: unknown) => {
+          console.error('corpus wall failed', err)
+          announce('corpus wall failed')
+        })
       },
     }
 

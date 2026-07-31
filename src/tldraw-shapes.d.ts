@@ -20,6 +20,21 @@ declare module '@tldraw/tlschema' {
       created: string
       ordinal: number
     }
+    /**
+     * One essay's atom sequence as a horizontal band (§8). The only place
+     * pigment appears as area fill rather than as a mark (errata E5).
+     */
+    band: {
+      w: number
+      h: number
+      title: string
+      /** `atom: null` is an unclassified unit — hatched, never guessed. */
+      segments: { atom: string | null; weight: number }[]
+      /** Jordan's own essay: the bottom band, under a double rule. */
+      mine: boolean
+      /** Which corpus file this came from, so a classification can be written back. */
+      slug: string
+    }
     /** An open question, in terracotta (§7 Stage 6). */
     ticket: {
       w: number

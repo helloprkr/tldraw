@@ -1,0 +1,70 @@
+/* The band — BUILD.md §8. Almost nothing is styled here on purpose: the ground,
+   the segments, the hatch and the double rule are geometry, and geometry that
+   only exists in CSS never reaches the plate (E10), so BandShapeUtil draws all
+   of it as SVG on the canvas as well. What is left for this file is the two runs
+   of type — their family, their colour, and the box each one is centred in. */
+
+.ec-band {
+  box-sizing: border-box;
+  /* Stated, not inherited. The band's ground is the paper rect under its
+     segments, drawn at a known colour so the translucent fills composite the
+     same way wherever the figure is opened. */
+  background: none;
+  /* No border: a border box would shrink the containing block and put both runs
+     of type 1px away from where toSvg places them (E4). */
+  border: 0;
+  border-radius: var(--r-0);
+  /* Paper does not float. */
+  box-shadow: none;
+  /* Stated rather than inherited, so the text measurer, the band and the
+     exported SVG all lay out on the same metrics. */
+  font-feature-settings: 'kern', 'liga', 'onum', 'pnum';
+  user-select: none;
+}
+
+/* Every mark on the diagram, from the same element tree toSvg returns. It takes
+   no pointer events: the click target is the shape's rectangle, and which
+   segment was hit is answered by bandSegmentIndexAt, not by the DOM. */
+.ec-band__body {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+.ec-band__strip,
+.ec-band__title {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  /* Both runs are cut to their measure in JS, so a line that wrapped or a CSS
+     ellipsis that fell on a different character would be a disagreement with
+     the export, not a fallback. */
+  white-space: nowrap;
+  overflow: hidden;
+  line-height: 1;
+}
+
+/* The atom sequence. Each token carries its own pigment inline — the strip is
+   the band's legend, and a token that did not match its segment would be worse
+   than no token. Separators, the ellipsis and unclassified marks are --ink-4. */
+.ec-band__strip {
+  font-family: var(--font-mono);
+  font-size: var(--t-meta);
+  font-weight: 500;
+  letter-spacing: var(--tk-wider);
+  text-transform: none;
+}
+
+/* The essay's name, in the margin, right-aligned to the band: its right edge is
+   the band's left edge. Instrument Serif italic — the display face, set tight,
+   as the wordmark is. */
+.ec-band__title {
+  justify-content: flex-end;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 20px; /* --t-h3 */
+  font-weight: 400;
+  letter-spacing: var(--tk-tight);
+  color: var(--ink);
+}

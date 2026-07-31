@@ -497,3 +497,13 @@ In particular, a "resolved but retained" ticket must never be styled by draining
 ### E24. Agent lifecycle (Jordan, 2026-07-31, non-negotiable)
 
 **No gate commit until every spawned agent and shell has reported or been killed.** Twice an agent's report arrived after the milestone commit, and each time its late edits had to be reconciled by hand. Confirm three things before committing: every agent has returned, the task list is empty, and the process table holds nothing but the dev server.
+
+### E25. Verify the fixture, not a file downstream of it (M5)
+
+E22's gate step failed on its first outing, and the way it failed is worth recording. At the M4 fix I rebuilt `work/test-essay.tldr`, regenerated `out/`, and then ran a stray `git stash`/`git stash pop` inside a verification command. The stash reverted the snapshot before `git add`, so the commit carried the regenerated `out/` and the **old** `work/`. The desync survived the fix that was meant to remove it.
+
+It survived because the verification was aimed at the wrong artifact: the clean-clone check counted `UNANSWERED` boxes in the committed `map.md`, which is an *output*. It would have read 6 whether or not the snapshot that produced it was committed.
+
+**The check has to run the generator, not read its output.** In a clean clone: run `npm run readout` and require the result to match the committed `out/` on everything but the timestamp. That is the only form of the check that can fail when `work/` and `out/` disagree.
+
+Corollary: never run `git stash` in a verification path. Verification must not be able to change the tree it is verifying.

@@ -1,0 +1,51 @@
+{
+  "slug": "the-long-argument-with-the-weather",
+  "title": "The long argument with the weather",
+  "units": [
+    {
+      "atom": "stance",
+      "words": 101,
+      "text": "The position taken here is that forecasting is not a discipline of prediction but a discipline of stated uncertainty, and that the history of the field is largely the history of learning to say how sure one is. This is an unfashionable position in a period that grades forecasters by hit rate, and it is nonetheless the only position that makes sense of what forecasters do all day. They do not guess tomorrow. They bound it, and they bound it in language that a farmer, a pilot, and an underwriter can each act on without any of the three being misled."
+    },
+    {
+      "atom": "claim",
+      "words": 98,
+      "text": "The instructive period is the middle of the nineteenth century, when the telegraph made simultaneous observation possible across a continent for the first time. What changed was not the quality of any single reading; barometers had been good instruments for a hundred years. What changed was that two hundred mediocre readings taken at the same hour became a better instrument than one excellent reading taken alone. Robert FitzRoy understood this at once and built the first storm-warning service on it in 1861. He was ridiculed for the failures, and in the end he was remembered mostly for them."
+    },
+    {
+      "atom": "claim",
+      "words": 76,
+      "text": "The ridicule repays study, because it followed a form that has never stopped repeating. FitzRoy’s warnings were right often enough to be worth issuing and wrong often enough to be humiliating, and the public possessed no vocabulary for a statement that was neither true nor false but calibrated. A warning is not a promise. Nobody had explained this to the readers of the morning papers, and in fairness FitzRoy had not entirely explained it to himself."
+    },
+    {
+      "atom": "move",
+      "words": 77,
+      "text": "Consider what was on offer before him. A captain leaving Liverpool had the sky, the glass on the cabin wall, and whatever his own memory of that coast had taught him. Set against that, the correct question was never whether the telegraphed warning was reliable. It was whether the warning beat the sky. It did, by a wide margin, and the argument was conducted for thirty years as though it had been asked the other way around."
+    },
+    {
+      "atom": "claim",
+      "words": 87,
+      "text": "The technical resolution took another century and arrived as a scoring rule rather than as a better model. Glenn Brier proposed in 1950 that a probabilistic forecast be scored by the squared distance between the stated probability and the outcome, which has the useful property that a forecaster minimizes the score only by reporting what he actually believes. Overconfidence is punished. So is the hedge. A field that had spent ninety years arguing about credibility was handed, in four lines of arithmetic, a way to earn it."
+    },
+    {
+      "atom": "claim",
+      "words": 73,
+      "text": "Ensemble forecasting completed the shift. Rather than integrate one best estimate of the present state forward, the modern centre perturbs the initial conditions within the range the observations cannot distinguish and runs fifty atmospheres at once. The output is not a forecast. It is a distribution of forecasts, and the width of that distribution is itself the most valuable thing produced, because it says how much of tomorrow the present has already decided."
+    },
+    {
+      "atom": "figure",
+      "words": 65,
+      "text": "The picture to hold is the hurricane cone. A track line runs out from the coast, and around it a shape that widens with each day of lead time until, at five days, it covers three states. The cone is not the storm. The cone is the honest width of what is known, drawn at the scale of the decision it is meant to inform."
+    },
+    {
+      "atom": "claim",
+      "words": 93,
+      "text": "And it is misread constantly, in a way that is instructive rather than merely regrettable. Residents read the cone as the area that will be hit, and so a town at the edge of it hears a small warning when what it has been given is a wide one. The forecasters have been correct and the communication has failed, which suggests that stated uncertainty is not a property of the statement alone. It is a property of the statement and its reader together, and only one half of that pair has been engineered."
+    },
+    {
+      "atom": "stance",
+      "words": 101,
+      "text": "So the standard by which I would judge the field is not accuracy, which improves on its own schedule and owes more to satellites than to anyone’s judgment. It is calibration made legible: whether the person acting on a forecast ends up holding, in their own head, a picture of the future as wide as the one the forecaster holds. By that standard the weather services are the most successful institution of applied uncertainty we have built, and they are still losing the argument at the last mile, on the evening news, in the sentence that begins with a chance of."
+    }
+  ]
+}

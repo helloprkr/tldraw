@@ -1,0 +1,66 @@
+{
+  "slug": "a-machine-for-forgetting",
+  "title": "A machine for forgetting",
+  "units": [
+    {
+      "atom": "figure",
+      "words": 39,
+      "text": "Picture a library where every new arrival displaces the book nearest the door. Nothing is destroyed. The collection simply loses its oldest edge, one volume at a time, at exactly the rate it grows. That library is the feed."
+    },
+    {
+      "atom": "move",
+      "words": 29,
+      "text": "Start with the objection, because it is a good one. Nothing is deleted. Every post you have ever scrolled past still sits on a disk somewhere, addressable, retrievable, indexed."
+    },
+    {
+      "atom": "move",
+      "words": 30,
+      "text": "But retrievability is not memory. A thing you can find only if you already know to look for it is not something you remember. It is something you have filed."
+    },
+    {
+      "atom": "claim",
+      "words": 26,
+      "text": "Memory is the capacity to be reminded without asking. Storage is the capacity to be searched. The gap between those two sentences is the whole subject."
+    },
+    {
+      "atom": "move",
+      "words": 30,
+      "text": "Watch what a ranked feed actually does with the past. It does not hide it. It sinks it below the threshold of the thumb, which is cheaper and works better."
+    },
+    {
+      "atom": "figure",
+      "words": 45,
+      "text": "There is a shape here worth drawing. Chronology is a line. Ranking is a slope. On a line, last year is behind you and you can turn around. On a slope, last year is beneath you, and the interface offers no gesture that goes down."
+    },
+    {
+      "atom": "move",
+      "words": 28,
+      "text": "Ask someone what they read on a feed three Tuesdays ago. Then ask what they read in a book three years ago. Watch which question gets an answer."
+    },
+    {
+      "atom": "claim",
+      "words": 44,
+      "text": "A medium that ranks by freshness cannot produce a canon. Not because it forbids one, but because a canon is only a set of old things that keep being handed forward, and a freshness ranking is precisely a machine for not handing things forward."
+    },
+    {
+      "atom": "move",
+      "words": 29,
+      "text": "The usual complaint stops here, at the moral one. We are shallow now, we cannot read, our children are worse. Skip it. It flatters the complainer and explains nothing."
+    },
+    {
+      "atom": "stance",
+      "words": 40,
+      "text": "I do not think we have grown shallower. I think we have grown less rehearsed. What has thinned is not the depth of any single reading but the number of times one thing gets read again by the same person."
+    },
+    {
+      "atom": "move",
+      "words": 29,
+      "text": "Which makes the design question narrow, and answerable. What would it take for a system to hand something back unbidden, at the hour it would be worth having again?"
+    },
+    {
+      "atom": "claim",
+      "words": 42,
+      "text": "Every tool for thought that has ever earned the name answered that question. The index. The commonplace book. The marginal note found later in your own handwriting. None of them stored more than the shelf beside them. All of them returned better."
+    }
+  ]
+}

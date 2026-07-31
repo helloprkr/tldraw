@@ -115,7 +115,14 @@ async function main() {
     if (stopped) return
     stopped = true
     chrome.kill('SIGKILL')
-    rmSync(profile, { recursive: true, force: true })
+    // Chrome is still writing its profile as it dies, so this can lose the race.
+    // The startup sweep is the guarantee; this is only the tidy path, and it
+    // must never turn a successful run into a failed one.
+    try {
+      rmSync(profile, { recursive: true, force: true })
+    } catch {
+      // swept next run
+    }
   }
   process.on('exit', stop)
   for (const signal of ['SIGINT', 'SIGTERM', 'SIGHUP']) {

@@ -11,13 +11,16 @@ import { essayTheme } from './theme'
 import './shapes/plate.css'
 import './shapes/ticket.css'
 import './shapes/gap.css'
+import './shapes/band.css'
 import { AtomShapeUtil } from './shapes/AtomShapeUtil'
 import { DependencyArrowUtil } from './shapes/DependencyArrowUtil'
 import { PlateShapeUtil } from './shapes/PlateShapeUtil'
 import { TicketShapeUtil } from './shapes/TicketShapeUtil'
 import { GapShapeUtil } from './shapes/GapShapeUtil'
+import { BandShapeUtil } from './shapes/BandShapeUtil'
 import { Counter } from './ui/Counter'
 import { DeltaCounter } from './ui/DeltaCounter'
+import { CorpusPicker } from './ui/CorpusPicker'
 import { essaySlugFromUrl } from './lib/essayFs'
 import { openEssay, startAutosave } from './lib/openEssay'
 import { shapeVisibility } from './lib/deltaView'
@@ -29,6 +32,7 @@ const shapeUtils = [
   AtomShapeUtil,
   TicketShapeUtil,
   GapShapeUtil,
+  BandShapeUtil,
   PlateShapeUtil,
   DependencyArrowUtil,
 ]
@@ -75,6 +79,7 @@ export default function App() {
       >
         <Counter />
         <DeltaCounter />
+        <CorpusPicker />
       </Tldraw>
     </div>
   )
