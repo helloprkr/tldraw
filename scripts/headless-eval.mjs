@@ -22,13 +22,16 @@
  */
 
 import { spawn } from 'node:child_process'
-import { readFileSync } from 'node:fs'
+import { readFileSync, readdirSync, rmSync } from 'node:fs'
+import { tmpdir } from 'node:os'
 
 const CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
 const PORT = 9333
 const READY_TIMEOUT_MS = 30_000
 /** The app has to mount, fetch its inputs, and load the snapshot before it is drivable. */
 const APP_SETTLE_MS = 6_000
+const PROFILE_DIR = tmpdir()
+const PROFILE_PREFIX = 'essay-canvas-headless-'
 
 function parseArgs(argv) {
   const args = { url: null, essay: null, expr: null, file: null, settle: APP_SETTLE_MS }
@@ -74,10 +77,23 @@ async function waitForDevtools() {
   throw new Error('headless chrome never opened its devtools port')
 }
 
+/**
+ * Chrome rewrites its profile while shutting down, so the directory can survive
+ * the kill that removes it. Sweeping at startup keeps them from accumulating
+ * without racing teardown.
+ */
+function sweepStaleProfiles() {
+  for (const name of readdirSync(PROFILE_DIR)) {
+    if (!name.startsWith(PROFILE_PREFIX)) continue
+    rmSync(`${PROFILE_DIR}/${name}`, { recursive: true, force: true })
+  }
+}
+
 async function main() {
   const args = parseArgs(process.argv.slice(2))
   const expression = args.file ? readFileSync(args.file, 'utf8') : args.expr
-  const profile = `/tmp/essay-canvas-headless-${process.pid}`
+  sweepStaleProfiles()
+  const profile = `${PROFILE_DIR}/${PROFILE_PREFIX}${process.pid}`
 
   const chrome = spawn(
     CHROME,
@@ -92,8 +108,27 @@ async function main() {
     ],
     { stdio: 'ignore' }
   )
-  const stop = () => chrome.kill('SIGKILL')
+  // A browser that outlives its run is exactly the orphan this harness exists
+  // to avoid, so every exit path kills it and takes its profile with it.
+  let stopped = false
+  const stop = () => {
+    if (stopped) return
+    stopped = true
+    chrome.kill('SIGKILL')
+    rmSync(profile, { recursive: true, force: true })
+  }
   process.on('exit', stop)
+  for (const signal of ['SIGINT', 'SIGTERM', 'SIGHUP']) {
+    process.on(signal, () => {
+      stop()
+      process.exit(1)
+    })
+  }
+  process.on('uncaughtException', (err) => {
+    console.error(String(err))
+    stop()
+    process.exit(1)
+  })
 
   await waitForDevtools()
 
