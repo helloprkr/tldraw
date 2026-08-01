@@ -691,3 +691,60 @@ That listener calls the registered `back-to-essay` action rather than `returnToE
 Verified at runtime from both views by all three routes, and on all four exclusions: `Escape` closes the context menu and stays; closes the `?` overlay and stays; ends a card edit and stays; and pressed again with nothing open, returns. Crossing was verified in both directions — `⌘⇧C` on the delta opens the wall, `⌘D` on the wall opens the delta. On the essay canvas the strip is absent, the menu has no return row, and `Escape` does nothing.
 
 **The general lesson: a guard that reads shared state is only as correct as the moment it reads it.** `getEditingShapeId()` was the right question asked too late. When two listeners on the same event both mutate and inspect the same state, the phase they run in *is* the logic.
+
+### E41. M6 pre-build rulings (Fable, by Jordan's delegation, 2026-07-31)
+
+`M6_GENERATIVE.md` §13 lists five decisions Fable does not make. Jordan delegated
+them ("use your best judgement", 2026-07-31, before the M6 build began). Each is
+his to overturn; none is entrenched in a schema.
+
+1. **All six forms survive.** Two are wholesale reuse (`delta`, `band`) and the
+   real cut lives in `/draw`'s standing instruction to skip forms that do not
+   fit — an unused form costs nothing, an unbuilt one is a gap Jordan cannot
+   fill by waking up. He cuts after the Trace Test with evidence instead of
+   before it without.
+2. **`field`'s y-axis is model-declared**, poles labeled, per §5.3's own text.
+   The trace review gate is where a wrong axis dies, and it dies in seconds.
+3. **`/trace` may propose tensions Jordan has not noticed**, only between units
+   that both carry spans, and each proposal is marked `"proposed": true` so the
+   review can delete them wholesale. "At most dialectic" permits naming a
+   tension; resolving one stays forbidden. The Trace Test's pass condition —
+   "shows him something he hadn't already seen" — is exactly this clause.
+4. **Compiled canvases land in `work/` beside hand-built ones.** §2 decides it:
+   the generative path and the manual path produce the same kind of object, and
+   a `work/generated/` would fork the instrument in the filesystem after M6
+   went to the trouble of not forking it in the vocabulary.
+5. **No fifth atom type** — was never open (§13.5 states it as a refusal).
+
+Implementation rulings made under the same delegation, recorded because they
+shape code:
+
+6. **Spans are located by code, not by the model.** The `/trace` skill writes a
+   verbatim `quote` per unit; `npm run trace -- --resolve <slug>` finds each
+   quote in its context file and mints `start`/`end`. Character arithmetic is
+   precision, and §1's division of labor sends precision to code. A quote that
+   does not resolve verbatim, or resolves ambiguously, fails loudly and stays
+   unresolved — lint's `unfounded` then refuses it a canvas.
+7. **Skill format.** This repo has no skill files (`BUILD.md`'s essay-assembly
+   skill lives outside it). `/trace` and `/draw` land as
+   `.claude/skills/<name>/SKILL.md`, invocable in Claude Code; their
+   deterministic halves are npm scripts like every existing command.
+8. **No graph library.** dagre would be a new dependency, which §9.4 forbids.
+   `genealogy` and `mechanism` use a hand-rolled longest-path layering —
+   deterministic, ~100 lines, and its output is testable.
+9. **Edge labels are not rendered in M6.** The relation kinds live in the scene
+   and the trace, not as canvas text. Lint's `collision` check is implemented
+   and vacuously passes until labels exist, so adding them later meets a gate
+   that already works.
+10. **The `band` form emits `corpus/<slug>.assembly.json`** from trace units —
+    atom per unit, weight from span length — and M5's wall renders it against
+    the corpus with zero new canvas code. Classification here is not guessing:
+    the atoms come out of a trace Jordan has reviewed, which is the judgment §8
+    requires. One band still compares nothing; the wall is what makes it a
+    comparison.
+11. **Fixture policy.** `context/test-trace/` is committed synthetic fixture
+    material, and its trace may carry `reviewed: true` as scaffolding — it is
+    not Jordan's idea and the gates need a reviewed trace to exercise `/draw`
+    and the compiler. **No trace of Jordan's real material is ever marked
+    reviewed by the machine.** The real-essay trace committed for the M6.1 gate
+    stays `reviewed: false` until he reads it.

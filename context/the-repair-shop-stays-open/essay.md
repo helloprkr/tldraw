@@ -1,0 +1,17 @@
+# The repair shop stays open
+
+My uncle ran a small engine shop for thirty-one years. Mowers, chainsaws, the occasional outboard. He never advertised. People found him because something had broken and someone told them where to go.
+
+He kept a shelf of parts for machines nobody sold anymore. Most of it never moved. He said the shelf was not inventory. It was a promise to whoever walked in with a twenty-year-old saw and no other option.
+
+I used to think this was sentiment. It is not. It is arithmetic done on a longer horizon than a quarter. A shop that can fix an old machine gets the customer’s new machine too, and the customer’s brother, and the brother’s whole crew. The shelf paid for itself in a currency the books did not track.
+
+What the trade calls a repair is mostly diagnosis. Two hours of listening, ten minutes of wrench. He would start an engine and stand there with his head tilted, and the tilt told you whether the afternoon was going to be simple. I never learned to hear what he heard. He said it took ten years and a great many wrong guesses.
+
+There is a particular failure I want to name. A machine arrives broken in a way that is cheap to fix and expensive to explain. The honest shop fixes it and bills twenty minutes. The other shop swaps the assembly and bills the part. Both machines run when they leave. Only one owner learns anything about the thing he owns.
+
+Manufacturing has drifted toward the second shop. Sealed housings. Fasteners that need a bit nobody stocks. Diagnostics that report a code and not a cause. None of this is a conspiracy. It is what happens when the person who assembles a product never meets the person who opens it a second time.
+
+The shop closed in 2019. Not because the work dried up. Because the work required my uncle, and my uncle turned seventy-four, and nobody had stood beside him at the bench for the ten years it takes to hear an engine.
+
+That is the loss worth counting. Not the shop. The bench, and the decade of wrong guesses that only happens next to someone who has already made them.

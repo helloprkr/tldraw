@@ -1,0 +1,257 @@
+{
+  "idea": "Repair is a transmission problem: the scarce thing is not parts or technique but the accompanied decade of wrong guesses that makes diagnosis possible.",
+  "slug": "the-repair-shop-stays-open",
+  "reviewed": false,
+  "generated": "2026-07-31T07:20:00Z",
+  "sources": [
+    {
+      "id": "s-1",
+      "kind": "essay",
+      "file": "context/the-repair-shop-stays-open/essay.md",
+      "cite": "J. Parker, The repair shop stays open"
+    }
+  ],
+  "units": [
+    {
+      "id": "u-1",
+      "atom": "figure",
+      "text": "The shop is found by breakage and word of mouth, never by advertising.",
+      "holder": null,
+      "span": {
+        "source": "s-1",
+        "start": 129,
+        "end": 230,
+        "quote": "He never advertised. People found him because something had broken and someone told them where to go."
+      },
+      "abstraction": 1
+    },
+    {
+      "id": "u-2",
+      "atom": "figure",
+      "text": "The shelf of dead-stock parts is a promise to the owner with no other option, not inventory.",
+      "holder": null,
+      "span": {
+        "source": "s-1",
+        "start": 315,
+        "end": 437,
+        "quote": "He said the shelf was not inventory. It was a promise to whoever walked in with a twenty-year-old saw and no other option."
+      },
+      "abstraction": 1
+    },
+    {
+      "id": "u-3",
+      "atom": "stance",
+      "text": "The shelf reads as sentiment.",
+      "holder": "received",
+      "span": {
+        "source": "s-1",
+        "start": 439,
+        "end": 474,
+        "quote": "I used to think this was sentiment."
+      },
+      "abstraction": 2
+    },
+    {
+      "id": "u-4",
+      "atom": "claim",
+      "text": "The shelf is arithmetic done on a longer horizon than the books track.",
+      "holder": "mine",
+      "span": {
+        "source": "s-1",
+        "start": 486,
+        "end": 543,
+        "quote": "It is arithmetic done on a longer horizon than a quarter."
+      },
+      "abstraction": 3
+    },
+    {
+      "id": "u-5",
+      "atom": "claim",
+      "text": "Repair is mostly diagnosis — listening, not wrenching.",
+      "holder": null,
+      "span": {
+        "source": "s-1",
+        "start": 740,
+        "end": 837,
+        "quote": "What the trade calls a repair is mostly diagnosis. Two hours of listening, ten minutes of wrench."
+      },
+      "abstraction": 3
+    },
+    {
+      "id": "u-6",
+      "atom": "figure",
+      "text": "The head tilt at a running engine tells you the shape of the afternoon.",
+      "holder": null,
+      "span": {
+        "source": "s-1",
+        "start": 838,
+        "end": 968,
+        "quote": "He would start an engine and stand there with his head tilted, and the tilt told you whether the afternoon was going to be simple."
+      },
+      "abstraction": 1
+    },
+    {
+      "id": "u-7",
+      "atom": "claim",
+      "text": "Hearing an engine takes ten years and a great many wrong guesses.",
+      "holder": null,
+      "span": {
+        "source": "s-1",
+        "start": 1008,
+        "end": 1065,
+        "quote": "He said it took ten years and a great many wrong guesses."
+      },
+      "abstraction": 2
+    },
+    {
+      "id": "u-8",
+      "atom": "move",
+      "text": "Naming the failure: broken in a way that is cheap to fix and expensive to explain.",
+      "holder": null,
+      "span": {
+        "source": "s-1",
+        "start": 1113,
+        "end": 1193,
+        "quote": "A machine arrives broken in a way that is cheap to fix and expensive to explain."
+      },
+      "abstraction": 2
+    },
+    {
+      "id": "u-9",
+      "atom": "claim",
+      "text": "Both repairs run; only the honest one teaches the owner about the thing he owns.",
+      "holder": null,
+      "span": {
+        "source": "s-1",
+        "start": 1299,
+        "end": 1389,
+        "quote": "Both machines run when they leave. Only one owner learns anything about the thing he owns."
+      },
+      "abstraction": 3
+    },
+    {
+      "id": "u-10",
+      "atom": "stance",
+      "text": "The drift toward unrepairability reads as somebody's plot.",
+      "holder": "received",
+      "span": {
+        "source": "s-1",
+        "start": 1547,
+        "end": 1576,
+        "quote": "None of this is a conspiracy."
+      },
+      "abstraction": 3
+    },
+    {
+      "id": "u-11",
+      "atom": "claim",
+      "text": "Unrepairability is what happens when the assembler never meets the person who opens the product a second time.",
+      "holder": "mine",
+      "span": {
+        "source": "s-1",
+        "start": 1577,
+        "end": 1686,
+        "quote": "It is what happens when the person who assembles a product never meets the person who opens it a second time."
+      },
+      "abstraction": 4
+    },
+    {
+      "id": "u-12",
+      "atom": "move",
+      "text": "The shop closed for transmission reasons, not demand: nobody stood at the bench for the necessary decade.",
+      "holder": null,
+      "span": {
+        "source": "s-1",
+        "start": 1713,
+        "end": 1904,
+        "quote": "Not because the work dried up. Because the work required my uncle, and my uncle turned seventy-four, and nobody had stood beside him at the bench for the ten years it takes to hear an engine."
+      },
+      "abstraction": 2
+    },
+    {
+      "id": "u-13",
+      "atom": "stance",
+      "text": "The loss worth counting is the bench — the accompanied decade of wrong guesses — not the shop.",
+      "holder": null,
+      "span": {
+        "source": "s-1",
+        "start": 1939,
+        "end": 2056,
+        "quote": "Not the shop. The bench, and the decade of wrong guesses that only happens next to someone who has already made them."
+      },
+      "abstraction": 4
+    }
+  ],
+  "relations": [
+    {
+      "from": "u-2",
+      "to": "u-4",
+      "kind": "supports"
+    },
+    {
+      "from": "u-4",
+      "to": "u-3",
+      "kind": "answers"
+    },
+    {
+      "from": "u-6",
+      "to": "u-5",
+      "kind": "supports"
+    },
+    {
+      "from": "u-5",
+      "to": "u-7",
+      "kind": "feeds"
+    },
+    {
+      "from": "u-9",
+      "to": "u-8",
+      "kind": "supports"
+    },
+    {
+      "from": "u-8",
+      "to": "u-11",
+      "kind": "feeds"
+    },
+    {
+      "from": "u-11",
+      "to": "u-10",
+      "kind": "answers"
+    },
+    {
+      "from": "u-7",
+      "to": "u-12",
+      "kind": "feeds"
+    },
+    {
+      "from": "u-12",
+      "to": "u-13",
+      "kind": "supports"
+    },
+    {
+      "from": "u-13",
+      "to": "u-7",
+      "kind": "derives"
+    }
+  ],
+  "tensions": [
+    {
+      "between": [
+        "u-4",
+        "u-12"
+      ],
+      "note": "if the longer-horizon arithmetic pays, the decade at the bench should have been worth funding — the closure says nobody priced it, and the essay never names what the books still do not track",
+      "proposed": true
+    }
+  ],
+  "gaps": [
+    {
+      "facing": "u-11",
+      "label": "the lever — what would make the assembler meet the opener"
+    },
+    {
+      "facing": "u-7",
+      "label": "whether the decade compresses — the apprenticeship floor is asserted, not argued"
+    }
+  ]
+}

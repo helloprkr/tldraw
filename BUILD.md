@@ -567,6 +567,7 @@ Report at each gate. Do not proceed past a failed gate.
 | **M3** | `plate.tsx`, `exportFigure.ts`, figure registry, SVG + PNG. ~3 files, ~300 lines. | Exported SVG opens correctly with the dev server **stopped**. |
 | **M4** | `GapShapeUtil`, `TicketShapeUtil`, `DeltaView`, ticket→map wiring. ~4 files, ~350 lines. | Six unbound Received cards → six gaps → six checkboxes in `map.md`. |
 | **M5** | `BandShapeUtil`, `corpus.ts` both paths, `CorpusWallView`, segment classification round-trip. ~4 files, ~450 lines. | Four bands render; classifying a segment writes back to JSON. |
+| **M6** | Generative trace → scene → canvas. See `M6_GENERATIVE.md`. | Trace Test (§10) passes. |
 
 ---
 
