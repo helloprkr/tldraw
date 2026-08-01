@@ -201,6 +201,8 @@ function repairRecord(row: unknown): FigureRecord | null {
       : [],
     created: asString(source.created, ''),
     sourceHash: asString(source.sourceHash, ''),
+    // Rows written before M6 predate generation entirely; they were all hand.
+    origin: source.origin === 'generated' || source.origin === 'mixed' ? source.origin : 'hand',
     files: {
       svg: asString(files.svg, '') || rebuilt.svg,
       png: asString(files.png, '') || rebuilt.png,

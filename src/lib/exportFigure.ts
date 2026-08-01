@@ -12,8 +12,10 @@ import {
 import { serializeJson } from './serialize'
 import { nowStamp } from './stamp'
 import { readOut, writeOut } from './essayFs'
+import { lintPageGeometry } from './sceneLint'
 import { PLATE_PAD } from '../figure-types'
 import type { FigureRecord } from '../figure-types'
+import type { StoreDocument } from '../readout-types'
 
 /**
  * Stage 7 — export the figure (BUILD.md §10).
@@ -65,6 +67,28 @@ export async function exportFigure(
 
   const bounds = editor.getSelectionPageBounds()
   if (!bounds) throw new Error('selection has no bounds')
+
+  // M6 §7: lint is a gate on export. On a compiled page the geometric checks
+  // run live against exactly what is about to become a plate — a figure that
+  // fails lint does not get one. Hand pages are Jordan's arrangement and are
+  // not judged.
+  const currentPage = editor.getCurrentPage()
+  if (currentPage.meta?.generated === true) {
+    const { document } = getSnapshot(editor.store)
+    const findings = lintPageGeometry(document as unknown as StoreDocument, currentPage.id)
+    if (findings.length > 0) {
+      const first = findings[0]
+      throw new Error(`lint: ${first.check} [${first.at.join(', ')}] — ${findings.length} finding(s), run npm run lint -- ${slug}`)
+    }
+  }
+
+  // §9: provenance is recorded, never rendered. The plate carries no marker.
+  const origins = selected.map((id) => editor.getShape(id)?.meta?.origin === 'generated')
+  const origin: FigureRecord['origin'] = origins.every(Boolean)
+    ? 'generated'
+    : origins.some(Boolean)
+      ? 'mixed'
+      : 'hand'
 
   const raw = await readOut(slug, REGISTRY_PATH)
   const registry = parseRegistry(raw, slug)
@@ -148,6 +172,7 @@ export async function exportFigure(
     shapeIds: [...selected],
     created: nowStamp(),
     sourceHash: hashSource(serializeJson(document)),
+    origin,
     files: { svg: `${FIGURES_DIR}/${files.svg}`, png: `${FIGURES_DIR}/${files.png}` },
   }
 

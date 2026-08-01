@@ -27,6 +27,12 @@ export interface FigureRecord {
   created: string
   /** Hash of the .tldr the plate was cut from, so a figure can be traced back. */
   sourceHash: string
+  /**
+   * M6 §9: recorded for Jordan's own records, never rendered — the plate
+   * carries no marker. `generated` when every selected shape came from the
+   * compiler, `hand` when none did, `mixed` otherwise.
+   */
+  origin: 'generated' | 'hand' | 'mixed'
   files: { svg: string; png: string }
 }
 

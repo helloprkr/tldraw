@@ -12,7 +12,8 @@
     "corpus": "tsx scripts/corpus-cli.ts",
     "save": "tsx scripts/save-cli.ts",
     "trace": "tsx scripts/trace-cli.ts",
-    "compile": "tsx scripts/compile-cli.ts"
+    "compile": "tsx scripts/compile-cli.ts",
+    "lint": "tsx scripts/lint-cli.ts"
   },
   "dependencies": {
     "react": "^19.2.1",

@@ -58,6 +58,37 @@ And one color is reserved: **terracotta always means something is missing** — 
 - **`⌘Z`** undoes one step. **Space-drag** pans. **Scroll** zooms.
 - **Double-click empty paper** — a marginalia note. It never enters the outline; it's for talking to yourself.
 
+## Starting from a pile instead of fragments
+
+Sometimes an idea exists as an essay, some snippets, a few tweets — not as
+composed fragments. The generative path turns that pile into a canvas you then
+arrange by hand. Every step is a command, and nothing skips your review:
+
+1. **Pile.** Drop everything into `context/my-idea/` — the essay, the
+   snippets, whatever there is, as plain files.
+2. **Trace.** In Claude Code, `/trace my-idea`. It reads the pile and writes
+   `out/my-idea/trace.json` — the idea's *structure*: claims, moves, figures,
+   stances, each pointing at the exact characters in your pile it came from.
+   Nothing in the trace is allowed to be something you didn't write.
+3. **Review — this one is yours.** Read `trace.json`. Fix what's wrong (it's
+   just JSON — edit the text fields, delete units, add relations). When it
+   reads true, change `"reviewed": false` to `true`. Nothing proceeds while
+   it's false, and there is deliberately no way to skip this.
+4. **Draw.** `/draw my-idea`. It picks the diagram forms that fit — the
+   argument in order, received-vs-mine, a positioning map, a genealogy, a
+   mechanism — and writes scene files. It skips forms that don't fit; three
+   good diagrams beat six dutiful ones.
+5. **Compile.** `npm run compile -- my-idea` turns scenes into
+   `work/my-idea.tldr`. Open it like any essay
+   (`http://localhost:5173/?essay=my-idea`) and *move things* — that's the
+   point. Recompiling after you've rearranged never moves a card you placed.
+6. **Lint.** `npm run lint -- my-idea` checks the canvas the way a proofreader
+   would — overlaps, clipped text, a diagram that's become a hairball — and
+   `⌘E` refuses a plate on a generated page until lint is clean.
+7. **Export.** `⌘E`, as always. A generated figure you've reviewed and
+   rearranged is your figure; the plate carries no marker. (For your own
+   records, `figures.json` notes whether a figure began generated or by hand.)
+
 ## What the app will never do
 
 It never moves a card you placed. It never writes into `inputs/` (your fragments are read-only to it). It never guesses a card's type. It never commits to git. It never talks to the internet. Everything it produces is a plain file on your disk, in `out/` and `work/`, yours to version and publish.

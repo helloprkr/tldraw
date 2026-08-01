@@ -816,3 +816,37 @@ rather than trusting the first implementation:
    for an unanswered Received card the moment the page is visited. Verified:
    a compiled delta with one unanswered card shows the hole, the ※ novelty
    mark, and `1 UNANSWERED` with zero delta-specific code added in M6.
+
+### E45. Lint is two rings around one core (M6.4)
+
+§7's nine checks split by what they need to see. The geometric ring —
+overlap, overflow, bounds, untyped, orphan-gap, collision — reads only the
+document, so `lintPageGeometry` runs identically from the CLI and from inside
+`exportFigure`, where ⌘E on a generated page refuses a plate while any
+finding stands (the toast names the check and the node ids). The scene-aware
+ring — orphan, crossings, unfounded — needs the scene files and the trace,
+so it joins in `npm run lint`. Refusal is scoped: pages without
+`meta.generated` are Jordan's arrangement and are never judged.
+
+Scoping rulings, recorded because each could have gone the other way:
+
+- **Overflow judges only generated cards.** Hand cards clamp text by design
+  (M1); flagging Jordan's own clamping would gate his export on a stylistic
+  fact about cards that were never compiled.
+- **A card overhanging its own frame is not an overlap** (E36 made it
+  information); a card intersecting a frame it does not belong to is.
+- **A gap covering its facing card is the mechanism** (E19), never a finding.
+- **`collision` fires on any arrow label at all** while E41.9 stands — the
+  finding is the label's existence, since no M6 form renders one. If labels
+  ever arrive, the check graduates to real rectangle tests.
+- **`bounds` is nearest-neighbor distance (> 2400px), not a fixed extent** —
+  it catches the flung card without forbidding a wide diagram.
+
+`figures.json` rows gained `origin: generated | hand | mixed`, computed from
+the selection's `meta.origin` and repaired to `hand` for pre-M6 rows. Per §9
+the plate carries no marker; the field exists for Jordan's records only.
+
+Verified live, both halves: dropping n-1 onto n-2 in the running app made ⌘E
+refuse with `lint: overlap [n-1, n-2]`; moving it back exported `fig-01` with
+`origin: "generated"` in the ledger. The verification figure was not
+committed (E34's discipline).

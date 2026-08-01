@@ -50,6 +50,7 @@ function record(number: number, caption: string): FigureRecord {
     shapeIds: [`shape:c-${number}`],
     created: '2026-07-30T14:02:11Z',
     sourceHash: hashSource(`canvas ${number}`),
+    origin: 'hand',
     files: figureFileNames(number, slug),
   }
 }
@@ -247,6 +248,7 @@ const row: FigureRecord = {
   shapeIds: ['shape:c-003', 'shape:c-007'],
   created: '2026-07-30T14:02:11Z',
   sourceHash: hashSource(TLDR),
+  origin: 'hand',
   files,
 }
 const written = serializeJson(addFigure(disk, row))

@@ -267,7 +267,10 @@ export const overrides: TLUiOverrides = {
           announce(`fig. ${number} exported`)
         } catch (err: unknown) {
           console.error('export failed', err)
-          announce('export failed')
+          // A lint refusal names its finding (M6 §7); every other failure
+          // stays generic. The message already carries node ids.
+          const message = err instanceof Error && err.message.startsWith('lint:') ? err.message : 'export failed'
+          announce(message)
         }
       },
     }
