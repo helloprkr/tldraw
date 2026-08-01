@@ -1,0 +1,24 @@
+{
+  "form": "spine",
+  "title": "The ladder and the rope, in order",
+  "caption": "the argument in reading order",
+  "source": "out/test-trace/trace.json",
+  "nodes": [
+    { "id": "n-1", "unit": "u-1", "atom": "stance", "text": "A skill is a ladder: ordered rungs, climbed in advance-set order.", "slot": "column", "rank": null },
+    { "id": "n-2", "unit": "u-2", "atom": "claim", "text": "A skill is a rope: many weak crossing strands, none running the whole length.", "slot": "column", "rank": null },
+    { "id": "n-3", "unit": "u-3", "atom": "claim", "text": "Ladder-trained skill collapses when the problem turns sideways.", "slot": "column", "rank": null },
+    { "id": "n-4", "unit": "u-4", "atom": "figure", "text": "Splicing, not climbing — short strands joined until the join disappears.", "slot": "inset", "rank": null },
+    { "id": "n-5", "unit": "u-5", "atom": "move", "text": "Practice should braid, not stack.", "slot": "margin", "rank": null },
+    { "id": "n-6", "unit": "u-6", "atom": "move", "text": "The objection: ropes cannot be inspected.", "slot": "column", "rank": null },
+    { "id": "n-7", "unit": "u-7", "atom": "claim", "text": "The objection lands: a braid hides its gaps until it is loaded.", "slot": "column", "rank": null },
+    { "id": "n-8", "unit": "u-8", "atom": "stance", "text": "Keep both pictures: climb mapped ground, braid unmapped, and know which you are on.", "slot": "column", "rank": null }
+  ],
+  "edges": [
+    { "from": "n-7", "to": "n-2", "kind": "counters", "feedback": false },
+    { "from": "n-8", "to": "n-1", "kind": "derives", "feedback": false }
+  ],
+  "groups": [
+    { "id": "g-1", "label": "The two pictures", "nodes": ["n-1", "n-2", "n-3"] },
+    { "id": "g-2", "label": "The objection and the split", "nodes": ["n-6", "n-7", "n-8"] }
+  ]
+}

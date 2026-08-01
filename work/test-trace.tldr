@@ -1,0 +1,520 @@
+{
+  "store": {
+    "shape:06325db5": {
+      "x": 337,
+      "y": 249,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {
+        "origin": "generated",
+        "scene": "01-spine",
+        "node": "n-8",
+        "textHash": "978aa294"
+      },
+      "id": "shape:06325db5",
+      "type": "atom",
+      "props": {
+        "w": 420,
+        "h": 145,
+        "atom": "stance",
+        "text": "Keep both pictures: climb mapped ground, braid unmapped, and know which you are on.",
+        "sourceId": "u-8",
+        "created": "2026-07-31",
+        "ordinal": 8
+      },
+      "parentId": "shape:88066438",
+      "index": "a2",
+      "typeName": "shape"
+    },
+    "shape:88066438": {
+      "x": -24,
+      "y": 659,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {
+        "origin": "generated",
+        "scene": "01-spine",
+        "node": "g-2"
+      },
+      "id": "shape:88066438",
+      "type": "frame",
+      "props": {
+        "w": 468,
+        "h": 495,
+        "name": "The objection and the split",
+        "color": "black"
+      },
+      "parentId": "page:148cba4d",
+      "index": "a1",
+      "typeName": "shape"
+    },
+    "shape:0b326594": {
+      "x": 24,
+      "y": 378,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {
+        "origin": "generated",
+        "scene": "01-spine",
+        "node": "n-3",
+        "textHash": "bb42b589"
+      },
+      "id": "shape:0b326594",
+      "type": "atom",
+      "props": {
+        "w": 420,
+        "h": 145,
+        "atom": "claim",
+        "text": "Ladder-trained skill collapses when the problem turns sideways.",
+        "sourceId": "u-3",
+        "created": "2026-07-31",
+        "ordinal": 3
+      },
+      "parentId": "shape:8b0668f1",
+      "index": "a2",
+      "typeName": "shape"
+    },
+    "shape:0a326401": {
+      "x": 460,
+      "y": 418,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {
+        "origin": "generated",
+        "scene": "01-spine",
+        "node": "n-4",
+        "textHash": "3565eddb"
+      },
+      "id": "shape:0a326401",
+      "type": "atom",
+      "props": {
+        "w": 320,
+        "h": 145,
+        "atom": "figure",
+        "text": "Splicing, not climbing — short strands joined until the join disappears.",
+        "sourceId": "u-4",
+        "created": "2026-07-31",
+        "ordinal": 4
+      },
+      "parentId": "page:148cba4d",
+      "index": "a2",
+      "typeName": "shape"
+    },
+    "page:148cba4d": {
+      "meta": {
+        "generated": true,
+        "scene": "01-spine",
+        "form": "spine"
+      },
+      "id": "page:148cba4d",
+      "name": "The ladder and the rope, in order",
+      "index": "a0",
+      "typeName": "page"
+    },
+    "binding:c63214cc": {
+      "meta": {
+        "scene": "01-spine"
+      },
+      "id": "binding:c63214cc",
+      "type": "arrow",
+      "fromId": "shape:9ce813aa",
+      "toId": "shape:07325f48",
+      "props": {
+        "isPrecise": true,
+        "isExact": false,
+        "normalizedAnchor": {
+          "x": 1,
+          "y": 0.5
+        },
+        "snap": "none",
+        "terminal": "start"
+      },
+      "typeName": "binding"
+    },
+    "shape:0932626e": {
+      "x": -320,
+      "y": 418,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {
+        "origin": "generated",
+        "scene": "01-spine",
+        "node": "n-5",
+        "textHash": "86d239cc"
+      },
+      "id": "shape:0932626e",
+      "type": "atom",
+      "props": {
+        "w": 260,
+        "h": 119,
+        "atom": "move",
+        "text": "Practice should braid, not stack.",
+        "sourceId": "u-5",
+        "created": "2026-07-31",
+        "ordinal": 5
+      },
+      "parentId": "page:148cba4d",
+      "index": "a3",
+      "typeName": "shape"
+    },
+    "shape:0d3268ba": {
+      "x": 24,
+      "y": 24,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {
+        "origin": "generated",
+        "scene": "01-spine",
+        "node": "n-1",
+        "textHash": "d735a912"
+      },
+      "id": "shape:0d3268ba",
+      "type": "atom",
+      "props": {
+        "w": 420,
+        "h": 145,
+        "atom": "stance",
+        "text": "A skill is a ladder: ordered rungs, climbed in advance-set order.",
+        "sourceId": "u-1",
+        "created": "2026-07-31",
+        "ordinal": 1
+      },
+      "parentId": "shape:8b0668f1",
+      "index": "a0",
+      "typeName": "shape"
+    },
+    "binding:cbdf16b5": {
+      "meta": {
+        "scene": "01-spine"
+      },
+      "id": "binding:cbdf16b5",
+      "type": "arrow",
+      "fromId": "shape:9ce813aa",
+      "toId": "shape:0c326727",
+      "props": {
+        "isPrecise": true,
+        "isExact": false,
+        "normalizedAnchor": {
+          "x": 1,
+          "y": 0.5
+        },
+        "snap": "none",
+        "terminal": "end"
+      },
+      "typeName": "binding"
+    },
+    "shape:0c326727": {
+      "x": 24,
+      "y": 201,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {
+        "origin": "generated",
+        "scene": "01-spine",
+        "node": "n-2",
+        "textHash": "6851c8f7"
+      },
+      "id": "shape:0c326727",
+      "type": "atom",
+      "props": {
+        "w": 420,
+        "h": 145,
+        "atom": "claim",
+        "text": "A skill is a rope: many weak crossing strands, none running the whole length.",
+        "sourceId": "u-2",
+        "created": "2026-07-31",
+        "ordinal": 2
+      },
+      "parentId": "shape:8b0668f1",
+      "index": "a1",
+      "typeName": "shape"
+    },
+    "user:2IBgHutqu-vH-JofqC8KK": {
+      "name": "",
+      "color": "#7B66DC",
+      "imageUrl": "",
+      "meta": {},
+      "id": "user:2IBgHutqu-vH-JofqC8KK",
+      "typeName": "user"
+    },
+    "binding:5c77e3bd": {
+      "meta": {
+        "scene": "01-spine"
+      },
+      "id": "binding:5c77e3bd",
+      "type": "arrow",
+      "fromId": "shape:66458ff7",
+      "toId": "shape:06325db5",
+      "props": {
+        "isPrecise": true,
+        "isExact": false,
+        "normalizedAnchor": {
+          "x": 1,
+          "y": 0.5
+        },
+        "snap": "none",
+        "terminal": "start"
+      },
+      "typeName": "binding"
+    },
+    "shape:07325f48": {
+      "x": 24,
+      "y": 175,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {
+        "origin": "generated",
+        "scene": "01-spine",
+        "node": "n-7",
+        "textHash": "559d18f6"
+      },
+      "id": "shape:07325f48",
+      "type": "atom",
+      "props": {
+        "w": 420,
+        "h": 119,
+        "atom": "claim",
+        "text": "The objection lands: a braid hides its gaps until it is loaded.",
+        "sourceId": "u-7",
+        "created": "2026-07-31",
+        "ordinal": 7
+      },
+      "parentId": "shape:88066438",
+      "index": "a1",
+      "typeName": "shape"
+    },
+    "shape:8b0668f1": {
+      "x": -24,
+      "y": 40,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {
+        "origin": "generated",
+        "scene": "01-spine",
+        "node": "g-1"
+      },
+      "id": "shape:8b0668f1",
+      "type": "frame",
+      "props": {
+        "w": 468,
+        "h": 547,
+        "name": "The two pictures",
+        "color": "black"
+      },
+      "parentId": "page:148cba4d",
+      "index": "a0",
+      "typeName": "shape"
+    },
+    "shape:9ce813aa": {
+      "x": 0,
+      "y": 0,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {
+        "origin": "generated",
+        "scene": "01-spine",
+        "node": "e:n-7->n-2",
+        "relation": "trace",
+        "kind": "counters",
+        "feedback": false
+      },
+      "id": "shape:9ce813aa",
+      "type": "arrow",
+      "props": {
+        "kind": "elbow",
+        "elbowMidPoint": 0.5,
+        "dash": "solid",
+        "size": "s",
+        "fill": "fill",
+        "color": "black",
+        "labelColor": "black",
+        "bend": 0,
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 2,
+          "y": 0
+        },
+        "arrowheadStart": "none",
+        "arrowheadEnd": "triangle",
+        "richText": {
+          "type": "doc",
+          "content": [
+            {
+              "type": "paragraph"
+            }
+          ]
+        },
+        "labelPosition": 0.5,
+        "font": "draw",
+        "scale": 1
+      },
+      "parentId": "page:148cba4d",
+      "index": "a1Pz9l",
+      "typeName": "shape"
+    },
+    "shape:083260db": {
+      "x": 24,
+      "y": 24,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {
+        "origin": "generated",
+        "scene": "01-spine",
+        "node": "n-6",
+        "textHash": "d00ccf6b"
+      },
+      "id": "shape:083260db",
+      "type": "atom",
+      "props": {
+        "w": 420,
+        "h": 119,
+        "atom": "move",
+        "text": "The objection: ropes cannot be inspected.",
+        "sourceId": "u-6",
+        "created": "2026-07-31",
+        "ordinal": 6
+      },
+      "parentId": "shape:88066438",
+      "index": "a0",
+      "typeName": "shape"
+    },
+    "shape:66458ff7": {
+      "x": 0,
+      "y": 0,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {
+        "origin": "generated",
+        "scene": "01-spine",
+        "node": "e:n-8->n-1",
+        "relation": "trace",
+        "kind": "derives",
+        "feedback": false
+      },
+      "id": "shape:66458ff7",
+      "type": "arrow",
+      "props": {
+        "kind": "elbow",
+        "elbowMidPoint": 0.5,
+        "dash": "solid",
+        "size": "s",
+        "fill": "fill",
+        "color": "black",
+        "labelColor": "black",
+        "bend": 0,
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 2,
+          "y": 0
+        },
+        "arrowheadStart": "none",
+        "arrowheadEnd": "triangle",
+        "richText": {
+          "type": "doc",
+          "content": [
+            {
+              "type": "paragraph"
+            }
+          ]
+        },
+        "labelPosition": 0.5,
+        "font": "draw",
+        "scale": 1
+      },
+      "parentId": "page:148cba4d",
+      "index": "a19IKd",
+      "typeName": "shape"
+    },
+    "document:document": {
+      "gridSize": 10,
+      "name": "",
+      "meta": {},
+      "id": "document:document",
+      "typeName": "document"
+    },
+    "binding:838533e4": {
+      "meta": {
+        "scene": "01-spine"
+      },
+      "id": "binding:838533e4",
+      "type": "arrow",
+      "fromId": "shape:66458ff7",
+      "toId": "shape:0d3268ba",
+      "props": {
+        "isPrecise": true,
+        "isExact": false,
+        "normalizedAnchor": {
+          "x": 1,
+          "y": 0.5
+        },
+        "snap": "none",
+        "terminal": "end"
+      },
+      "typeName": "binding"
+    },
+    "user:lWxxdBy2tUjCrTT5e01EK": {
+      "name": "",
+      "color": "#39B178",
+      "imageUrl": "",
+      "meta": {},
+      "id": "user:lWxxdBy2tUjCrTT5e01EK",
+      "typeName": "user"
+    }
+  },
+  "schema": {
+    "schemaVersion": 2,
+    "sequences": {
+      "com.tldraw.store": 5,
+      "com.tldraw.asset": 1,
+      "com.tldraw.camera": 1,
+      "com.tldraw.document": 2,
+      "com.tldraw.instance": 26,
+      "com.tldraw.instance_page_state": 5,
+      "com.tldraw.page": 1,
+      "com.tldraw.instance_presence": 6,
+      "com.tldraw.pointer": 1,
+      "com.tldraw.shape": 4,
+      "com.tldraw.user": 1,
+      "com.tldraw.asset.image": 6,
+      "com.tldraw.asset.video": 5,
+      "com.tldraw.asset.bookmark": 2,
+      "com.tldraw.shape.group": 0,
+      "com.tldraw.shape.text": 4,
+      "com.tldraw.shape.bookmark": 2,
+      "com.tldraw.shape.draw": 5,
+      "com.tldraw.shape.geo": 11,
+      "com.tldraw.shape.note": 13,
+      "com.tldraw.shape.line": 5,
+      "com.tldraw.shape.highlight": 4,
+      "com.tldraw.shape.embed": 4,
+      "com.tldraw.shape.image": 5,
+      "com.tldraw.shape.video": 4,
+      "com.tldraw.shape.atom": 0,
+      "com.tldraw.shape.ticket": 0,
+      "com.tldraw.shape.gap": 0,
+      "com.tldraw.shape.band": 0,
+      "com.tldraw.shape.plate": 0,
+      "com.tldraw.shape.arrow": 8,
+      "com.tldraw.shape.frame": 1,
+      "com.tldraw.binding.arrow": 1
+    }
+  }
+}

@@ -11,7 +11,8 @@
     "readout": "tsx scripts/readout-cli.ts",
     "corpus": "tsx scripts/corpus-cli.ts",
     "save": "tsx scripts/save-cli.ts",
-    "trace": "tsx scripts/trace-cli.ts"
+    "trace": "tsx scripts/trace-cli.ts",
+    "compile": "tsx scripts/compile-cli.ts"
   },
   "dependencies": {
     "react": "^19.2.1",

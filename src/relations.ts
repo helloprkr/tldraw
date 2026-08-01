@@ -16,7 +16,13 @@
  * key and read as `dependency`, which is what they were.
  */
 
-export const RELATIONS = ['dependency', 'correspondence'] as const
+/**
+ * `trace` (M6): a compiled scene edge — one of the trace's relation kinds
+ * (`answers|supports|counters|derives|feeds`, carried in `meta.kind`) drawn as
+ * an arrow by the compiler. Named here so it can never leak into topo.ts as a
+ * dependency or into delta.ts as a correspondence; a generated rail is neither.
+ */
+export const RELATIONS = ['dependency', 'correspondence', 'trace'] as const
 
 export type Relation = (typeof RELATIONS)[number]
 
@@ -30,7 +36,7 @@ export interface RelationMeta {
 export function relationOf(meta: unknown): Relation {
   if (meta && typeof meta === 'object') {
     const value = (meta as Record<string, unknown>).relation
-    if (value === 'correspondence' || value === 'dependency') return value
+    if (value === 'correspondence' || value === 'dependency' || value === 'trace') return value
   }
   // Legacy arrows predate the stamp; they were all dependencies.
   return DEFAULT_RELATION

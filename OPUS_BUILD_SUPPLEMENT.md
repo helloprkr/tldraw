@@ -748,3 +748,41 @@ shape code:
     and the compiler. **No trace of Jordan's real material is ever marked
     reviewed by the machine.** The real-essay trace committed for the M6.1 gate
     stays `reviewed: false` until he reads it.
+
+### E42. A generated essay opens with no inputs/ at all (M6.2)
+
+`openEssay` read `inputs/<slug>/` unconditionally and threw on the plugin's
+404, so a canvas that exists only as `work/<slug>.tldr` — which is what the M6
+compiler produces — could never be opened. `readInputsOrNull` now returns null
+for a missing folder and `openEssay` proceeds with zero fragments, provided
+the work file exists. A slug with *neither* is still refused loudly: opening a
+typo as a blank canvas would invite autosave to mint an empty work file under
+the wrong name, which is E12's failure wearing a new hat.
+
+Also recorded: the spine's dependency rail is drawn with **elbow arrows bound
+to the cards' right edges** — no new shape. They carry `meta.relation:
+"trace"` (the trace kind rides in `meta.kind`), and `trace` joined the
+vocabulary in `src/relations.ts` per E17's standing rule. Without that entry,
+`relationOf`'s legacy fallback would have read every generated rail as a
+dependency and topo.ts would have raised unsupported-claim warnings on pages
+the compiler had just laid out. Verified live: a compiled spine page reports
+zero dependency edges and zero unsupported marks.
+
+### E43. Deterministic fractional indices come from the library's own test path (M6.2)
+
+§6.3 rule 3 (use the library's index utilities) and E22.5 (same input, same
+bytes) collided: `@tldraw/utils` picks its key generator at import time, and
+the default path **jitters** — `getIndicesAbove(null, 2)` returns different
+keys on every run, a collision defense for concurrent writers. The compiler is
+a single writer whose gate is byte-stability, so `compile-deps.ts` sets
+`NODE_ENV=test` before importing, which is the library's own switch to the
+plain `generateNKeysBetween`. Still the library's mint, still validated keys —
+just the deterministic branch of it. Hand-rolling indices remains forbidden.
+
+One eval-side note for future gates (not an app bug): after editing a source
+file while the dev server runs, Vite pins `?t=` HMR URLs inside the app's
+module graph, so a bare `await import('/src/lib/x.ts')` from headless-eval can
+get a **second module instance** whose module-level state (e.g. `openEssay`'s
+`ready` flag) is fresh. A gate that drives module state must call the module's
+own entry points in the same eval rather than assuming it shares the app's
+instance.

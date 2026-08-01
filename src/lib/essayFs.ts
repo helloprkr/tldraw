@@ -21,6 +21,17 @@ export async function readInputs(slug: string): Promise<InputFile[]> {
   return json(await fetch(`/api/inputs/${encodeURIComponent(slug)}`), `read inputs/${slug}`)
 }
 
+/**
+ * Null when inputs/<slug>/ does not exist. A generated essay (M6) has a canvas
+ * in work/ and no fragments at all; only a missing-everything slug is an error,
+ * and openEssay decides that with the work file in hand.
+ */
+export async function readInputsOrNull(slug: string): Promise<InputFile[] | null> {
+  const res = await fetch(`/api/inputs/${encodeURIComponent(slug)}`)
+  if (res.status === 404) return null
+  return json(res, `read inputs/${slug}`)
+}
+
 /** Returns null when the essay has no canvas state yet — the first spread. */
 export async function readWork(slug: string): Promise<unknown | null> {
   const res = await fetch(`/api/work/${encodeURIComponent(slug)}`)

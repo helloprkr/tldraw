@@ -1,6 +1,6 @@
 import { EASINGS, createShapeId, getSnapshot, loadSnapshot } from 'tldraw'
 import type { Editor, TLShape } from 'tldraw'
-import { readInputs, readWork, writeWork } from './essayFs'
+import { readInputsOrNull, readWork, writeWork } from './essayFs'
 import { parseFragments } from './frontmatter'
 import { planSpread } from './spread'
 import { CARD_H, CARD_W } from '../types'
@@ -27,14 +27,21 @@ export async function openEssay(editor: Editor, slug: string): Promise<void> {
   // is cleared here rather than only set at the end, so a reload part-way
   // through cannot leave a stale "ready" standing over an empty store.
   ready = false
-  const [inputs, work] = await Promise.all([readInputs(slug), readWork(slug)])
+  const [inputs, work] = await Promise.all([readInputsOrNull(slug), readWork(slug)])
+
+  // A generated essay (M6) has a compiled canvas and no inputs/ folder at all.
+  // Only a slug with neither is refused — that is a typo, and opening it blank
+  // would invite autosave to mint an empty work file under the wrong name.
+  if (!inputs && !work) {
+    throw new Error(`no inputs/${slug}/ and no work/${slug}.tldr — nothing to open`)
+  }
 
   if (work) {
     loadSnapshot(editor.store, { document: work as never })
   }
 
   const existingIds = editor.getCurrentPageShapes().filter(isAtom).map((s) => s.props.sourceId)
-  const placements = planSpread(parseFragments(inputs), existingIds)
+  const placements = planSpread(parseFragments(inputs ?? []), existingIds)
 
   if (placements.length > 0) {
     editor.createShapes(

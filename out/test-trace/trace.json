@@ -1,0 +1,178 @@
+{
+  "idea": "Skill is braided from crossing strands, not climbed rung by rung — and honest practice knows which picture it is standing on.",
+  "slug": "test-trace",
+  "reviewed": true,
+  "generated": "2026-07-31T07:45:00Z",
+  "sources": [
+    {
+      "id": "s-1",
+      "kind": "essay",
+      "file": "context/test-trace/essay.md",
+      "cite": "Fixture, The ladder and the rope, 2026"
+    }
+  ],
+  "units": [
+    {
+      "id": "u-1",
+      "atom": "stance",
+      "text": "A skill is a ladder: ordered rungs, climbed in advance-set order.",
+      "holder": "received",
+      "span": {
+        "source": "s-1",
+        "start": 173,
+        "end": 309,
+        "quote": "People say a skill is a ladder. You climb rung by rung, and the rungs are\nordered for you in advance by someone who has already climbed."
+      },
+      "abstraction": 3
+    },
+    {
+      "id": "u-2",
+      "atom": "claim",
+      "text": "A skill is a rope: many weak crossing strands, none running the whole length.",
+      "holder": "mine",
+      "span": {
+        "source": "s-1",
+        "start": 348,
+        "end": 437,
+        "quote": "It holds because many weak strands cross\neach other, and no strand runs the whole length."
+      },
+      "abstraction": 3
+    },
+    {
+      "id": "u-3",
+      "atom": "claim",
+      "text": "Ladder-trained skill collapses when the problem turns sideways.",
+      "holder": "mine",
+      "span": {
+        "source": "s-1",
+        "start": 477,
+        "end": 602,
+        "quote": "A rung only bears weight in one\ndirection, which is why ladder-trained skill collapses the moment the problem\nturns sideways."
+      },
+      "abstraction": 2
+    },
+    {
+      "id": "u-4",
+      "atom": "figure",
+      "text": "Watch anyone good: splicing, not climbing — short strands joined until the join disappears.",
+      "holder": null,
+      "span": {
+        "source": "s-1",
+        "start": 604,
+        "end": 677,
+        "quote": "Watch anyone actually good at a thing and you see splicing, not climbing."
+      },
+      "abstraction": 1
+    },
+    {
+      "id": "u-5",
+      "atom": "move",
+      "text": "Practice should braid, not stack: two hours across three problems beats six up one.",
+      "holder": null,
+      "span": {
+        "source": "s-1",
+        "start": 777,
+        "end": 866,
+        "quote": "practice should braid, not stack. Two hours across\nthree problems beats six hours up one."
+      },
+      "abstraction": 2
+    },
+    {
+      "id": "u-6",
+      "atom": "move",
+      "text": "The objection: ropes cannot be inspected; a ladder shows which rung is missing.",
+      "holder": "received",
+      "span": {
+        "source": "s-1",
+        "start": 899,
+        "end": 1004,
+        "quote": "Curricula exist because ropes cannot be\ninspected, and a ladder at least shows you which rung is missing."
+      },
+      "abstraction": 2
+    },
+    {
+      "id": "u-7",
+      "atom": "claim",
+      "text": "The objection lands: a braid hides its gaps until it is loaded.",
+      "holder": "mine",
+      "span": {
+        "source": "s-1",
+        "start": 1027,
+        "end": 1106,
+        "quote": "A braid hides its gaps until it is loaded, and by then\nyou are hanging from it."
+      },
+      "abstraction": 2
+    },
+    {
+      "id": "u-8",
+      "atom": "stance",
+      "text": "Keep both pictures: climb mapped ground, braid unmapped, and know which you are on.",
+      "holder": "mine",
+      "span": {
+        "source": "s-1",
+        "start": 1142,
+        "end": 1240,
+        "quote": "climb where the ground is mapped, braid\nwhere it is not, and know which kind of ground you are on."
+      },
+      "abstraction": 4
+    }
+  ],
+  "relations": [
+    {
+      "from": "u-2",
+      "to": "u-1",
+      "kind": "answers"
+    },
+    {
+      "from": "u-3",
+      "to": "u-1",
+      "kind": "counters"
+    },
+    {
+      "from": "u-4",
+      "to": "u-2",
+      "kind": "supports"
+    },
+    {
+      "from": "u-5",
+      "to": "u-2",
+      "kind": "derives"
+    },
+    {
+      "from": "u-6",
+      "to": "u-2",
+      "kind": "counters"
+    },
+    {
+      "from": "u-7",
+      "to": "u-6",
+      "kind": "answers"
+    },
+    {
+      "from": "u-8",
+      "to": "u-7",
+      "kind": "derives"
+    },
+    {
+      "from": "u-8",
+      "to": "u-5",
+      "kind": "derives"
+    }
+  ],
+  "tensions": [
+    {
+      "between": [
+        "u-5",
+        "u-7"
+      ],
+      "note": "braid-first practice and the hidden-gaps concession pull against each other until u-8 splits the ground",
+      "proposed": false
+    }
+  ],
+  "gaps": [
+    {
+      "facing": "u-6",
+      "label": "how a braid could be inspected before it is loaded"
+    }
+  ]
+}
