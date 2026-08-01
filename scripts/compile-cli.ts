@@ -21,6 +21,7 @@ import { parseTrace, validateTrace, checkSpans } from '../src/trace-types.ts'
 import { parseScene, validateScene } from '../src/scene-types.ts'
 import type { Scene } from '../src/scene-types.ts'
 import { layoutScene } from '../src/lib/sceneLayout.ts'
+import { bandAssembly } from '../src/lib/bandFill.ts'
 import { compileScenes } from '../src/lib/sceneCompile.ts'
 import type { CompiledScene } from '../src/lib/sceneCompile.ts'
 import { serializeJson } from '../src/lib/serialize.ts'
@@ -94,6 +95,7 @@ async function main(): Promise<void> {
   }
 
   const compiled: CompiledScene[] = []
+  const bands: { name: string; scene: Scene }[] = []
   let sceneErrors = 0
   for (const fileName of sceneNames) {
     const name = fileName.replace(/\.scene\.json$/, '')
@@ -105,7 +107,9 @@ async function main(): Promise<void> {
       console.log(`${fileName}  ${i.level.toUpperCase()} ${i.code} ${i.at ?? ''}: ${i.message}`)
     }
     if (!scene || all.some((i) => i.level === 'error')) continue
-    compiled.push({ name, scene: scene as Scene, layout: layoutScene(scene) })
+    // A band emits a corpus assembly, not shapes (E41.10).
+    if (scene.form === 'band') bands.push({ name, scene: scene as Scene })
+    else compiled.push({ name, scene: scene as Scene, layout: layoutScene(scene) })
   }
   if (sceneErrors > 0) die(`${sceneErrors} scene error(s) — nothing compiled`)
 
@@ -120,15 +124,23 @@ async function main(): Promise<void> {
 
   const deps = await loadDeps()
   const generatedDate = trace.generated.slice(0, 10)
-  const { document, report } = compileScenes(slug, compiled, existing, generatedDate, deps)
 
-  await writeFile(workPath, serializeJson(document), 'utf8')
-
-  for (const r of report) {
-    console.log(`${r.scene}: ${r.created} created, ${r.preserved} preserved, ${r.removed} removed`)
+  if (compiled.length > 0) {
+    const { document, report } = compileScenes(slug, compiled, existing, generatedDate, deps)
+    await writeFile(workPath, serializeJson(document), 'utf8')
+    for (const r of report) {
+      console.log(`${r.scene}: ${r.created} created, ${r.preserved} preserved, ${r.removed} removed`)
+    }
+    console.log(`\nwork/${slug}.tldr written (${compiled.length} scene(s))`)
+    console.log(`open: http://localhost:5173/?essay=${encodeURIComponent(slug)}`)
   }
-  console.log(`\nwork/${slug}.tldr written (${compiled.length} scene(s))`)
-  console.log(`open: http://localhost:5173/?essay=${encodeURIComponent(slug)}`)
+
+  for (const band of bands) {
+    const assembly = bandAssembly(band.scene, trace)
+    const target = path.join(REPO_ROOT, 'corpus', `${slug}.assembly.json`)
+    await writeFile(target, serializeJson(assembly), 'utf8')
+    console.log(`${band.name}: corpus/${slug}.assembly.json written (${assembly.units.length} units) — open the wall (⌘⇧C)`)
+  }
 }
 
 await main()

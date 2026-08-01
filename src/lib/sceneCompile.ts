@@ -137,12 +137,23 @@ export function compileScenes(
 
     const wanted = new Set<string>()
 
-    const pageId = deps.pageId(fnv1a(`${slug}:${name}:page`))
+    // A delta scene compiles onto THE delta page — the one ⌘D opens and the
+    // reconciler works (M4). If Jordan already visited the delta by hand, that
+    // page exists under tldraw's own id; adopt it rather than minting a twin
+    // with the same name and stranding one of them.
+    const pageName = scene.form === 'delta' ? 'Delta' : scene.title
+    let pageId = deps.pageId(fnv1a(`${slug}:${name}:page`))
+    if (scene.form === 'delta') {
+      const existingDelta = [...store.values()].find(
+        (r) => r.typeName === 'page' && (r as unknown as { name: string }).name === 'Delta'
+      )
+      if (existingDelta) pageId = existingDelta.id
+    }
     wanted.add(pageId)
     const pageRecord = store.get(pageId)
     if (pageRecord) {
       // The page survives as-is; only its label and provenance refresh.
-      ;(pageRecord as unknown as { name: string }).name = scene.title
+      ;(pageRecord as unknown as { name: string }).name = pageName
       pageRecord.meta = { ...pageRecord.meta, generated: true, scene: name, form: scene.form }
     } else {
       const [index] = deps.indicesAfter(pageIndexCursor, 1)
@@ -150,7 +161,7 @@ export function compileScenes(
       store.set(pageId, {
         meta: { generated: true, scene: name, form: scene.form },
         id: pageId,
-        name: scene.title,
+        name: pageName,
         index,
         typeName: 'page',
       } as unknown as TldrRecord)
@@ -180,6 +191,22 @@ export function compileScenes(
 
     // Frames first: cards parent onto them, and their ids must exist to do so.
     for (const frame of layout.frames) {
+      // Delta furniture may already exist by hand (⌘D's ensureFrames): adopt a
+      // frame with the matching name on the target page instead of doubling it.
+      if (scene.form === 'delta') {
+        const handFrame = [...store.values()].find(
+          (r) =>
+            r.typeName === 'shape' &&
+            r.type === 'frame' &&
+            r.parentId === pageId &&
+            (r.props as { name?: string } | undefined)?.name === frame.group.label &&
+            r.meta?.scene === undefined
+        )
+        if (handFrame) {
+          frameIds.set(frame.group.id, handFrame.id)
+          continue
+        }
+      }
       const id = deps.shapeId(fnv1a(`${slug}:${name}:${frame.group.id}`))
       frameIds.set(frame.group.id, id)
       place(
@@ -211,6 +238,39 @@ export function compileScenes(
       )
     }
 
+    // The field's axes: one shape, under everything (placed first, so a fresh
+    // compile mints it the lowest index on the page).
+    if (layout.axes) {
+      const a = layout.axes
+      const id = deps.shapeId(fnv1a(`${slug}:${name}:axes`))
+      place(
+        id,
+        () =>
+          ({
+            x: a.x,
+            y: a.y,
+            rotation: 0,
+            isLocked: false,
+            opacity: 1,
+            meta: { origin: 'generated', scene: name, node: 'axes' },
+            id,
+            type: 'axes',
+            props: { w: a.w, h: a.h, xLow: a.xLow, xHigh: a.xHigh, yLow: a.yLow, yHigh: a.yHigh },
+            parentId: pageId,
+            index: '',
+            typeName: 'shape',
+          }) as unknown as TldrRecord,
+        (before, fresh) => ({
+          ...fresh,
+          x: before.x,
+          y: before.y,
+          parentId: before.parentId,
+          index: before.index,
+          props: { ...(fresh.props ?? {}), w: before.props?.w, h: before.props?.h },
+        })
+      )
+    }
+
     const textHash = (p: PlacedNode) => fnv1a(p.node.text)
     // Reading order is the scene's node order, not placement order — the
     // eyebrow ordinal and ¶ reference both read from it.
@@ -224,6 +284,18 @@ export function compileScenes(
       // Child coordinates are relative to the parent frame.
       const x = frame ? placedNode.x - frame.x : placedNode.x
       const y = frame ? placedNode.y - frame.y : placedNode.y
+      const props =
+        placedNode.kind === 'cite'
+          ? { w: placedNode.w, h: placedNode.h, text: placedNode.node.text }
+          : {
+              w: placedNode.w,
+              h: placedNode.h,
+              atom: placedNode.node.atom,
+              text: placedNode.node.text,
+              sourceId: placedNode.node.unit,
+              created: generatedDate,
+              ordinal,
+            }
       place(
         id,
         () =>
@@ -235,16 +307,8 @@ export function compileScenes(
             opacity: 1,
             meta: { origin: 'generated', scene: name, node: placedNode.node.id, textHash: textHash(placedNode) },
             id,
-            type: 'atom',
-            props: {
-              w: placedNode.w,
-              h: placedNode.h,
-              atom: placedNode.node.atom,
-              text: placedNode.node.text,
-              sourceId: placedNode.node.unit,
-              created: generatedDate,
-              ordinal,
-            },
+            type: placedNode.kind,
+            props,
             parentId,
             index: '',
             typeName: 'shape',
@@ -287,13 +351,18 @@ export function compileScenes(
               origin: 'generated',
               scene: name,
               node: `e:${edge.from}->${edge.to}`,
-              relation: 'trace',
+              relation: placedEdge.relation,
               kind: edge.kind,
               feedback: edge.feedback,
             },
             id: arrowId,
             type: 'arrow',
-            props: { ...ARROW_PROPS, kind: placedEdge.kind === 'elbow' ? 'elbow' : 'arc', bend: placedEdge.bend },
+            props: {
+              ...ARROW_PROPS,
+              kind: placedEdge.kind === 'elbow' ? 'elbow' : 'arc',
+              bend: placedEdge.bend,
+              dash: placedEdge.dash,
+            },
             parentId: pageId,
             index: '',
             typeName: 'shape',

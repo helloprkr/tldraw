@@ -57,6 +57,26 @@ declare module '@tldraw/tlschema' {
       sourceId: string
     }
     /**
+     * The field's axes (M6 §5.3): two bone hairlines, four mono pole labels.
+     * One shape for the whole declaration so it exports as one toSvg.
+     */
+    axes: {
+      w: number
+      h: number
+      xLow: string
+      xHigh: string
+      yLow: string
+      yHigh: string
+    }
+    /**
+     * A genealogy source (M6 §5.4). Not an atom; wears no pigment ever.
+     */
+    cite: {
+      w: number
+      h: number
+      text: string
+    }
+    /**
      * The book-plate wrapper (§10). It carries only its own chrome — ground,
      * hairline border, double rule, caption, colophon. The figure's content is
      * the cloned shapes laid over it, so the plate never has to know what it

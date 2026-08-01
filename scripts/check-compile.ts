@@ -80,10 +80,13 @@ section('deterministic ids')
   check('two fresh compiles are byte-identical', JSON.stringify(first.document), JSON.stringify(again.document))
   check('a node id is derived, not random', first.document.store[shapeIdOf('n-1')] !== undefined, true)
   check('recompiling over the result is a no-op', JSON.stringify(compile(first.document).document), JSON.stringify(first.document))
+  // work/test-trace.tldr is app-saved (the fixture was written back by the
+  // running app after the shape roster grew in M6.3), so this compares the
+  // compiler's schema against what the app itself serializes today.
   check(
     'schema block is byte-identical to an app-saved file',
     JSON.stringify(first.document.schema),
-    JSON.stringify(readJson<{ schema: unknown }>('work/test-essay.tldr').schema)
+    JSON.stringify(readJson<{ schema: unknown }>('work/test-trace.tldr').schema)
   )
 }
 

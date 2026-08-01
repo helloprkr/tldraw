@@ -56,6 +56,8 @@ export async function loadDeps(): Promise<CompileDeps> {
     gap: {},
     band: {},
     plate: {},
+    axes: {},
+    cite: {},
     arrow: d.arrow,
     frame: d.frame,
   }

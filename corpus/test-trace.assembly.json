@@ -1,0 +1,47 @@
+{
+  "slug": "test-trace",
+  "title": "The ladder and the rope",
+  "units": [
+    {
+      "atom": "stance",
+      "words": 27,
+      "text": "A skill is a ladder: ordered rungs, climbed in advance-set order."
+    },
+    {
+      "atom": "claim",
+      "words": 16,
+      "text": "A skill is a rope: many weak crossing strands, none running the whole length."
+    },
+    {
+      "atom": "claim",
+      "words": 20,
+      "text": "Ladder-trained skill collapses when the problem turns sideways."
+    },
+    {
+      "atom": "figure",
+      "words": 13,
+      "text": "Watch anyone good: splicing, not climbing — short strands joined until the join disappears."
+    },
+    {
+      "atom": "move",
+      "words": 15,
+      "text": "Practice should braid, not stack: two hours across three problems beats six up one."
+    },
+    {
+      "atom": "move",
+      "words": 18,
+      "text": "The objection: ropes cannot be inspected; a ladder shows which rung is missing."
+    },
+    {
+      "atom": "claim",
+      "words": 17,
+      "text": "The objection lands: a braid hides its gaps until it is loaded."
+    },
+    {
+      "atom": "stance",
+      "words": 20,
+      "text": "Keep both pictures: climb mapped ground, braid unmapped, and know which you are on."
+    }
+  ],
+  "mine": true
+}

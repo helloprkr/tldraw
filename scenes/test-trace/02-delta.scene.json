@@ -1,0 +1,16 @@
+{
+  "form": "delta",
+  "title": "Received and answered",
+  "caption": "the received view and where it is answered",
+  "source": "out/test-trace/trace.json",
+  "nodes": [
+    { "id": "n-r1", "unit": "u-1", "atom": "stance", "text": "A skill is a ladder: ordered rungs, climbed in advance-set order.", "slot": "received", "rank": null },
+    { "id": "n-r2", "unit": "u-6", "atom": "move", "text": "The objection: ropes cannot be inspected; a ladder shows which rung is missing.", "slot": "received", "rank": null },
+    { "id": "n-m1", "unit": "u-2", "atom": "claim", "text": "A skill is a rope: many weak crossing strands, none running the whole length.", "slot": "mine", "rank": null },
+    { "id": "n-m2", "unit": "u-8", "atom": "stance", "text": "Keep both pictures: climb mapped ground, braid unmapped, and know which you are on.", "slot": "mine", "rank": null }
+  ],
+  "edges": [
+    { "from": "n-m1", "to": "n-r1", "kind": "answers", "feedback": false }
+  ],
+  "groups": []
+}

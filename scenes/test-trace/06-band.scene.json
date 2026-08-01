@@ -1,0 +1,18 @@
+{
+  "form": "band",
+  "title": "The ladder and the rope",
+  "caption": "compositional rhythm against the corpus",
+  "source": "out/test-trace/trace.json",
+  "nodes": [
+    { "id": "n-1", "unit": "u-1", "atom": "stance", "text": "", "slot": null, "rank": null },
+    { "id": "n-2", "unit": "u-2", "atom": "claim", "text": "", "slot": null, "rank": null },
+    { "id": "n-3", "unit": "u-3", "atom": "claim", "text": "", "slot": null, "rank": null },
+    { "id": "n-4", "unit": "u-4", "atom": "figure", "text": "", "slot": null, "rank": null },
+    { "id": "n-5", "unit": "u-5", "atom": "move", "text": "", "slot": null, "rank": null },
+    { "id": "n-6", "unit": "u-6", "atom": "move", "text": "", "slot": null, "rank": null },
+    { "id": "n-7", "unit": "u-7", "atom": "claim", "text": "", "slot": null, "rank": null },
+    { "id": "n-8", "unit": "u-8", "atom": "stance", "text": "", "slot": null, "rank": null }
+  ],
+  "edges": [],
+  "groups": []
+}

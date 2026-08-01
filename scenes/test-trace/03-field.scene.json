@@ -1,0 +1,19 @@
+{
+  "form": "field",
+  "title": "Where the pieces sit",
+  "caption": "concrete to abstract, inspectable to opaque",
+  "source": "out/test-trace/trace.json",
+  "axes": { "yLow": "inspectable", "yHigh": "opaque" },
+  "nodes": [
+    { "id": "n-1", "unit": "u-1", "atom": "stance", "text": "The ladder picture.", "slot": null, "rank": { "x": 3, "y": 1 } },
+    { "id": "n-2", "unit": "u-2", "atom": "claim", "text": "The rope picture.", "slot": null, "rank": { "x": 3, "y": 3 } },
+    { "id": "n-3", "unit": "u-4", "atom": "figure", "text": "Splicing, watched in the wild.", "slot": null, "rank": { "x": 1, "y": 2 } },
+    { "id": "n-4", "unit": "u-5", "atom": "move", "text": "Braid, don't stack.", "slot": null, "rank": { "x": 2, "y": 2 } },
+    { "id": "n-5", "unit": "u-7", "atom": "claim", "text": "A braid hides its gaps until loaded.", "slot": null, "rank": { "x": 2, "y": 3 } },
+    { "id": "n-6", "unit": "u-6", "atom": "move", "text": "A ladder shows its missing rung.", "slot": null, "rank": { "x": 2, "y": 1 } },
+    { "id": "n-7", "unit": "u-8", "atom": "stance", "text": "Know which ground you are on.", "slot": null, "rank": { "x": 4, "y": 2 } },
+    { "id": "n-8", "unit": "u-3", "atom": "claim", "text": "Ladder skill fails sideways.", "slot": null, "rank": { "x": 2, "y": 1 } }
+  ],
+  "edges": [],
+  "groups": []
+}

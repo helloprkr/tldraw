@@ -18,6 +18,8 @@ import { PlateShapeUtil } from './shapes/PlateShapeUtil'
 import { TicketShapeUtil } from './shapes/TicketShapeUtil'
 import { GapShapeUtil } from './shapes/GapShapeUtil'
 import { BandShapeUtil } from './shapes/BandShapeUtil'
+import { AxesShapeUtil } from './shapes/AxesShapeUtil'
+import { CiteShapeUtil } from './shapes/CiteShapeUtil'
 import { SectionFrameUtil } from './shapes/SectionFrameUtil'
 import { Counter } from './ui/Counter'
 import { DeltaCounter } from './ui/DeltaCounter'
@@ -39,6 +41,8 @@ const shapeUtils = [
   GapShapeUtil,
   BandShapeUtil,
   PlateShapeUtil,
+  AxesShapeUtil,
+  CiteShapeUtil,
   DependencyArrowUtil,
   SectionFrameUtil,
 ]

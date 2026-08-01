@@ -1,8 +1,79 @@
 {
   "store": {
+    "shape:c28a753d": {
+      "x": 0,
+      "y": 0,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {
+        "origin": "generated",
+        "scene": "05-genealogy",
+        "node": "e:n-3->n-4",
+        "relation": "trace",
+        "kind": "derives",
+        "feedback": false
+      },
+      "id": "shape:c28a753d",
+      "type": "arrow",
+      "props": {
+        "kind": "arc",
+        "elbowMidPoint": 0.5,
+        "dash": "solid",
+        "size": "s",
+        "fill": "fill",
+        "color": "black",
+        "labelColor": "black",
+        "bend": 0,
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 2,
+          "y": 0
+        },
+        "arrowheadStart": "none",
+        "arrowheadEnd": "triangle",
+        "richText": {
+          "type": "doc",
+          "content": [
+            {
+              "type": "paragraph"
+            }
+          ]
+        },
+        "labelPosition": 0.5,
+        "font": "draw",
+        "scale": 1
+      },
+      "parentId": "page:54051dcf",
+      "index": "a9",
+      "typeName": "shape"
+    },
+    "binding:9008d4ea": {
+      "meta": {
+        "scene": "04-mechanism"
+      },
+      "id": "binding:9008d4ea",
+      "type": "arrow",
+      "fromId": "shape:42d0bd3d",
+      "toId": "shape:571f8f1f",
+      "props": {
+        "isPrecise": true,
+        "isExact": false,
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        },
+        "snap": "none",
+        "terminal": "end"
+      },
+      "typeName": "binding"
+    },
     "shape:06325db5": {
-      "x": 337,
-      "y": 249,
+      "x": 24,
+      "y": 326,
       "rotation": 0,
       "isLocked": false,
       "opacity": 1,
@@ -27,6 +98,128 @@
       "index": "a2",
       "typeName": "shape"
     },
+    "shape:6576e2fc": {
+      "x": 0,
+      "y": 0,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {
+        "origin": "generated",
+        "scene": "05-genealogy",
+        "node": "e:n-s1->n-1",
+        "relation": "trace",
+        "kind": "feeds",
+        "feedback": false
+      },
+      "id": "shape:6576e2fc",
+      "type": "arrow",
+      "props": {
+        "kind": "arc",
+        "elbowMidPoint": 0.5,
+        "dash": "solid",
+        "size": "s",
+        "fill": "fill",
+        "color": "black",
+        "labelColor": "black",
+        "bend": 0,
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 2,
+          "y": 0
+        },
+        "arrowheadStart": "none",
+        "arrowheadEnd": "triangle",
+        "richText": {
+          "type": "doc",
+          "content": [
+            {
+              "type": "paragraph"
+            }
+          ]
+        },
+        "labelPosition": 0.5,
+        "font": "draw",
+        "scale": 1
+      },
+      "parentId": "page:54051dcf",
+      "index": "a1TGGV",
+      "typeName": "shape"
+    },
+    "binding:46f9cea7": {
+      "meta": {
+        "scene": "04-mechanism"
+      },
+      "id": "binding:46f9cea7",
+      "type": "arrow",
+      "fromId": "shape:300e8795",
+      "toId": "shape:591f9245",
+      "props": {
+        "isPrecise": true,
+        "isExact": false,
+        "normalizedAnchor": {
+          "x": 1,
+          "y": 0.5
+        },
+        "snap": "none",
+        "terminal": "start"
+      },
+      "typeName": "binding"
+    },
+    "shape:4580864f": {
+      "x": 0,
+      "y": 0,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {
+        "origin": "generated",
+        "scene": "05-genealogy",
+        "node": "e:n-1->n-4",
+        "relation": "trace",
+        "kind": "derives",
+        "feedback": false
+      },
+      "id": "shape:4580864f",
+      "type": "arrow",
+      "props": {
+        "kind": "arc",
+        "elbowMidPoint": 0.5,
+        "dash": "solid",
+        "size": "s",
+        "fill": "fill",
+        "color": "black",
+        "labelColor": "black",
+        "bend": 0,
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 2,
+          "y": 0
+        },
+        "arrowheadStart": "none",
+        "arrowheadEnd": "triangle",
+        "richText": {
+          "type": "doc",
+          "content": [
+            {
+              "type": "paragraph"
+            }
+          ]
+        },
+        "labelPosition": 0.5,
+        "font": "draw",
+        "scale": 1
+      },
+      "parentId": "page:54051dcf",
+      "index": "a7",
+      "typeName": "shape"
+    },
     "shape:88066438": {
       "x": -24,
       "y": 659,
@@ -49,6 +242,53 @@
       "parentId": "page:148cba4d",
       "index": "a1",
       "typeName": "shape"
+    },
+    "shape:5c1ba9d7": {
+      "x": -160,
+      "y": 379,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {
+        "origin": "generated",
+        "scene": "05-genealogy",
+        "node": "n-4",
+        "textHash": "f3646ffa"
+      },
+      "id": "shape:5c1ba9d7",
+      "type": "atom",
+      "props": {
+        "w": 320,
+        "h": 145,
+        "atom": "stance",
+        "text": "The synthesis: both pictures, known ground.",
+        "sourceId": "u-8",
+        "created": "2026-07-31",
+        "ordinal": 5
+      },
+      "parentId": "page:54051dcf",
+      "index": "a4",
+      "typeName": "shape"
+    },
+    "binding:84495f63": {
+      "meta": {
+        "scene": "04-mechanism"
+      },
+      "id": "binding:84495f63",
+      "type": "arrow",
+      "fromId": "shape:41f808f1",
+      "toId": "shape:571f8f1f",
+      "props": {
+        "isPrecise": true,
+        "isExact": false,
+        "normalizedAnchor": {
+          "x": 1,
+          "y": 0.5
+        },
+        "snap": "none",
+        "terminal": "start"
+      },
+      "typeName": "binding"
     },
     "shape:0b326594": {
       "x": 24,
@@ -75,6 +315,180 @@
       },
       "parentId": "shape:8b0668f1",
       "index": "a2",
+      "typeName": "shape"
+    },
+    "shape:6baaffcb": {
+      "x": 622,
+      "y": 334,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {
+        "origin": "generated",
+        "scene": "03-field",
+        "node": "n-1",
+        "textHash": "7ad771ac"
+      },
+      "id": "shape:6baaffcb",
+      "type": "atom",
+      "props": {
+        "w": 260,
+        "h": 119,
+        "atom": "stance",
+        "text": "The ladder picture.",
+        "sourceId": "u-1",
+        "created": "2026-07-31",
+        "ordinal": 1
+      },
+      "parentId": "page:c977570a",
+      "index": "a1",
+      "typeName": "shape"
+    },
+    "page:8178ec56": {
+      "meta": {
+        "generated": true,
+        "scene": "04-mechanism",
+        "form": "mechanism"
+      },
+      "id": "page:8178ec56",
+      "name": "The braid under load",
+      "index": "a3",
+      "typeName": "page"
+    },
+    "binding:5fd3dd2a": {
+      "meta": {
+        "scene": "05-genealogy"
+      },
+      "id": "binding:5fd3dd2a",
+      "type": "arrow",
+      "fromId": "shape:6576e2fc",
+      "toId": "shape:f623a33d",
+      "props": {
+        "isPrecise": true,
+        "isExact": false,
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        },
+        "snap": "none",
+        "terminal": "start"
+      },
+      "typeName": "binding"
+    },
+    "page:54051dcf": {
+      "meta": {
+        "generated": true,
+        "scene": "05-genealogy",
+        "form": "genealogy"
+      },
+      "id": "page:54051dcf",
+      "name": "Where the rope came from",
+      "index": "a4",
+      "typeName": "page"
+    },
+    "shape:521f8740": {
+      "x": 1248,
+      "y": -72.5,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {
+        "origin": "generated",
+        "scene": "04-mechanism",
+        "node": "n-4",
+        "textHash": "a075c843"
+      },
+      "id": "shape:521f8740",
+      "type": "atom",
+      "props": {
+        "w": 320,
+        "h": 145,
+        "atom": "stance",
+        "text": "The split: climb mapped ground, braid unmapped.",
+        "sourceId": "u-8",
+        "created": "2026-07-31",
+        "ordinal": 4
+      },
+      "parentId": "page:8178ec56",
+      "index": "a3",
+      "typeName": "shape"
+    },
+    "shape:300e8795": {
+      "x": 0,
+      "y": 0,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {
+        "origin": "generated",
+        "scene": "04-mechanism",
+        "node": "e:n-3->n-4",
+        "relation": "trace",
+        "kind": "feeds",
+        "feedback": false
+      },
+      "id": "shape:300e8795",
+      "type": "arrow",
+      "props": {
+        "kind": "arc",
+        "elbowMidPoint": 0.5,
+        "dash": "solid",
+        "size": "s",
+        "fill": "fill",
+        "color": "black",
+        "labelColor": "black",
+        "bend": 0,
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 2,
+          "y": 0
+        },
+        "arrowheadStart": "none",
+        "arrowheadEnd": "triangle",
+        "richText": {
+          "type": "doc",
+          "content": [
+            {
+              "type": "paragraph"
+            }
+          ]
+        },
+        "labelPosition": 0.5,
+        "font": "draw",
+        "scale": 1
+      },
+      "parentId": "page:8178ec56",
+      "index": "a6",
+      "typeName": "shape"
+    },
+    "shape:141845be": {
+      "x": 232,
+      "y": 48,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {
+        "origin": "generated",
+        "scene": "02-delta",
+        "node": "n-r1",
+        "textHash": "d735a912"
+      },
+      "id": "shape:141845be",
+      "type": "atom",
+      "props": {
+        "w": 320,
+        "h": 145,
+        "atom": "stance",
+        "text": "A skill is a ladder: ordered rungs, climbed in advance-set order.",
+        "sourceId": "u-1",
+        "created": "2026-07-31",
+        "ordinal": 1
+      },
+      "parentId": "shape:3c235d4c",
+      "index": "a0",
       "typeName": "shape"
     },
     "shape:0a326401": {
@@ -114,6 +528,76 @@
       "name": "The ladder and the rope, in order",
       "index": "a0",
       "typeName": "page"
+    },
+    "shape:3c235d4c": {
+      "x": 0,
+      "y": 0,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {
+        "origin": "generated",
+        "scene": "02-delta",
+        "node": "f-received"
+      },
+      "id": "shape:3c235d4c",
+      "type": "frame",
+      "props": {
+        "w": 784,
+        "h": 460,
+        "name": "Received",
+        "color": "black"
+      },
+      "parentId": "page:00be4dc9",
+      "index": "a0",
+      "typeName": "shape"
+    },
+    "shape:6eab0484": {
+      "x": 311,
+      "y": 167,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {
+        "origin": "generated",
+        "scene": "03-field",
+        "node": "n-4",
+        "textHash": "f83a6885"
+      },
+      "id": "shape:6eab0484",
+      "type": "atom",
+      "props": {
+        "w": 260,
+        "h": 119,
+        "atom": "move",
+        "text": "Braid, don't stack.",
+        "sourceId": "u-5",
+        "created": "2026-07-31",
+        "ordinal": 4
+      },
+      "parentId": "page:c977570a",
+      "index": "a4",
+      "typeName": "shape"
+    },
+    "binding:5fa60cea": {
+      "meta": {
+        "scene": "05-genealogy"
+      },
+      "id": "binding:5fa60cea",
+      "type": "arrow",
+      "fromId": "shape:c28a753d",
+      "toId": "shape:5c1ba9d7",
+      "props": {
+        "isPrecise": true,
+        "isExact": false,
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0
+        },
+        "snap": "none",
+        "terminal": "end"
+      },
+      "typeName": "binding"
     },
     "binding:c63214cc": {
       "meta": {
@@ -162,6 +646,96 @@
       "index": "a3",
       "typeName": "shape"
     },
+    "shape:591f9245": {
+      "x": 832,
+      "y": -59.5,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {
+        "origin": "generated",
+        "scene": "04-mechanism",
+        "node": "n-3",
+        "textHash": "5e71eb59"
+      },
+      "id": "shape:591f9245",
+      "type": "atom",
+      "props": {
+        "w": 320,
+        "h": 119,
+        "atom": "claim",
+        "text": "Load reveals the hidden gaps.",
+        "sourceId": "u-7",
+        "created": "2026-07-31",
+        "ordinal": 3
+      },
+      "parentId": "page:8178ec56",
+      "index": "a2",
+      "typeName": "shape"
+    },
+    "binding:11a45d1f": {
+      "meta": {
+        "scene": "05-genealogy"
+      },
+      "id": "binding:11a45d1f",
+      "type": "arrow",
+      "fromId": "shape:c28a753d",
+      "toId": "shape:591ba51e",
+      "props": {
+        "isPrecise": true,
+        "isExact": false,
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        },
+        "snap": "none",
+        "terminal": "start"
+      },
+      "typeName": "binding"
+    },
+    "binding:12926256": {
+      "meta": {
+        "scene": "04-mechanism"
+      },
+      "id": "binding:12926256",
+      "type": "arrow",
+      "fromId": "shape:41f808f1",
+      "toId": "shape:581f90b2",
+      "props": {
+        "isPrecise": true,
+        "isExact": false,
+        "normalizedAnchor": {
+          "x": 0,
+          "y": 0.5
+        },
+        "snap": "none",
+        "terminal": "end"
+      },
+      "typeName": "binding"
+    },
+    "shape:f623a33d": {
+      "x": -130,
+      "y": 0,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {
+        "origin": "generated",
+        "scene": "05-genealogy",
+        "node": "n-s1",
+        "textHash": "ba9bf739"
+      },
+      "id": "shape:f623a33d",
+      "type": "cite",
+      "props": {
+        "w": 260,
+        "h": 68,
+        "text": "Fixture, The ladder and the rope, 2026"
+      },
+      "parentId": "page:54051dcf",
+      "index": "a0",
+      "typeName": "shape"
+    },
     "shape:0d3268ba": {
       "x": 24,
       "y": 24,
@@ -189,6 +763,76 @@
       "index": "a0",
       "typeName": "shape"
     },
+    "binding:8f730bea": {
+      "meta": {
+        "scene": "05-genealogy"
+      },
+      "id": "binding:8f730bea",
+      "type": "arrow",
+      "fromId": "shape:042a643c",
+      "toId": "shape:5a1ba6b1",
+      "props": {
+        "isPrecise": true,
+        "isExact": false,
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        },
+        "snap": "none",
+        "terminal": "start"
+      },
+      "typeName": "binding"
+    },
+    "shape:71ab093d": {
+      "x": 933,
+      "y": 167,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {
+        "origin": "generated",
+        "scene": "03-field",
+        "node": "n-7",
+        "textHash": "55899bd6"
+      },
+      "id": "shape:71ab093d",
+      "type": "atom",
+      "props": {
+        "w": 260,
+        "h": 119,
+        "atom": "stance",
+        "text": "Know which ground you are on.",
+        "sourceId": "u-8",
+        "created": "2026-07-31",
+        "ordinal": 7
+      },
+      "parentId": "page:c977570a",
+      "index": "a8",
+      "typeName": "shape"
+    },
+    "shape:c0ffe580": {
+      "x": 976,
+      "y": 0,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {
+        "origin": "generated",
+        "scene": "02-delta",
+        "node": "f-mine"
+      },
+      "id": "shape:c0ffe580",
+      "type": "frame",
+      "props": {
+        "w": 784,
+        "h": 460,
+        "name": "Mine",
+        "color": "black"
+      },
+      "parentId": "page:00be4dc9",
+      "index": "a1",
+      "typeName": "shape"
+    },
     "binding:cbdf16b5": {
       "meta": {
         "scene": "01-spine"
@@ -202,6 +846,211 @@
         "isExact": false,
         "normalizedAnchor": {
           "x": 1,
+          "y": 0.5
+        },
+        "snap": "none",
+        "terminal": "end"
+      },
+      "typeName": "binding"
+    },
+    "shape:571ba1f8": {
+      "x": -544,
+      "y": 164,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {
+        "origin": "generated",
+        "scene": "05-genealogy",
+        "node": "n-1",
+        "textHash": "7c941eb1"
+      },
+      "id": "shape:571ba1f8",
+      "type": "atom",
+      "props": {
+        "w": 320,
+        "h": 119,
+        "atom": "stance",
+        "text": "The ladder picture, as received.",
+        "sourceId": "u-1",
+        "created": "2026-07-31",
+        "ordinal": 2
+      },
+      "parentId": "page:54051dcf",
+      "index": "a1",
+      "typeName": "shape"
+    },
+    "shape:e3895db9": {
+      "x": 0,
+      "y": 0,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {
+        "origin": "generated",
+        "scene": "05-genealogy",
+        "node": "e:n-s1->n-2",
+        "relation": "trace",
+        "kind": "feeds",
+        "feedback": false
+      },
+      "id": "shape:e3895db9",
+      "type": "arrow",
+      "props": {
+        "kind": "arc",
+        "elbowMidPoint": 0.5,
+        "dash": "solid",
+        "size": "s",
+        "fill": "fill",
+        "color": "black",
+        "labelColor": "black",
+        "bend": 0,
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 2,
+          "y": 0
+        },
+        "arrowheadStart": "none",
+        "arrowheadEnd": "triangle",
+        "richText": {
+          "type": "doc",
+          "content": [
+            {
+              "type": "paragraph"
+            }
+          ]
+        },
+        "labelPosition": 0.5,
+        "font": "draw",
+        "scale": 1
+      },
+      "parentId": "page:54051dcf",
+      "index": "a2IS3V",
+      "typeName": "shape"
+    },
+    "binding:250d0e8f": {
+      "meta": {
+        "scene": "04-mechanism"
+      },
+      "id": "binding:250d0e8f",
+      "type": "arrow",
+      "fromId": "shape:388d554d",
+      "toId": "shape:581f90b2",
+      "props": {
+        "isPrecise": true,
+        "isExact": false,
+        "normalizedAnchor": {
+          "x": 1,
+          "y": 0.5
+        },
+        "snap": "none",
+        "terminal": "start"
+      },
+      "typeName": "binding"
+    },
+    "binding:8b97791a": {
+      "meta": {
+        "scene": "04-mechanism"
+      },
+      "id": "binding:8b97791a",
+      "type": "arrow",
+      "fromId": "shape:388d554d",
+      "toId": "shape:591f9245",
+      "props": {
+        "isPrecise": true,
+        "isExact": false,
+        "normalizedAnchor": {
+          "x": 0,
+          "y": 0.5
+        },
+        "snap": "none",
+        "terminal": "end"
+      },
+      "typeName": "binding"
+    },
+    "binding:8908782b": {
+      "meta": {
+        "scene": "02-delta"
+      },
+      "id": "binding:8908782b",
+      "type": "arrow",
+      "fromId": "shape:7459f160",
+      "toId": "shape:141845be",
+      "props": {
+        "isPrecise": true,
+        "isExact": false,
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        },
+        "snap": "none",
+        "terminal": "end"
+      },
+      "typeName": "binding"
+    },
+    "shape:62aaf1a0": {
+      "x": 311,
+      "y": 477,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {
+        "origin": "generated",
+        "scene": "03-field",
+        "node": "n-8",
+        "textHash": "c25cd432"
+      },
+      "id": "shape:62aaf1a0",
+      "type": "atom",
+      "props": {
+        "w": 260,
+        "h": 119,
+        "atom": "claim",
+        "text": "Ladder skill fails sideways.",
+        "sourceId": "u-3",
+        "created": "2026-07-31",
+        "ordinal": 8
+      },
+      "parentId": "page:c977570a",
+      "index": "a7",
+      "typeName": "shape"
+    },
+    "binding:5c00413c": {
+      "meta": {
+        "scene": "05-genealogy"
+      },
+      "id": "binding:5c00413c",
+      "type": "arrow",
+      "fromId": "shape:4580864f",
+      "toId": "shape:5c1ba9d7",
+      "props": {
+        "isPrecise": true,
+        "isExact": false,
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0
+        },
+        "snap": "none",
+        "terminal": "end"
+      },
+      "typeName": "binding"
+    },
+    "binding:cd15e902": {
+      "meta": {
+        "scene": "04-mechanism"
+      },
+      "id": "binding:cd15e902",
+      "type": "arrow",
+      "fromId": "shape:300e8795",
+      "toId": "shape:521f8740",
+      "props": {
+        "isPrecise": true,
+        "isExact": false,
+        "normalizedAnchor": {
+          "x": 0,
           "y": 0.5
         },
         "snap": "none",
@@ -236,13 +1085,72 @@
       "index": "a1",
       "typeName": "shape"
     },
-    "user:2IBgHutqu-vH-JofqC8KK": {
-      "name": "",
-      "color": "#7B66DC",
-      "imageUrl": "",
-      "meta": {},
-      "id": "user:2IBgHutqu-vH-JofqC8KK",
-      "typeName": "user"
+    "binding:ec3aa4db": {
+      "meta": {
+        "scene": "05-genealogy"
+      },
+      "id": "binding:ec3aa4db",
+      "type": "arrow",
+      "fromId": "shape:e3895db9",
+      "toId": "shape:f623a33d",
+      "props": {
+        "isPrecise": true,
+        "isExact": false,
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        },
+        "snap": "none",
+        "terminal": "start"
+      },
+      "typeName": "binding"
+    },
+    "binding:e0265b45": {
+      "meta": {
+        "scene": "05-genealogy"
+      },
+      "id": "binding:e0265b45",
+      "type": "arrow",
+      "fromId": "shape:4580864f",
+      "toId": "shape:571ba1f8",
+      "props": {
+        "isPrecise": true,
+        "isExact": false,
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        },
+        "snap": "none",
+        "terminal": "start"
+      },
+      "typeName": "binding"
+    },
+    "shape:1318442b": {
+      "x": 232,
+      "y": 241,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {
+        "origin": "generated",
+        "scene": "02-delta",
+        "node": "n-r2",
+        "textHash": "5455efaa"
+      },
+      "id": "shape:1318442b",
+      "type": "atom",
+      "props": {
+        "w": 320,
+        "h": 145,
+        "atom": "move",
+        "text": "The objection: ropes cannot be inspected; a ladder shows which rung is missing.",
+        "sourceId": "u-6",
+        "created": "2026-07-31",
+        "ordinal": 2
+      },
+      "parentId": "shape:3c235d4c",
+      "index": "a1",
+      "typeName": "shape"
     },
     "binding:5c77e3bd": {
       "meta": {
@@ -263,6 +1171,44 @@
         "terminal": "start"
       },
       "typeName": "binding"
+    },
+    "shape:571f8f1f": {
+      "x": 0,
+      "y": -59.5,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {
+        "origin": "generated",
+        "scene": "04-mechanism",
+        "node": "n-1",
+        "textHash": "425f909e"
+      },
+      "id": "shape:571f8f1f",
+      "type": "atom",
+      "props": {
+        "w": 320,
+        "h": 119,
+        "atom": "move",
+        "text": "Practice braids across problems.",
+        "sourceId": "u-5",
+        "created": "2026-07-31",
+        "ordinal": 1
+      },
+      "parentId": "page:8178ec56",
+      "index": "a0",
+      "typeName": "shape"
+    },
+    "page:00be4dc9": {
+      "meta": {
+        "generated": true,
+        "scene": "02-delta",
+        "form": "delta"
+      },
+      "id": "page:00be4dc9",
+      "name": "Delta",
+      "index": "a1",
+      "typeName": "page"
     },
     "shape:07325f48": {
       "x": 24,
@@ -291,6 +1237,122 @@
       "index": "a1",
       "typeName": "shape"
     },
+    "page:c977570a": {
+      "meta": {
+        "generated": true,
+        "scene": "03-field",
+        "form": "field"
+      },
+      "id": "page:c977570a",
+      "name": "Where the pieces sit",
+      "index": "a2",
+      "typeName": "page"
+    },
+    "shape:6dab02f1": {
+      "x": 0,
+      "y": 167,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {
+        "origin": "generated",
+        "scene": "03-field",
+        "node": "n-3",
+        "textHash": "06b7fa42"
+      },
+      "id": "shape:6dab02f1",
+      "type": "atom",
+      "props": {
+        "w": 260,
+        "h": 119,
+        "atom": "figure",
+        "text": "Splicing, watched in the wild.",
+        "sourceId": "u-4",
+        "created": "2026-07-31",
+        "ordinal": 3
+      },
+      "parentId": "page:c977570a",
+      "index": "a3",
+      "typeName": "shape"
+    },
+    "shape:42d0bd3d": {
+      "x": 0,
+      "y": 0,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {
+        "origin": "generated",
+        "scene": "04-mechanism",
+        "node": "e:n-4->n-1",
+        "relation": "trace",
+        "kind": "feeds",
+        "feedback": true
+      },
+      "id": "shape:42d0bd3d",
+      "type": "arrow",
+      "props": {
+        "kind": "arc",
+        "elbowMidPoint": 0.5,
+        "dash": "dashed",
+        "size": "s",
+        "fill": "fill",
+        "color": "black",
+        "labelColor": "black",
+        "bend": -93,
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 2,
+          "y": 0
+        },
+        "arrowheadStart": "none",
+        "arrowheadEnd": "triangle",
+        "richText": {
+          "type": "doc",
+          "content": [
+            {
+              "type": "paragraph"
+            }
+          ]
+        },
+        "labelPosition": 0.5,
+        "font": "draw",
+        "scale": 1
+      },
+      "parentId": "page:8178ec56",
+      "index": "a7",
+      "typeName": "shape"
+    },
+    "shape:6fab0617": {
+      "x": 311,
+      "y": 0,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {
+        "origin": "generated",
+        "scene": "03-field",
+        "node": "n-5",
+        "textHash": "f9d5f063"
+      },
+      "id": "shape:6fab0617",
+      "type": "atom",
+      "props": {
+        "w": 260,
+        "h": 119,
+        "atom": "claim",
+        "text": "A braid hides its gaps until loaded.",
+        "sourceId": "u-7",
+        "created": "2026-07-31",
+        "ordinal": 5
+      },
+      "parentId": "page:c977570a",
+      "index": "a5",
+      "typeName": "shape"
+    },
     "shape:8b0668f1": {
       "x": -24,
       "y": 40,
@@ -313,6 +1375,61 @@
       "parentId": "page:148cba4d",
       "index": "a0",
       "typeName": "shape"
+    },
+    "shape:591ba51e": {
+      "x": 224,
+      "y": 164,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {
+        "origin": "generated",
+        "scene": "05-genealogy",
+        "node": "n-3",
+        "textHash": "42f60ef3"
+      },
+      "id": "shape:591ba51e",
+      "type": "atom",
+      "props": {
+        "w": 320,
+        "h": 119,
+        "atom": "claim",
+        "text": "The braid hides its gaps until loaded.",
+        "sourceId": "u-7",
+        "created": "2026-07-31",
+        "ordinal": 4
+      },
+      "parentId": "page:54051dcf",
+      "index": "a3",
+      "typeName": "shape"
+    },
+    "binding:8d78651f": {
+      "meta": {
+        "scene": "04-mechanism"
+      },
+      "id": "binding:8d78651f",
+      "type": "arrow",
+      "fromId": "shape:42d0bd3d",
+      "toId": "shape:521f8740",
+      "props": {
+        "isPrecise": true,
+        "isExact": false,
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 1
+        },
+        "snap": "none",
+        "terminal": "start"
+      },
+      "typeName": "binding"
+    },
+    "user:HzjfOwgzjrJ0eaTTbDLgU": {
+      "name": "",
+      "color": "#EC5E41",
+      "imageUrl": "",
+      "meta": {},
+      "id": "user:HzjfOwgzjrJ0eaTTbDLgU",
+      "typeName": "user"
     },
     "shape:9ce813aa": {
       "x": 0,
@@ -362,7 +1479,61 @@
         "scale": 1
       },
       "parentId": "page:148cba4d",
-      "index": "a1Pz9l",
+      "index": "a1TsuV",
+      "typeName": "shape"
+    },
+    "shape:6cab015e": {
+      "x": 622,
+      "y": 0,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {
+        "origin": "generated",
+        "scene": "03-field",
+        "node": "n-2",
+        "textHash": "d283e474"
+      },
+      "id": "shape:6cab015e",
+      "type": "atom",
+      "props": {
+        "w": 260,
+        "h": 119,
+        "atom": "claim",
+        "text": "The rope picture.",
+        "sourceId": "u-2",
+        "created": "2026-07-31",
+        "ordinal": 2
+      },
+      "parentId": "page:c977570a",
+      "index": "a2",
+      "typeName": "shape"
+    },
+    "shape:581f90b2": {
+      "x": 416,
+      "y": -59.5,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {
+        "origin": "generated",
+        "scene": "04-mechanism",
+        "node": "n-2",
+        "textHash": "77eeba0b"
+      },
+      "id": "shape:581f90b2",
+      "type": "atom",
+      "props": {
+        "w": 320,
+        "h": 119,
+        "atom": "figure",
+        "text": "Strands splice until the join disappears.",
+        "sourceId": "u-4",
+        "created": "2026-07-31",
+        "ordinal": 2
+      },
+      "parentId": "page:8178ec56",
+      "index": "a1",
       "typeName": "shape"
     },
     "shape:083260db": {
@@ -440,8 +1611,53 @@
         "scale": 1
       },
       "parentId": "page:148cba4d",
-      "index": "a19IKd",
+      "index": "a1De1G",
       "typeName": "shape"
+    },
+    "shape:432aa564": {
+      "x": -96,
+      "y": -96,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {
+        "origin": "generated",
+        "scene": "03-field",
+        "node": "axes"
+      },
+      "id": "shape:432aa564",
+      "type": "axes",
+      "props": {
+        "w": 1385,
+        "h": 788,
+        "xLow": "concrete",
+        "xHigh": "abstract",
+        "yLow": "inspectable",
+        "yHigh": "opaque"
+      },
+      "parentId": "page:c977570a",
+      "index": "a0",
+      "typeName": "shape"
+    },
+    "binding:85f04e9e": {
+      "meta": {
+        "scene": "05-genealogy"
+      },
+      "id": "binding:85f04e9e",
+      "type": "arrow",
+      "fromId": "shape:e3895db9",
+      "toId": "shape:5a1ba6b1",
+      "props": {
+        "isPrecise": true,
+        "isExact": false,
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0
+        },
+        "snap": "none",
+        "terminal": "end"
+      },
+      "typeName": "binding"
     },
     "document:document": {
       "gridSize": 10,
@@ -449,6 +1665,280 @@
       "meta": {},
       "id": "document:document",
       "typeName": "document"
+    },
+    "shape:388d554d": {
+      "x": 0,
+      "y": 0,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {
+        "origin": "generated",
+        "scene": "04-mechanism",
+        "node": "e:n-2->n-3",
+        "relation": "trace",
+        "kind": "feeds",
+        "feedback": false
+      },
+      "id": "shape:388d554d",
+      "type": "arrow",
+      "props": {
+        "kind": "arc",
+        "elbowMidPoint": 0.5,
+        "dash": "solid",
+        "size": "s",
+        "fill": "fill",
+        "color": "black",
+        "labelColor": "black",
+        "bend": 0,
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 2,
+          "y": 0
+        },
+        "arrowheadStart": "none",
+        "arrowheadEnd": "triangle",
+        "richText": {
+          "type": "doc",
+          "content": [
+            {
+              "type": "paragraph"
+            }
+          ]
+        },
+        "labelPosition": 0.5,
+        "font": "draw",
+        "scale": 1
+      },
+      "parentId": "page:8178ec56",
+      "index": "a2UJEl",
+      "typeName": "shape"
+    },
+    "shape:5a1ba6b1": {
+      "x": -160,
+      "y": 164,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {
+        "origin": "generated",
+        "scene": "05-genealogy",
+        "node": "n-2",
+        "textHash": "d283e474"
+      },
+      "id": "shape:5a1ba6b1",
+      "type": "atom",
+      "props": {
+        "w": 320,
+        "h": 119,
+        "atom": "claim",
+        "text": "The rope picture.",
+        "sourceId": "u-2",
+        "created": "2026-07-31",
+        "ordinal": 3
+      },
+      "parentId": "page:54051dcf",
+      "index": "a2",
+      "typeName": "shape"
+    },
+    "binding:f735477f": {
+      "meta": {
+        "scene": "05-genealogy"
+      },
+      "id": "binding:f735477f",
+      "type": "arrow",
+      "fromId": "shape:6576e2fc",
+      "toId": "shape:571ba1f8",
+      "props": {
+        "isPrecise": true,
+        "isExact": false,
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0
+        },
+        "snap": "none",
+        "terminal": "end"
+      },
+      "typeName": "binding"
+    },
+    "shape:042a643c": {
+      "x": 0,
+      "y": 0,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {
+        "origin": "generated",
+        "scene": "05-genealogy",
+        "node": "e:n-2->n-4",
+        "relation": "trace",
+        "kind": "derives",
+        "feedback": false
+      },
+      "id": "shape:042a643c",
+      "type": "arrow",
+      "props": {
+        "kind": "arc",
+        "elbowMidPoint": 0.5,
+        "dash": "solid",
+        "size": "s",
+        "fill": "fill",
+        "color": "black",
+        "labelColor": "black",
+        "bend": 0,
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 2,
+          "y": 0
+        },
+        "arrowheadStart": "none",
+        "arrowheadEnd": "triangle",
+        "richText": {
+          "type": "doc",
+          "content": [
+            {
+              "type": "paragraph"
+            }
+          ]
+        },
+        "labelPosition": 0.5,
+        "font": "draw",
+        "scale": 1
+      },
+      "parentId": "page:54051dcf",
+      "index": "a8",
+      "typeName": "shape"
+    },
+    "shape:70ab07aa": {
+      "x": 311,
+      "y": 334,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {
+        "origin": "generated",
+        "scene": "03-field",
+        "node": "n-6",
+        "textHash": "4e841b34"
+      },
+      "id": "shape:70ab07aa",
+      "type": "atom",
+      "props": {
+        "w": 260,
+        "h": 119,
+        "atom": "move",
+        "text": "A ladder shows its missing rung.",
+        "sourceId": "u-6",
+        "created": "2026-07-31",
+        "ordinal": 6
+      },
+      "parentId": "page:c977570a",
+      "index": "a6",
+      "typeName": "shape"
+    },
+    "shape:41f808f1": {
+      "x": 0,
+      "y": 0,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {
+        "origin": "generated",
+        "scene": "04-mechanism",
+        "node": "e:n-1->n-2",
+        "relation": "trace",
+        "kind": "feeds",
+        "feedback": false
+      },
+      "id": "shape:41f808f1",
+      "type": "arrow",
+      "props": {
+        "kind": "arc",
+        "elbowMidPoint": 0.5,
+        "dash": "solid",
+        "size": "s",
+        "fill": "fill",
+        "color": "black",
+        "labelColor": "black",
+        "bend": 0,
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 2,
+          "y": 0
+        },
+        "arrowheadStart": "none",
+        "arrowheadEnd": "triangle",
+        "richText": {
+          "type": "doc",
+          "content": [
+            {
+              "type": "paragraph"
+            }
+          ]
+        },
+        "labelPosition": 0.5,
+        "font": "draw",
+        "scale": 1
+      },
+      "parentId": "page:8178ec56",
+      "index": "a1K9MV",
+      "typeName": "shape"
+    },
+    "shape:83e997d9": {
+      "x": 232,
+      "y": 48,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {
+        "origin": "generated",
+        "scene": "02-delta",
+        "node": "n-m1",
+        "textHash": "6851c8f7"
+      },
+      "id": "shape:83e997d9",
+      "type": "atom",
+      "props": {
+        "w": 320,
+        "h": 145,
+        "atom": "claim",
+        "text": "A skill is a rope: many weak crossing strands, none running the whole length.",
+        "sourceId": "u-2",
+        "created": "2026-07-31",
+        "ordinal": 3
+      },
+      "parentId": "shape:c0ffe580",
+      "index": "a0",
+      "typeName": "shape"
+    },
+    "binding:7bce061e": {
+      "meta": {
+        "scene": "02-delta"
+      },
+      "id": "binding:7bce061e",
+      "type": "arrow",
+      "fromId": "shape:7459f160",
+      "toId": "shape:83e997d9",
+      "props": {
+        "isPrecise": true,
+        "isExact": false,
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0.5
+        },
+        "snap": "none",
+        "terminal": "start"
+      },
+      "typeName": "binding"
     },
     "binding:838533e4": {
       "meta": {
@@ -470,13 +1960,103 @@
       },
       "typeName": "binding"
     },
-    "user:lWxxdBy2tUjCrTT5e01EK": {
-      "name": "",
-      "color": "#39B178",
-      "imageUrl": "",
-      "meta": {},
-      "id": "user:lWxxdBy2tUjCrTT5e01EK",
-      "typeName": "user"
+    "shape:80e99320": {
+      "x": 232,
+      "y": 241,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {
+        "origin": "generated",
+        "scene": "02-delta",
+        "node": "n-m2",
+        "textHash": "978aa294"
+      },
+      "id": "shape:80e99320",
+      "type": "atom",
+      "props": {
+        "w": 320,
+        "h": 171,
+        "atom": "stance",
+        "text": "Keep both pictures: climb mapped ground, braid unmapped, and know which you are on.",
+        "sourceId": "u-8",
+        "created": "2026-07-31",
+        "ordinal": 4
+      },
+      "parentId": "shape:c0ffe580",
+      "index": "a1",
+      "typeName": "shape"
+    },
+    "binding:f2d2623f": {
+      "meta": {
+        "scene": "05-genealogy"
+      },
+      "id": "binding:f2d2623f",
+      "type": "arrow",
+      "fromId": "shape:042a643c",
+      "toId": "shape:5c1ba9d7",
+      "props": {
+        "isPrecise": true,
+        "isExact": false,
+        "normalizedAnchor": {
+          "x": 0.5,
+          "y": 0
+        },
+        "snap": "none",
+        "terminal": "end"
+      },
+      "typeName": "binding"
+    },
+    "shape:7459f160": {
+      "x": 0,
+      "y": 0,
+      "rotation": 0,
+      "isLocked": false,
+      "opacity": 1,
+      "meta": {
+        "origin": "generated",
+        "scene": "02-delta",
+        "node": "e:n-m1->n-r1",
+        "relation": "correspondence",
+        "kind": "answers",
+        "feedback": false
+      },
+      "id": "shape:7459f160",
+      "type": "arrow",
+      "props": {
+        "kind": "arc",
+        "elbowMidPoint": 0.5,
+        "dash": "solid",
+        "size": "s",
+        "fill": "fill",
+        "color": "black",
+        "labelColor": "black",
+        "bend": 0,
+        "start": {
+          "x": 0,
+          "y": 0
+        },
+        "end": {
+          "x": 2,
+          "y": 0
+        },
+        "arrowheadStart": "none",
+        "arrowheadEnd": "triangle",
+        "richText": {
+          "type": "doc",
+          "content": [
+            {
+              "type": "paragraph"
+            }
+          ]
+        },
+        "labelPosition": 0.5,
+        "font": "draw",
+        "scale": 1
+      },
+      "parentId": "page:00be4dc9",
+      "index": "a2",
+      "typeName": "shape"
     }
   },
   "schema": {
@@ -512,6 +2092,8 @@
       "com.tldraw.shape.gap": 0,
       "com.tldraw.shape.band": 0,
       "com.tldraw.shape.plate": 0,
+      "com.tldraw.shape.axes": 0,
+      "com.tldraw.shape.cite": 0,
       "com.tldraw.shape.arrow": 8,
       "com.tldraw.shape.frame": 1,
       "com.tldraw.binding.arrow": 1

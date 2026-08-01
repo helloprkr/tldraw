@@ -1,0 +1,19 @@
+{
+  "form": "mechanism",
+  "title": "The braid under load",
+  "caption": "practice braids, load reveals, the split feeds back",
+  "source": "out/test-trace/trace.json",
+  "nodes": [
+    { "id": "n-1", "unit": "u-5", "atom": "move", "text": "Practice braids across problems.", "slot": null, "rank": null },
+    { "id": "n-2", "unit": "u-4", "atom": "figure", "text": "Strands splice until the join disappears.", "slot": null, "rank": null },
+    { "id": "n-3", "unit": "u-7", "atom": "claim", "text": "Load reveals the hidden gaps.", "slot": null, "rank": null },
+    { "id": "n-4", "unit": "u-8", "atom": "stance", "text": "The split: climb mapped ground, braid unmapped.", "slot": null, "rank": null }
+  ],
+  "edges": [
+    { "from": "n-1", "to": "n-2", "kind": "feeds", "feedback": false },
+    { "from": "n-2", "to": "n-3", "kind": "feeds", "feedback": false },
+    { "from": "n-3", "to": "n-4", "kind": "feeds", "feedback": false },
+    { "from": "n-4", "to": "n-1", "kind": "feeds", "feedback": true }
+  ],
+  "groups": []
+}

@@ -786,3 +786,33 @@ get a **second module instance** whose module-level state (e.g. `openEssay`'s
 `ready` flag) is fresh. A gate that drives module state must call the module's
 own entry points in the same eval rather than assuming it shares the app's
 instance.
+
+### E44. M6.3 layout findings — measured, not reasoned (2026-07-31)
+
+Four corrections that came out of rendering the forms in the running app
+rather than trusting the first implementation:
+
+1. **A tie nudge must move whole cards.** §5.3's "resolve ties by nudging
+   along the less-loaded axis" was first read as a half-card offset, which is
+   an overlap wearing a euphemism. Ties now stack full cards (plus `--s-5`)
+   along the chosen axis, and the grid's row heights and column widths make
+   room for the deepest stack — the pitch, not the card, absorbs the tie.
+2. **The mechanism return's bend is negative.** tldraw's arc bend sign was
+   settled empirically: for a right-to-left bottom-anchored return, a positive
+   bend bows the curve UP through the middle of the diagram — the exact
+   "straight line through the middle" §5.5 forbids, in a beret. Negative
+   swings it below. `check-layout.ts` pins the sign so a refactor cannot
+   quietly flip it back.
+3. **A rootless atom is not a source.** Longest-path layering puts every
+   zero-indegree node at rank 0, which seated an unreferenced claim beside
+   the citations. Sources own the top row; atoms floor at rank 1 whenever
+   sources exist, which also keeps their edges to one generation instead of
+   lancing through the rows between.
+4. **The delta adopts what ⌘D built.** A delta scene compiles onto the page
+   named `Delta` and reuses hand-created Received/Mine frames when they exist,
+   because the reconciler, the counter, and `readout` all find the delta by
+   name (E20/E28) — minting a twin page would strand half the machinery. Gaps
+   are never compiled: the reconciler owns them (E32), and it mints the hole
+   for an unanswered Received card the moment the page is visited. Verified:
+   a compiled delta with one unanswered card shows the hole, the ※ novelty
+   mark, and `1 UNANSWERED` with zero delta-specific code added in M6.

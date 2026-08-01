@@ -1,0 +1,21 @@
+{
+  "form": "genealogy",
+  "title": "Where the rope came from",
+  "caption": "sources above, synthesis below",
+  "source": "out/test-trace/trace.json",
+  "nodes": [
+    { "id": "n-s1", "unit": null, "source": "s-1", "atom": null, "text": "Fixture, The ladder and the rope, 2026", "slot": null, "rank": null },
+    { "id": "n-1", "unit": "u-1", "atom": "stance", "text": "The ladder picture, as received.", "slot": null, "rank": null },
+    { "id": "n-2", "unit": "u-2", "atom": "claim", "text": "The rope picture.", "slot": null, "rank": null },
+    { "id": "n-3", "unit": "u-7", "atom": "claim", "text": "The braid hides its gaps until loaded.", "slot": null, "rank": null },
+    { "id": "n-4", "unit": "u-8", "atom": "stance", "text": "The synthesis: both pictures, known ground.", "slot": null, "rank": null }
+  ],
+  "edges": [
+    { "from": "n-s1", "to": "n-1", "kind": "feeds", "feedback": false },
+    { "from": "n-s1", "to": "n-2", "kind": "feeds", "feedback": false },
+    { "from": "n-1", "to": "n-4", "kind": "derives", "feedback": false },
+    { "from": "n-2", "to": "n-4", "kind": "derives", "feedback": false },
+    { "from": "n-3", "to": "n-4", "kind": "derives", "feedback": false }
+  ],
+  "groups": []
+}
