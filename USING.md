@@ -17,11 +17,13 @@ Nothing enforces this. It's a convention, like writing on the lines of ruled pap
 
 The app is one document with three pages. You move between them with keys; each is a different way of looking at the same essay.
 
+**Getting back is always the same three moves**, so you can never be stranded: press the key that got you there a second time, press `Esc`, or right-click and take the top row. When you're not on the essay canvas the top-left margin says so, and says `ESC RETURNS`. The essay canvas itself carries no label — home needs no sign.
+
 **1. The essay canvas** — where you start and where you mostly live. Cards, sections, arrows. This is the desk.
 
-**2. The delta view (⌘D)** — an argument checker. Two columns: *Received* (the position you're arguing against, as cards) and *Mine* (your material). You draw a line from your card to the received card it answers. Anything on their side you haven't answered turns into a dashed terracotta hole — a visibly missing tooth. The holes automatically become a to-do list in your outline.
+**2. The delta view (⌘D, again to return)** — an argument checker. Two columns: *Received* (the position you're arguing against, as cards) and *Mine* (your material). You draw a line from your card to the received card it answers. Anything on their side you haven't answered turns into a dashed terracotta hole — a visibly missing tooth. The holes automatically become a to-do list in your outline.
 
-**3. The corpus wall (⌘⇧C)** — a rhythm x-ray of finished essays. Each horizontal band is one whole essay, read left to right, start to finish. Each colored block is one passage, wide when the passage is long, colored by what the passage *does* (see the four types below). The word-strip above each band spells the same sequence out. Three bands are writers being studied; the band below the double rule is yours. The point: you can see that one writer opens on imagery and another on assertion without reading a word. Hatched grey blocks are passages nobody has classified yet — click one, press 1–4, and your judgment is saved to disk.
+**3. The corpus wall (⌘⇧C, again to return)** — a rhythm x-ray of finished essays. Each horizontal band is one whole essay, read left to right, start to finish. Each colored block is one passage, wide when the passage is long, colored by what the passage *does* (see the four types below). The word-strip above each band spells the same sequence out. Three bands are writers being studied; the band below the double rule is yours. The point: you can see that one writer opens on imagery and another on assertion without reading a word. Hatched grey blocks are passages nobody has classified yet — click one, press 1–4, and your judgment is saved to disk.
 
 ## The four kinds of card
 
@@ -52,7 +54,7 @@ And one color is reserved: **terracotta always means something is missing** — 
 
 - **Right-click** anywhere — everything you can do here, with its key, in context.
 - **`?`** — the full keyboard map (also written as `? KEYS` bottom-left, always).
-- **Refresh the browser tab** — returns you to the essay canvas from any view.
+- **`Esc`** — from the delta or the corpus wall, returns you to the essay canvas. (When something is open — a menu, the keyboard map, a card you're typing into — it closes that first, and the *next* `Esc` takes you home.)
 - **`⌘Z`** undoes one step. **Space-drag** pans. **Scroll** zooms.
 - **Double-click empty paper** — a marginalia note. It never enters the outline; it's for talking to yourself.
 

@@ -3,6 +3,7 @@ import type { Editor, Signal, TLPageId, TLShape } from 'tldraw'
 import { assemblyFileName, classifyUnit, parseAssembly, toBands } from './corpus'
 import { readCorpus, writeCorpusAssembly } from './essayFs'
 import { serializeJson } from './serialize'
+import { currentView } from './views'
 import { BAND_GAP, CORPUS_PAGE } from '../corpus-types'
 import { BAND_SHAPE_H, BAND_SHAPE_W, bandSegmentIndexAt } from '../shapes/BandShapeUtil'
 import type { BandShape } from '../shapes/BandShapeUtil'
@@ -26,7 +27,7 @@ function findPage(editor: Editor, name: string): TLPageId | null {
 }
 
 export function isCorpusPage(editor: Editor): boolean {
-  return editor.getPages().find((p) => p.id === editor.getCurrentPageId())?.name === CORPUS_PAGE
+  return currentView(editor) === 'corpus'
 }
 
 /** Every assembly in corpus/, in the order the wall stacks them. */

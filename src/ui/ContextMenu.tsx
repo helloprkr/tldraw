@@ -7,6 +7,7 @@ import {
   useValue,
 } from 'tldraw'
 import type { TLUiContextMenuProps } from 'tldraw'
+import { currentView } from '../lib/views'
 import './context-menu.css'
 
 /**
@@ -76,6 +77,32 @@ interface Group {
  * actually presses. The binding is not touched.
  */
 const KEYBOARD_MAP_KBD = '[[?]]'
+
+/**
+ * E40, and the second exception, for a different reason worth stating plainly:
+ * `back-to-essay` carries no `kbd` at all. Escape cannot be bound through the
+ * registry — tldraw's shortcut manager reads the editing state too late, and
+ * `src/ui/EscapeRoute.tsx` explains why — so there is no binding here to read,
+ * and this row states the key instead of reflecting it. (The literal escape is
+ * needed anyway: tldraw's `kbd()` formatter walks a bare key character by
+ * character and would print `E S C`.)
+ *
+ * The row still calls the same action the key calls, which is the guarantee
+ * rule 2 is protecting. What it cannot do is prove it from the registry, so it
+ * is written down here instead.
+ */
+const BACK_TO_ESSAY_KBD = '[[Esc]]'
+
+/**
+ * The way home, first because leaving is the one thing Jordan cannot work out
+ * from what is in front of him. Prepended only when he is on a view — on the
+ * essay canvas there is nothing to go back from, and a permanent row saying so
+ * would be furniture.
+ */
+const RETURN: Group = {
+  id: 'return',
+  rows: [{ id: 'back-to-essay', label: 'Back to essay', kbd: BACK_TO_ESSAY_KBD }],
+}
 
 /**
  * With a selection, every row acts on it. The order is §11's: the four atom
@@ -159,7 +186,17 @@ function EssayContextMenuContent() {
     [editor]
   )
 
-  const groups = hasSelection ? WITH_SELECTION : WITHOUT_SELECTION
+  // Both selection states get the row, because a right-click on the wall lands
+  // on a band and a right-click in the delta lands on a card — being away from
+  // the essay is not a fact about what is selected.
+  const away = useValue(
+    'context menu is away from the essay canvas',
+    () => currentView(editor) !== 'essay',
+    [editor]
+  )
+
+  const base = hasSelection ? WITH_SELECTION : WITHOUT_SELECTION
+  const groups = away ? [RETURN, ...base] : base
 
   return (
     <div className="essay-context-menu">

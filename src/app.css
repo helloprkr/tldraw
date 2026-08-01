@@ -30,6 +30,13 @@ body,
   user-select: none;
 }
 
+/* The view label (E40). Top-left, where nothing else sits: the counter is
+   bottom-left, the delta's is bottom-right. */
+.margin-note--top-left {
+  left: var(--s-5);
+  top: var(--s-5);
+}
+
 .margin-note--bottom-left {
   left: var(--s-5);
   bottom: var(--s-5);

@@ -1,6 +1,7 @@
 import { EASINGS, createShapeId, getSnapshot } from 'tldraw'
 import type { Editor, TLPageId, TLParentId, TLShape, TLShapeId } from 'tldraw'
 import { cardSides, deltaState, gapPlacements } from './delta'
+import { currentView } from './views'
 import { DELTA_PAGE, GAP_LABEL, MINE_FRAME, RECEIVED_FRAME } from '../delta-types'
 import { CARD_H, CARD_W, GUTTER } from '../types'
 import type { StoreDocument } from '../readout-types'
@@ -176,7 +177,7 @@ export function openDeltaView(editor: Editor): void {
 }
 
 export function isDeltaPage(editor: Editor): boolean {
-  return editor.getPages().find((p) => p.id === editor.getCurrentPageId())?.name === DELTA_PAGE
+  return currentView(editor) === 'delta'
 }
 
 /** The label a gap shows is the facing card's text, quoted rather than owned. */

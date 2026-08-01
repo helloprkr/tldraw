@@ -63,11 +63,20 @@ const SECTIONS: Section[] = [
   {
     title: 'Views',
     bindings: [
-      { keys: '⌘D', action: 'Delta view' },
+      {
+        keys: '⌘D',
+        action: 'Delta view',
+        note: 'Pressed again on the delta, it returns to the essay',
+      },
       {
         keys: '⌘⇧C',
         action: 'Corpus wall',
-        note: 'There 1-4 and 0 classify the selected segment, and write to disk',
+        note: 'There 1-4 and 0 classify the selected segment, and write to disk. Pressed again on the wall, it returns to the essay',
+      },
+      {
+        keys: 'Esc',
+        action: 'Back to the essay canvas',
+        note: 'From either view, when there is no menu, overlay or edit to close',
       },
     ],
   },

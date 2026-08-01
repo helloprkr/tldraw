@@ -8,6 +8,7 @@ import { exportFigure } from './lib/exportFigure'
 import { isDeltaPage, openDeltaView } from './lib/deltaView'
 import { classifySelectedSegment, isCorpusPage, openCorpusWall } from './lib/corpusWall'
 import { createTicket } from './lib/tickets'
+import { returnToEssay } from './lib/views'
 import { promptForCaption } from './ui/CaptionDialog'
 import { openHelpOverlay } from './ui/HelpOverlay'
 import { saveWork } from './lib/openEssay'
@@ -176,11 +177,19 @@ export const overrides: TLUiOverrides = {
       },
     }
 
+    // E40. Both view keys are toggles: pressed on their own view they go home,
+    // pressed anywhere else they open. The test is the view the key *names*, not
+    // "am I away" — otherwise ⌘⇧C on the delta page would return to the essay
+    // instead of crossing to the wall.
     actions['corpus-wall'] = {
       id: 'corpus-wall',
       kbd: 'cmd+shift+c,ctrl+shift+c',
       label: 'Corpus wall',
       onSelect() {
+        if (isCorpusPage(editor)) {
+          returnToEssay(editor)
+          return
+        }
         void openCorpusWall(editor).catch((err: unknown) => {
           console.error('corpus wall failed', err)
           announce('corpus wall failed')
@@ -193,7 +202,33 @@ export const overrides: TLUiOverrides = {
       kbd: 'cmd+d,ctrl+d',
       label: 'Delta view',
       onSelect() {
+        if (isDeltaPage(editor)) {
+          returnToEssay(editor)
+          return
+        }
         openDeltaView(editor)
+      },
+    }
+
+    /**
+     * E40. The third route home, and the only one that does not require knowing
+     * which key opened the view you are standing on.
+     *
+     * Carries no `kbd`, and it is the one action here that does not. Escape has
+     * to be read before tldraw's own state machine answers it — the reason is
+     * measured and written out in `src/ui/EscapeRoute.tsx`, which owns the
+     * keystroke and calls straight back to this entry, so the key and the
+     * context menu's row are still one implementation.
+     *
+     * Registered unconditionally — the registry is built once, at mount — and
+     * inert on the essay canvas, where `returnToEssay` finds nothing to return
+     * from.
+     */
+    actions['back-to-essay'] = {
+      id: 'back-to-essay',
+      label: 'Back to essay',
+      onSelect() {
+        returnToEssay(editor)
       },
     }
 

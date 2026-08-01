@@ -23,6 +23,8 @@ import { Counter } from './ui/Counter'
 import { DeltaCounter } from './ui/DeltaCounter'
 import { DeltaReconciler } from './ui/DeltaReconciler'
 import { CorpusPicker } from './ui/CorpusPicker'
+import { ViewLabel } from './ui/ViewLabel'
+import { EscapeRoute } from './ui/EscapeRoute'
 import { essaySlugFromUrl } from './lib/essayFs'
 import { openEssay, startAutosave } from './lib/openEssay'
 import { shapeVisibility } from './lib/deltaView'
@@ -80,6 +82,8 @@ export default function App() {
         <DeltaCounter />
         <DeltaReconciler />
         <CorpusPicker />
+        <ViewLabel />
+        <EscapeRoute />
       </Tldraw>
     </div>
   )
